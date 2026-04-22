@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Familie Kroeker · Usachew — Familiengeschichte</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0d0a;
+  --paper: #f7f0e3;
+  --paper2: #ede3cc;
+  --ink: #1a1208;
+  --gold: #c8a84b;
+  --gold2: #a07830;
+  --red: #7a1f1f;
+  --faded: #6b5a3e;
+  --border: #d4bc8a;
+  --green: #2a4a2a;
+  --blue: #1a2f4a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* HEADER */
+.site-header {
+  background: var(--bg);
+  border-bottom: 1px solid var(--gold2);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-logo {
+  font-family: 'IM Fell English', serif;
+  color: var(--gold);
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+}
+
+.site-logo span {
+  color: #7a6040;
+  font-size: 0.85rem;
+  display: block;
+  font-style: italic;
+}
+
+/* LANGUAGE SWITCHER */
+.lang-switcher {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-btn {
+  background: none;
+  border: 1px solid var(--gold2);
+  color: var(--gold);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.8rem;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover, .lang-btn.active {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* NAV */
+.site-nav {
+  background: #1a1610;
+  border-bottom: 1px solid #2a2010;
+  padding: 0.7rem 2rem;
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+}
+
+.nav-link {
+  color: #a09070;
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--gold);
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(180deg, #1a1208 0%, #0f0d0a 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gold2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,168,75,0.08) 0%, transparent 70%);
+}
+
+.hero-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 3rem;
+  color: var(--gold);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.hero-subtitle {
+  color: #7a6040;
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.hero-dates {
+  color: #5a4a2a;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* MAIN CONTENT */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* SECTION */
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+
+/* CARDS */
+.card {
+  background: var(--paper);
+  border-radius: 2px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  border-top: 3px solid var(--gold2);
+}
+
+.card-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.3rem;
+  color: var(--red);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card p {
+  line-height: 1.8;
+  color: var(--faded);
+  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+/* TREE */
+.tree-container {
+  background: var(--paper);
+  padding: 2rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  overflow-x: auto;
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-width: 800px;
+}
+
+.tree-level {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.tree-level::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 0.5rem;
+  background: var(--border);
+}
+
+.tree-node {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.7rem 1rem;
+  min-width: 160px;
+  max-width: 200px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tree-node::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 0.5rem;
+  background: var(--border);
+}
+
+.tree-node.you {
+  border-color: var(--gold);
+  background: #fffdf5;
+  border-width: 2px;
+}
+
+.tree-node.unknown {
+  border-style: dashed;
+  border-color: #aaa;
+  background: #f8f8f8;
+}
+
+.tree-connector {
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.tree-connector::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: var(--border);
+}
+
+.tree-connector-h {
+  height: 0;
+  border-top: 1px solid var(--border);
+  width: 60%;
+  margin: 0 auto;
+}
+
+.node-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.node-dates {
+  font-size: 0.72rem;
+  color: var(--faded);
+  line-height: 1.4;
+}
+
+.node-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  margin-top: 0.3rem;
+  background: #f0e8d8;
+  color: var(--faded);
+}
+
+.node-tag.german { background: #d5e0f0; color: #1a3a5c; }
+.node-tag.you-tag { background: #f5e8c8; color: #7a5a10; }
+.node-tag.unknown-tag { background: #f0f0f0; color: #888; }
+
+/* STATUS TABLE */
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.status-table th {
+  background: #f0e8d8;
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-family: 'IM Fell English', serif;
+  color: var(--red);
+  border-bottom: 2px solid var(--border);
+}
+
+.status-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--faded);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+.dot-wait { background: #c9a84c; }
+.dot-done { background: #2a7a2a; }
+.dot-deny { background: #7a2020; }
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.3rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold2);
+  border: 2px solid var(--paper);
+}
+
+.tl-year {
+  font-family: 'IM Fell English', serif;
+  color: var(--gold2);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.tl-text {
+  color: var(--faded);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* UPDATE LOG */
+.update-item {
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.88rem;
+}
+
+.update-date {
+  color: var(--gold2);
+  font-family: 'IM Fell English', serif;
+  font-size: 0.85rem;
+}
+
+.update-text { color: var(--faded); line-height: 1.5; margin-top: 0.2rem; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--gold2);
+}
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+
+@media (max-width: 700px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2rem; }
+  .site-header { flex-direction: column; gap: 1rem; }
+}
+
+.highlight-box {
+  background: #fff8ee;
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--faded);
+  line-height: 1.7;
+}
+
+.question-box {
+  background: #fff0f0;
+  border-left: 3px solid var(--red);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--faded);
+  line-height: 1.7;
+}
+
+.footer {
+  background: #0a0806;
+  border-top: 1px solid var(--gold2);
+  padding: 2rem;
+  text-align: center;
+  color: #4a3a20;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-top: 3rem;
+}
+</style>
+</head>
+<body>
+
+<!-- TRANSLATIONS -->
+<script>
+const T = {
+  de: {
+    logo: "Familie Kroeker · Usachew",
+    logo_sub: "Mennonitische Familiengeschichte · 1864–2026",
+    nav_home: "Startseite",
+    nav_tree: "Stammbaum",
+    nav_history: "Geschichte",
+    nav_timeline: "Zeitleiste",
+    nav_research: "Forschung",
+    nav_updates: "Aktualisierungen",
+    hero_title: "Familie Kroeker · Usachew",
+    hero_sub: "Die Geschichte einer mennonitischen Familie — von Preußen über Wolhynien und Kasachstan nach Deutschland",
+    hero_dates: "1864 — 2026",
+    sec_home: "Startseite",
+    sec_tree: "Stammbaum",
+    sec_history: "Geschichte der Familie",
+    sec_timeline: "Zeitleiste",
+    sec_research: "Forschungsstand",
+    sec_updates: "Aktualisierungen",
+    home_intro_title: "Über dieses Projekt",
+    home_intro: "Diese Website dokumentiert die Geschichte der Familie Kroeker–Usachew — einer mennonitischen Familie mit Wurzeln in Westpreußen, die über Wolhynien (Ukraine) nach Kasachstan und schließlich nach Deutschland gelangte. Das Projekt wird von Eugen Usachew (Berlin) geführt.",
+    home_path_title: "Der Weg der Familie",
+    home_path: "Westpreußen (vor 1864) → Wolhynien/Ukraine (1864–1941) → Kasachstan, Dorf Sennoje (1941–1955) → Russland, Schachty (1955–2006) → Deutschland, Berlin (ab 2006)",
+    home_q_title: "Hauptfrage der Forschung",
+    home_q: "Wer ist Wassili Kroeker — der biologische Vater von Wladimir Nikolajewitsch Usachew (geb. 08.04.1950, Sennoje, Nordkasachstan)? In der Geburtsurkunde steht der Vater als 'Kroeker Wassili' eingetragen. Seine Identität ist noch nicht vollständig geklärt.",
+    tree_title: "Stammbaum",
+    history_title: "Geschichte der Familie",
+    hist1_title: "Westpreußische Wurzeln (vor 1864)",
+    hist1: "Die Familie Kroeker ist eine mennonitische Familie friesischer Herkunft. Ihre Vorfahren lebten in Westpreußen (heute Polen) in der Region Danzig. Die Mennoniten kamen ursprünglich aus den Niederlanden und siedelten sich ab dem 16. Jahrhundert in Preußen an. Wann genau die Familie Kroeker von Preußen nach Wolhynien zog, ist noch nicht bekannt — dies soll durch das EWZ-Dokument aus dem Bundesarchiv geklärt werden.",
+    hist2_title: "Wolhynien — Ukraine (1864–1941)",
+    hist2: "Johann Kroeker wurde am 15. November 1864 geboren. Die Familie lebte in der deutschen Kolonie Hirschau in Wolhynien (heute Житомирська область, Ukraine). Die deutschen Kolonisten in Wolhynien waren vor allem Mennoniten und Lutheraner, die ab Mitte des 19. Jahrhunderts auf Einladung russischer Gutsbesitzer in diese Region kamen. Emma Gotlibowna (geb. Schulz, 1877) und Johann Kroeker heirateten und hatten mehrere Kinder, darunter Emma Iwanowna (1924) — die Großmutter von Eugen Usachew.",
+    hist3_title: "Deportation nach Kasachstan (1941)",
+    hist3: "Im Oktober 1941 wurden Emma Iwanowna Kroeker (17 Jahre alt) und ihre Mutter Emma Gotlibowna als Sowjetdeutsche aus dem Gebiet Kiew in das Dorf Sennoje im Nordkasachstan deportiert. Dies geschah auf Grundlage des sowjetischen Dekrets vom August 1941. Sie standen bis zum 16. Dezember 1955 unter Sondersiedlungsregime. Im Jahr 1993 wurden sie offiziell rehabilitiert.",
+    hist4_title: "Kasachstan und Russland (1950–2006)",
+    hist4: "Im Dorf Sennoje lernte Emma Iwanowna einen Mann namens Wassili Kroeker kennen. Am 8. April 1950 wurde ihr Sohn Wladimir geboren. 1952 heiratete Emma den Russen Nikolaj Maximowitsch Usachew, der zum Stiefvater von Wladimir wurde. Wladimir Nikolajewitsch Usachew lebte später in Schachty (Rostower Gebiet, Russland), wo er am 6. August 2023 verstarb.",
+    hist5_title: "Deutschland (ab 2006)",
+    hist5: "Eugen Wladimirowitsch Usachew (geb. 25.01.1979, Schachty) zog nach Deutschland und lebt heute in Berlin. Im Jahr 2019 änderte er seinen Namen von 'Evgeny Usachev' zu 'Eugen Usachew'. Er forscht aktiv nach den Wurzeln seiner Familie.",
+    tl_title: "Zeitleiste",
+    res_title: "Forschungsstand",
+    res_sent: "Gesendet",
+    res_waiting: "Wartend",
+    res_done: "Erhalten",
+    res_denied: "Abgelehnt",
+    res_archive: "Archiv / Institution",
+    res_what: "Was wird gesucht",
+    res_status: "Status",
+    res_deadline: "Frist",
+    upd_title: "Aktualisierungen",
+    upd_last: "Letzte Aktualisierung:",
+    footer: "Familie Kroeker · Usachew · Familiengeschichte · Berlin 2026 · Erstellt von Eugen Usachew"
+  },
+  ru: {
+    logo: "Семья Крёкер · Усачев",
+    logo_sub: "Меннонитская история семьи · 1864–2026",
+    nav_home: "Главная",
+    nav_tree: "Древо",
+    nav_history: "История",
+    nav_timeline: "Хронология",
+    nav_research: "Исследование",
+    nav_updates: "Обновления",
+    hero_title: "Семья Крёкер · Усачев",
+    hero_sub: "История меннонитской семьи — из Пруссии через Волынь и Казахстан в Германию",
+    hero_dates: "1864 — 2026",
+    sec_home: "Главная",
+    sec_tree: "Генеалогическое древо",
+    sec_history: "История семьи",
+    sec_timeline: "Хронология",
+    sec_research: "Статус исследований",
+    sec_updates: "Обновления",
+    home_intro_title: "О проекте",
+    home_intro: "Этот сайт документирует историю семьи Крёкер–Усачев — меннонитской семьи с корнями в Западной Пруссии, которая через Волынь (Украина) попала в Казахстан и в конечном итоге в Германию. Проект ведёт Евгений Усачев (Берлин).",
+    home_path_title: "Путь семьи",
+    home_path: "Западная Пруссия (до 1864) → Волынь/Украина (1864–1941) → Казахстан, с. Сенное (1941–1955) → Россия, Шахты (1955–2006) → Германия, Берлин (с 2006)",
+    home_q_title: "Главный вопрос исследования",
+    home_q: "Кто такой Василий Крекер — биологический отец Владимира Николаевича Усачева (р. 08.04.1950, с. Сенное, Северо-Казахстанская область)? В свидетельстве о рождении отец записан как 'Крекер Василий'. Его личность пока полностью не установлена.",
+    tree_title: "Генеалогическое древо",
+    history_title: "История семьи",
+    hist1_title: "Прусские корни (до 1864)",
+    hist1: "Семья Крёкер — меннонитская семья фризского происхождения. Их предки жили в Западной Пруссии (ныне Польша) в районе Данцига. Меннониты пришли из Нидерландов и с XVI века селились в Пруссии. Когда именно семья Крёкер переехала из Пруссии на Волынь — пока неизвестно. Это должен прояснить документ EWZ из Бундесархива.",
+    hist2_title: "Волынь — Украина (1864–1941)",
+    hist2: "Иоганн Крёкер родился 15 ноября 1864 года. Семья жила в немецкой колонии Хиршау на Волыни (ныне Житомирская область, Украина). Немецкие колонисты на Волыни были в основном меннонитами и лютеранами, приехавшими с середины XIX века по приглашению русских помещиков. Эмма Готлибовна (урождённая Шульц, 1877) и Иоганн Крёкер поженились и имели нескольких детей, в том числе Эмму Ивановну (1924) — бабушку Евгения Усачева.",
+    hist3_title: "Депортация в Казахстан (1941)",
+    hist3: "В октябре 1941 года Эмма Ивановна Крёкер (17 лет) и её мать Эмма Готлибовна были депортированы из Киевской области в село Сенное Северо-Казахстанской области как советские немцы. Они находились на режиме спецпоселения до 16 декабря 1955 года. В 1993 году были официально реабилитированы.",
+    hist4_title: "Казахстан и Россия (1950–2006)",
+    hist4: "В селе Сенное Эмма Ивановна познакомилась с мужчиной по имени Василий Крекер. 8 апреля 1950 года родился её сын Владимир. В 1952 году Эмма вышла замуж за русского Николая Максимовича Усачева, ставшего отчимом Владимира. Владимир Николаевич Усачев прожил жизнь в Шахтах (Ростовская область) и умер 6 августа 2023 года.",
+    hist5_title: "Германия (с 2006)",
+    hist5: "Евгений Владимирович Усачев (р. 25.01.1979, Шахты) переехал в Германию и живёт в Берлине. В 2019 году сменил имя с 'Evgeny Usachev' на 'Eugen Usachew'. Активно ищет корни своей семьи.",
+    tl_title: "Хронология",
+    res_title: "Статус исследований",
+    res_sent: "Отправлено",
+    res_waiting: "Ожидаем",
+    res_done: "Получено",
+    res_denied: "Отказано",
+    res_archive: "Архив / Учреждение",
+    res_what: "Что ищем",
+    res_status: "Статус",
+    res_deadline: "Срок",
+    upd_title: "Обновления",
+    upd_last: "Последнее обновление:",
+    footer: "Семья Крёкер · Усачев · История семьи · Берлин 2026 · Создано Евгением Усачевым"
+  },
+  en: {
+    logo: "Kroeker · Usachew Family",
+    logo_sub: "Mennonite Family History · 1864–2026",
+    nav_home: "Home",
+    nav_tree: "Family Tree",
+    nav_history: "History",
+    nav_timeline: "Timeline",
+    nav_research: "Research",
+    nav_updates: "Updates",
+    hero_title: "Kroeker · Usachew Family",
+    hero_sub: "The story of a Mennonite family — from Prussia through Volhynia and Kazakhstan to Germany",
+    hero_dates: "1864 — 2026",
+    sec_home: "Home",
+    sec_tree: "Family Tree",
+    sec_history: "Family History",
+    sec_timeline: "Timeline",
+    sec_research: "Research Status",
+    sec_updates: "Updates",
+    home_intro_title: "About This Project",
+    home_intro: "This website documents the history of the Kroeker–Usachew family — a Mennonite family with roots in West Prussia that passed through Volhynia (Ukraine), Kazakhstan and ultimately Germany. The project is maintained by Eugen Usachew (Berlin).",
+    home_path_title: "The Family's Journey",
+    home_path: "West Prussia (before 1864) → Volhynia/Ukraine (1864–1941) → Kazakhstan, Sennoje village (1941–1955) → Russia, Shakhty (1955–2006) → Germany, Berlin (from 2006)",
+    home_q_title: "Main Research Question",
+    home_q: "Who is Wassili Kroeker — the biological father of Vladimir Nikolaevich Usachew (born 08.04.1950, Sennoje, North Kazakhstan)? The birth certificate lists the father as 'Kroeker Wassili'. His identity has not yet been fully established.",
+    tree_title: "Family Tree",
+    history_title: "Family History",
+    hist1_title: "Prussian Roots (before 1864)",
+    hist1: "The Kroeker family is a Mennonite family of Frisian origin. Their ancestors lived in West Prussia (now Poland) in the Danzig region. Mennonites originally came from the Netherlands and settled in Prussia from the 16th century onwards. When exactly the Kroeker family moved from Prussia to Volhynia is not yet known — this should be clarified by the EWZ document from the Federal Archives.",
+    hist2_title: "Volhynia — Ukraine (1864–1941)",
+    hist2: "Johann Kroeker was born on 15 November 1864. The family lived in the German colony of Hirschau in Volhynia (now Zhytomyr Oblast, Ukraine). The German colonists in Volhynia were mainly Mennonites and Lutherans who came to the region from the mid-19th century at the invitation of Russian landowners. Emma Gotlibovna (née Schulz, 1877) and Johann Kroeker married and had several children, including Emma Iwanovna (1924) — the grandmother of Eugen Usachew.",
+    hist3_title: "Deportation to Kazakhstan (1941)",
+    hist3: "In October 1941, Emma Iwanovna Kroeker (age 17) and her mother Emma Gotlibovna were deported from the Kyiv region to the village of Sennoje in North Kazakhstan as Soviet Germans. They remained under the special settlement regime until 16 December 1955. In 1993 they were officially rehabilitated.",
+    hist4_title: "Kazakhstan and Russia (1950–2006)",
+    hist4: "In the village of Sennoje, Emma Iwanovna met a man named Wassili Kroeker. On 8 April 1950, her son Vladimir was born. In 1952, Emma married the Russian Nikolai Maximovich Usachew, who became Vladimir's stepfather. Vladimir Nikolaevich Usachew lived in Shakhty (Rostov Oblast) and died on 6 August 2023.",
+    hist5_title: "Germany (from 2006)",
+    hist5: "Eugen Vladimirovich Usachew (born 25.01.1979, Shakhty) moved to Germany and lives in Berlin. In 2019, he changed his name from 'Evgeny Usachev' to 'Eugen Usachew'. He is actively researching his family's roots.",
+    tl_title: "Timeline",
+    res_title: "Research Status",
+    res_sent: "Sent",
+    res_waiting: "Waiting",
+    res_done: "Received",
+    res_denied: "Denied",
+    res_archive: "Archive / Institution",
+    res_what: "What We're Looking For",
+    res_status: "Status",
+    res_deadline: "Deadline",
+    upd_title: "Updates",
+    upd_last: "Last updated:",
+    footer: "Kroeker · Usachew Family History · Berlin 2026 · Created by Eugen Usachew"
+  }
+};
+
+let lang = 'de';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.dataset.t;
+    if (T[l][key]) el.innerHTML = T[l][key];
+  });
+  document.documentElement.lang = l;
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.toggle('active', n.dataset.section === id));
+}
+</script>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">
+    <span data-t="logo">Familie Kroeker · Usachew</span>
+    <span data-t="logo_sub">Mennonitische Familiengeschichte · 1864–2026</span>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="de" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a class="nav-link active" data-section="home" data-t="nav_home" onclick="showSection('home')">Startseite</a>
+  <a class="nav-link" data-section="tree" data-t="nav_tree" onclick="showSection('tree')">Stammbaum</a>
+  <a class="nav-link" data-section="history" data-t="nav_history" onclick="showSection('history')">Geschichte</a>
+  <a class="nav-link" data-section="timeline" data-t="nav_timeline" onclick="showSection('timeline')">Zeitleiste</a>
+  <a class="nav-link" data-section="research" data-t="nav_research" onclick="showSection('research')">Forschung</a>
+  <a class="nav-link" data-section="updates" data-t="nav_updates" onclick="showSection('updates')">Aktualisierungen</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 class="hero-title" data-t="hero_title">Familie Kroeker · Usachew</h1>
+  <p class="hero-subtitle" data-t="hero_sub">Die Geschichte einer mennonitischen Familie</p>
+  <p class="hero-dates" data-t="hero_dates">1864 — 2026</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HOME -->
+  <div class="section active" id="home">
+    <h2 class="section-title" data-t="sec_home">Startseite</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" data-t="home_intro_title">Über dieses Projekt</div>
+        <p data-t="home_intro"></p>
+      </div>
+      <div class="card">
+        <div class="card-title" data-t="home_path_title">Der Weg der Familie</div>
+        <p data-t="home_path"></p>
+      </div>
+    </div>
+    <div class="question-box">
+      <strong data-t="home_q_title">Hauptfrage der Forschung</strong><br>
+      <span data-t="home_q"></span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Gottlieb Schulz</div>
+        <p>Urururgroßvater · Wolhynien<br><small style="color:#aaa">Vater von Emma Gotlibovna</small></p>
+      </div>
+      <div class="card">
+        <div class="card-title">Johann Kroeker</div>
+        <p>* 15.11.1864 · Hirschau, Wolhynien<br>Urgroßvater</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Emma Iwanowna Kroeker</div>
+        <p>* 1924 · Wolhynien<br>† Kasachstan<br>Großmutter</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREE -->
+  <div class="section" id="tree">
+    <h2 class="section-title" data-t="sec_tree">Stammbaum</h2>
+    <div class="tree-container">
+      <div class="tree">
+
+        <!-- Gen 1: Gottlieb Schulz -->
+        <div class="tree-level">
+          <div class="tree-node unknown" style="border-top:none">
+            <div class="node-name">Gottlieb Schulz</div>
+            <div class="node-dates">? – ?<br>Wolhynien</div>
+            <span class="node-tag german">Mennonit</span>
+          </div>
+          <div class="tree-node unknown" style="border-top:none">
+            <div class="node-name">??? Kroeker</div>
+            <div class="node-dates">? – ?<br>Westpreußen → Wolhynien</div>
+            <span class="node-tag unknown-tag">Unbekannt</span>
+          </div>
+        </div>
+
+        <div class="tree-connector"></div>
+        <div class="tree-connector-h"></div>
+        <div class="tree-connector"></div>
+
+        <!-- Gen 2: Johann + Emma Schulz -->
+        <div class="tree-level">
+          <div class="tree-node">
+            <div class="node-name">Johann Kroeker</div>
+            <div class="node-dates">* 15.11.1864<br>Hirschau, Wolhynien</div>
+            <span class="node-tag german">Urgroßvater</span>
+          </div>
+          <div class="tree-node">
+            <div class="node-name">Emma geb. Schulz</div>
+            <div class="node-dates">* 11.11.1884<br>Wolhynien</div>
+            <span class="node-tag german">Urgroßmutter</span>
+          </div>
+        </div>
+
+        <div class="tree-connector"></div>
+        <div class="tree-connector-h" style="width:30%"></div>
+        <div class="tree-connector"></div>
+
+        <!-- Gen 3: Emma Iwanowna + Wassili -->
+        <div class="tree-level">
+          <div class="tree-node unknown">
+            <div class="node-name">??? Wassili Kroeker</div>
+            <div class="node-dates">? – ?<br>Kasachstan ~1949</div>
+            <span class="node-tag unknown-tag">❓ Unbekannt</span>
+          </div>
+          <div class="tree-node">
+            <div class="node-name">Emma Iwanowna Kroeker</div>
+            <div class="node-dates">* 1924, Wolhynien<br>† Kasachstan</div>
+            <span class="node-tag german">Großmutter</span>
+          </div>
+        </div>
+
+        <div class="tree-connector"></div>
+        <div class="tree-connector-h" style="width:20%"></div>
+        <div class="tree-connector"></div>
+
+        <!-- Gen 4: Vladimir -->
+        <div class="tree-level">
+          <div class="tree-node">
+            <div class="node-name">Vladimir N. Usachew</div>
+            <div class="node-dates">* 08.04.1950, Sennoje<br>† 06.08.2023, Shakhty</div>
+            <span class="node-tag german">Vater</span>
+          </div>
+          <div class="tree-node">
+            <div class="node-name">Ljubow A. Kryschka</div>
+            <div class="node-dates">* 13.06.1952<br>Stawropol</div>
+            <span class="node-tag">Mutter</span>
+          </div>
+        </div>
+
+        <div class="tree-connector"></div>
+        <div class="tree-connector-h" style="width:15%"></div>
+        <div class="tree-connector"></div>
+
+        <!-- Gen 5: Eugen -->
+        <div class="tree-level">
+          <div class="tree-node you">
+            <div class="node-name">Eugen Usachew</div>
+            <div class="node-dates">* 25.01.1979, Shakhty<br>Berlin, Deutschland</div>
+            <span class="node-tag you-tag">⭐ Sie</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="section" id="history">
+    <h2 class="section-title" data-t="sec_history">Geschichte der Familie</h2>
+    <div class="card">
+      <div class="card-title" data-t="hist1_title">Westpreußische Wurzeln</div>
+      <p data-t="hist1"></p>
+    </div>
+    <div class="card">
+      <div class="card-title" data-t="hist2_title">Wolhynien</div>
+      <p data-t="hist2"></p>
+    </div>
+    <div class="card">
+      <div class="card-title" data-t="hist3_title">Deportation</div>
+      <p data-t="hist3"></p>
+    </div>
+    <div class="card">
+      <div class="card-title" data-t="hist4_title">Kasachstan und Russland</div>
+      <p data-t="hist4"></p>
+    </div>
+    <div class="card">
+      <div class="card-title" data-t="hist5_title">Deutschland</div>
+      <p data-t="hist5"></p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section" id="timeline">
+    <h2 class="section-title" data-t="sec_timeline">Zeitleiste</h2>
+    <div class="card">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-year">~1820–1860</div><div class="tl-text">Vorfahren der Familie Kroeker leben in Westpreußen (Danzig-Region). Auswanderung nach Wolhynien.</div></div>
+        <div class="tl-item"><div class="tl-year">1864</div><div class="tl-text">Johann Kroeker wird am 15. November 1864 in Hirschau, Wolhynien geboren.</div></div>
+        <div class="tl-item"><div class="tl-year">1877</div><div class="tl-text">Emma Gotlibovna Schulz wird geboren (Wolhynien). Später heiratet sie Johann Kroeker.</div></div>
+        <div class="tl-item"><div class="tl-year">1917</div><div class="tl-text">Lydia Iwanowna Kroeker (später Dreger) wird am 17.04.1917 in Schelesnjak geboren — Schwester von Emma Iwanowna.</div></div>
+        <div class="tl-item"><div class="tl-year">1924</div><div class="tl-text">Emma Iwanowna Kroeker wird in Wolhynien (Gebiet Kiew) geboren — Großmutter von Eugen.</div></div>
+        <div class="tl-item"><div class="tl-year">1941</div><div class="tl-text">Oktober: Emma Iwanowna und ihre Mutter werden als Sowjetdeutsche nach Kasachstan, Dorf Sennoje, deportiert. Lydia flüchtet mit den deutschen Truppen nach Deutschland.</div></div>
+        <div class="tl-item"><div class="tl-year">1950</div><div class="tl-text">8. April: Vladimir Kroeker (später Usachew) wird in Sennoje geboren. Vater: Wassili Kroeker (Identität unbekannt).</div></div>
+        <div class="tl-item"><div class="tl-year">1952</div><div class="tl-text">Emma heiratet Nikolaj Maximowitsch Usachew — Stiefvater von Vladimir.</div></div>
+        <div class="tl-item"><div class="tl-year">1955</div><div class="tl-text">16. Dezember: Emma Iwanowna wird aus dem Sondersiedlungsregime entlassen.</div></div>
+        <div class="tl-item"><div class="tl-year">1979</div><div class="tl-text">25. Januar: Eugen Wladimirowitsch Usachew wird in Shakhty, Russland geboren.</div></div>
+        <div class="tl-item"><div class="tl-year">1983</div><div class="tl-text">6. August: Vladimirs Eltern heiraten in Shakhty.</div></div>
+        <div class="tl-item"><div class="tl-year">1993</div><div class="tl-text">Emma Iwanowna Kroeker wird offiziell rehabilitiert (Republik Kasachstan).</div></div>
+        <div class="tl-item"><div class="tl-year">2019</div><div class="tl-text">Eugen ändert seinen Namen von 'Evgeny Usachev' zu 'Eugen Usachew' (Bundesverwaltungsamt, Friedland).</div></div>
+        <div class="tl-item"><div class="tl-year">2023</div><div class="tl-text">6. August: Vladimir Nikolajewitsch Usachew stirbt in Shakhty.</div></div>
+        <div class="tl-item"><div class="tl-year">2026</div><div class="tl-text">Eugen betreibt aktive Familienforschung: Anfragen an Archive in Deutschland, Ukraine, Kasachstan und Kanada.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="section" id="research">
+    <h2 class="section-title" data-t="sec_research">Forschungsstand</h2>
+    <div class="card">
+      <table class="status-table">
+        <thead>
+          <tr>
+            <th data-t="res_archive">Archiv / Institution</th>
+            <th data-t="res_what">Was wird gesucht</th>
+            <th data-t="res_status">Status</th>
+            <th data-t="res_deadline">Frist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>MHSBC (Kanada)</strong><br>Mennonitisches Hist. Gesellschaft BC</td>
+            <td>EWZ50-Dokumente: Johann Kroeker (1864) und Emma Schulz (1884) — Film B019, Kader 1340</td>
+            <td><span class="status-dot dot-wait"></span>Wartend</td>
+            <td>~Mai 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Bundesarchiv Berlin</strong></td>
+            <td>EWZ-Akte Edmund Dreger (R 9361-IV/18702) — Angaben über Familie Kroeker aus Wolhynien</td>
+            <td><span class="status-dot dot-wait"></span>Wartend</td>
+            <td>~22. Mai 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Ombudsmann Ukraine</strong></td>
+            <td>Beschwerde Nr. Е-25482.3/26 — Zugang zur Archivakte Kroeker E.I. (Charkiw)</td>
+            <td><span class="status-dot dot-wait"></span>Wartend</td>
+            <td>~13. Mai 2026</td>
+          </tr>
+          <tr>
+            <td><strong>SBU + GUMWS Charkiw</strong></td>
+            <td>Archivakte Sondersiedlerin Kroeker E.I. — persönliche Daten, Familienstand</td>
+            <td><span class="status-dot dot-wait"></span>Wartend</td>
+            <td>~20. Mai 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Kasachstan (Spezialistin Marina)</strong></td>
+            <td>Deportationsunterlagen, Sondersiedlungsakten</td>
+            <td><span class="status-dot dot-wait"></span>In Arbeit</td>
+            <td>Offen</td>
+          </tr>
+          <tr>
+            <td><strong>Justizbehörde Nordkasachstan</strong></td>
+            <td>Primäre Geburtsurkunde von Vladimir Usachew (08.04.1950, Sennoje) — Daten des Vaters</td>
+            <td><span class="status-dot dot-wait"></span>Wartend</td>
+            <td>Offen</td>
+          </tr>
+          <tr>
+            <td><strong>MWD Charkiw (Abgelehnt ×2)</strong></td>
+            <td>Kopien der Archivakte Kroeker E.I.</td>
+            <td><span class="status-dot dot-deny"></span>Abgelehnt</td>
+            <td>–</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="section" id="updates">
+    <h2 class="section-title" data-t="sec_updates">Aktualisierungen</h2>
+    <div class="card">
+      <p style="color:#aaa; font-size:0.85rem; margin-bottom:1rem;" data-t="upd_last">Letzte Aktualisierung: <strong>22. April 2026</strong></p>
+      <div class="update-item">
+        <div class="update-date">22. April 2026</div>
+        <div class="update-text">Anfrage an MHSBC (Kanada) gesendet — EWZ50-Dokumente Film B019, Kader 1340 (Johann Kroeker, Emma Schulz).</div>
+      </div>
+      <div class="update-item">
+        <div class="update-date">20. April 2026</div>
+        <div class="update-text">Neue Anfrage an SBU Ukraine + GUMWS Charkiw gesendet — mit Verweis auf das Gesetz über den Zugang zu Archiven repressiver Organe.</div>
+      </div>
+      <div class="update-item">
+        <div class="update-date">21. April 2026</div>
+        <div class="update-text">Benutzungsantrag an das Bundesarchiv Berlin gestellt (Akte Edmund Dreger, R 9361-IV/18702, EWZ-Nr. 906134).</div>
+      </div>
+      <div class="update-item">
+        <div class="update-date">13. April 2026</div>
+        <div class="update-text">Erneute Beschwerde beim ukrainischen Ombudsmann eingereicht (Nr. Е-25482.3/26) — mit Unterschrift und allen Beilagen.</div>
+      </div>
+      <div class="update-item">
+        <div class="update-date">22. April 2026</div>
+        <div class="update-text">Website erstellt. Forschung aktiv in 5 Archiven gleichzeitig.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer" data-t="footer">Familie Kroeker · Usachew · Familiengeschichte · Berlin 2026</div>
+
+<script>
+// Init
+setLang('de');
+showSection('home');
+</script>
+
+</body>
+</html>
