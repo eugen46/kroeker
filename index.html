@@ -494,17 +494,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 
 
-<div class="card" style="margin-top:1.2rem;background:linear-gradient(135deg,#0f2d5c,#1a56db);border:none;text-align:center;padding:1.4rem">
-  <div style="color:rgba(255,255,255,.6);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem" id="t-visits-label"></div>
-  <div style="color:#fff;font-weight:700;font-size:2rem;font-family:DM Serif Display,Georgia,serif" id="visit-count-display">
-    <a href="https://analytics.google.com" target="_blank" 
-       style="color:#fff;text-decoration:none;font-size:.85rem;opacity:.8">
-      &#128200; Google Analytics &#8594;
-    </a>
-  </div>
-  <div style="color:rgba(255,255,255,.35);font-size:.7rem;margin-top:.4rem" id="t-visits-sub"></div>
-</div>
-
   <div class="qbox"><strong id="t-qt"></strong><br><br><span id="t-q"></span></div>
   <div class="g3">
     <div class="stat-card"><div class="sc-label" id="t-c1r"></div><div class="sc-name" id="t-c1n"></div><div class="sc-dates" id="t-c1d"></div></div>
@@ -1322,5 +1311,13 @@ if(document.getElementById("s7") && document.getElementById("s7").classList.cont
 L("de");
 
 </script>
+
+<a href="https://analytics.google.com" target="_blank" 
+   style="position:fixed;bottom:18px;right:18px;background:rgba(15,45,92,.9);color:#fff;text-decoration:none;padding:.5rem .9rem;border-radius:20px;font-size:.78rem;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:100;backdrop-filter:blur(8px);transition:all .15s"
+   onmouseover="this.style.background='rgba(26,86,219,.95)'" onmouseout="this.style.background='rgba(15,45,92,.9)'"
+   title="Google Analytics">
+  &#128200; <span id="t-visits-label"></span>
+</a>
+
 </body>
 </html>
