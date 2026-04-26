@@ -92,6 +92,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   transition:all .15s
 }
 .lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.4)}
+.hdr-search:focus{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+.hdr-search::placeholder{color:rgba(255,255,255,.5)}
 
 /* SEARCH BAR */
 .search-bar{background:var(--white);border-bottom:1px solid var(--border);padding:.65rem 2rem}
@@ -123,7 +125,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   background:var(--white);
   border-bottom:1px solid var(--border);
   display:flex;overflow-x:auto;padding:0 2rem;
-  position:sticky;top:57px;z-index:99;
+  position:sticky;top:auto;z-index:99;
 }
 .nav-item{position:relative;display:inline-block}
 .nav-item>a{
@@ -132,7 +134,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   padding:.75rem 1rem;border-bottom:2px solid transparent;
   transition:all .15s;display:inline-flex;align-items:center;gap:.3rem
 }
-.nav-item>a:hover,.nav-item:hover>a{color:var(--blue)}
+.nav-item>a:hover,.nav-item:hover>a{color:var(--blue);background:var(--blue6)}
+.nav-item>a{transition:all .15s}
 .nav-item>a.on{color:var(--blue);border-bottom-color:var(--blue)}
 .nav-item>a .arr{font-size:.6rem;opacity:.5;transition:transform .15s}
 .nav-item:hover>a .arr{transform:rotate(180deg);opacity:1}
@@ -302,6 +305,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .footer{background:var(--navy);padding:1.6rem 2rem;margin-top:2.5rem}
 .footer-main{text-align:center;color:rgba(255,255,255,.6);font-size:.78rem;margin-bottom:.6rem}
 .footer-copy{text-align:center;color:rgba(255,255,255,.35);font-size:.7rem;line-height:1.6;max-width:800px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:.7rem}
+
+.hdr-search:focus{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+.hdr-search::placeholder{color:rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
@@ -312,6 +318,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div class="hdr-sub" id="hs" style="font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.15rem"></div>
   </div>
   <div class="hdr-right">
+    <a onclick="S('s0');return false;" href="#" style="color:rgba(255,255,255,.7);font-size:1rem;cursor:pointer;padding:.3rem .55rem;border-radius:8px;background:rgba(255,255,255,.08);text-decoration:none;display:inline-flex;align-items:center" title="Home">&#127968;</a>
+    <div style="position:relative">
+      <input class="hdr-search" id="search-input" type="text" oninput="doSearch(this.value)" placeholder="&#128269;" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:.32rem .8rem;border-radius:18px;font-size:.78rem;width:140px;outline:none;font-family:inherit"/>
+      <div id="search-results" style="position:absolute;top:100%;right:0;margin-top:.4rem;background:#fff;border-radius:8px;min-width:280px;max-width:380px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:200;display:none;padding:.5rem"></div>
+    </div>
     <a class="tg-btn" href="https://t.me/eugen30" target="_blank">&#9992; <span id="htg"></span></a>
     <a class="pp-btn" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank">&#9733; <span id="pp-label"></span></a>
     <div>
@@ -322,13 +333,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 </header>
 
-<div class="search-bar">
-  <div class="search-wrap">
-    <input class="search-input" id="search-input" type="text" oninput="doSearch(this.value)"/>
-    <button class="search-btn" onclick="doSearch(document.getElementById('search-input').value)">&#128269;</button>
-  </div>
-  <div id="search-results"></div>
-</div>
+
 
 <nav class="nav">
   <div class="nav-item">
@@ -371,7 +376,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 <!-- HOME -->
 <div class="sec on" id="s0">
-  <h2 class="sec-title" id="t-s0"></h2>
   <div class="g2">
     <div class="card"><h3 id="t-it"></h3><p id="t-i"></p></div>
     <div class="card"><h3 id="t-pt"></h3><p id="t-p"></p></div>
@@ -511,6 +515,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .ttg{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;fill:#1a56db;text-transform:uppercase;letter-spacing:.08em}
 .ttw{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;fill:#fff}
 .ttwh{font-family:'DM Sans',sans-serif;font-size:14px;fill:#dbeafe}
+
+.hdr-search:focus{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+.hdr-search::placeholder{color:rgba(255,255,255,.5)}
 </style>
 <text class="ttg" x="340" y="32" text-anchor="middle">1. Generation — Urur-Urgroßeltern</text>
 <rect x="190" y="56" width="300" height="62" rx="12" fill="#dbeafe" stroke="#1a56db" stroke-width="0.5" stroke-dasharray="3,2"/>
@@ -809,7 +816,7 @@ var T = {
   "n3": "ZEITLEISTE", "n4": "FORSCHUNG", "n5": "AKTUALISIERUNGEN",
   "ht": "Familie Kroeker \u00b7 Usachew",
   "hx": "Mennonitische Familiengeschichte \u2014 von Preu\u00dfen \u00fcber Wolhynien und Kasachstan nach Deutschland",
-  "s0": "Startseite", "s1": "Stammbaum", "s2": "Geschichte der Familie",
+  "s0": "", "s1": "Stammbaum", "s2": "Geschichte der Familie",
   "s3": "Zeitleiste", "s4": "Forschungsstand", "s5": "Aktualisierungen",
   "it": "\u00dcber dieses Projekt",
   "i": "Diese Website dokumentiert die Geschichte der Familie Kroeker\u2013Usachew \u2014 einer mennonitischen Familie mit Wurzeln in Westpreu\u00dfen, die \u00fcber Wolhynien (Ukraine) nach Kasachstan und schlie\u00dflich nach Deutschland gelangte. Das Projekt wird von Eugen Usachew (Berlin) gef\u00fchrt.",
@@ -925,7 +932,7 @@ var T = {
   "n3": "\u0425\u0420\u041e\u041d\u041e\u041b\u041e\u0413\u0418\u042f", "n4": "\u0418\u0421\u0421\u041b\u0415\u0414\u041e\u0412\u0410\u041d\u0418\u0415", "n5": "\u041e\u0411\u041d\u041e\u0412\u041b\u0415\u041d\u0418\u042f",
   "ht": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u00b7 \u0423\u0441\u0430\u0447\u0435\u0432",
   "hx": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u043c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u043e\u0439 \u0441\u0435\u043c\u044c\u0438 \u2014 \u0438\u0437 \u041f\u0440\u0443\u0441\u0441\u0438\u0438 \u0447\u0435\u0440\u0435\u0437 \u0412\u043e\u043b\u044b\u043d\u044c \u0438 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d \u0432 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044e",
-  "s0": "\u0413\u043b\u0430\u0432\u043d\u0430\u044f", "s1": "\u0414\u0440\u0435\u0432\u043e", "s2": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0441\u0435\u043c\u044c\u0438",
+  "s0": "", "s1": "\u0414\u0440\u0435\u0432\u043e", "s2": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0441\u0435\u043c\u044c\u0438",
   "s3": "\u0425\u0440\u043e\u043d\u043e\u043b\u043e\u0433\u0438\u044f", "s4": "\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f", "s5": "\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f",
   "it": "\u041e \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
   "i": "\u0421\u0430\u0439\u0442 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0438\u0440\u0443\u0435\u0442 \u0438\u0441\u0442\u043e\u0440\u0438\u044e \u0441\u0435\u043c\u044c\u0438 \u041a\u0440\u0451\u043a\u0435\u0440\u2013\u0423\u0441\u0430\u0447\u0435\u0432 \u2014 \u043c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u043e\u0439 \u0441\u0435\u043c\u044c\u0438 \u0441 \u043a\u043e\u0440\u043d\u044f\u043c\u0438 \u0432 \u0417\u0430\u043f\u0430\u0434\u043d\u043e\u0439 \u041f\u0440\u0443\u0441\u0441\u0438\u0438, \u043f\u0440\u043e\u0448\u0435\u0434\u0448\u0435\u0439 \u0447\u0435\u0440\u0435\u0437 \u0412\u043e\u043b\u044b\u043d\u044c \u0438 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d \u0432 \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044e. \u0410\u0432\u0442\u043e\u0440 \u043f\u0440\u043e\u0435\u043a\u0442\u0430: \u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432 (\u0411\u0435\u0440\u043b\u0438\u043d).",
@@ -1041,7 +1048,7 @@ var T = {
   "n3": "TIMELINE", "n4": "RESEARCH", "n5": "UPDATES",
   "ht": "Kroeker \u00b7 Usachew Family",
   "hx": "The story of a Mennonite family \u2014 from Prussia through Volhynia and Kazakhstan to Germany",
-  "s0": "Home", "s1": "Family Tree", "s2": "Family History",
+  "s0": "", "s1": "Family Tree", "s2": "Family History",
   "s3": "Timeline", "s4": "Research Status", "s5": "Updates",
   "it": "About This Project",
   "i": "This website documents the history of the Kroeker\u2013Usachew family \u2014 a Mennonite family with roots in West Prussia that passed through Volhynia (Ukraine) and Kazakhstan before arriving in Germany. Maintained by Eugen Usachew (Berlin).",
@@ -1296,9 +1303,9 @@ function doSearch(q){
     var sec = hits[j].section;
     var div = document.createElement("div");
     div.className = "s-hit";
-    var secNames = {"s0":"Startseite","s1":"Stammbaum","s2":"Geschichte","s3":"Zeitleiste","s4":"Forschung","s5":"Updates","s6":"Ressourcen"};
-    if(lang==="ru") secNames = {"s0":"Главная","s1":"Древо","s2":"История","s3":"Хронология","s4":"Исследование","s5":"Обновления","s6":"Ресурсы"};
-    if(lang==="en") secNames = {"s0":"Home","s1":"Family Tree","s2":"History","s3":"Timeline","s4":"Research","s5":"Updates","s6":"Resources"};
+    var secNames = {"s0": "","s1":"Stammbaum","s2":"Geschichte","s3":"Zeitleiste","s4":"Forschung","s5":"Updates","s6":"Ressourcen"};
+    if(lang==="ru") secNames = {"s0": "","s1":"Древо","s2":"История","s3":"Хронология","s4":"Исследование","s5":"Обновления","s6":"Ресурсы"};
+    if(lang==="en") secNames = {"s0": "","s1":"Family Tree","s2":"History","s3":"Timeline","s4":"Research","s5":"Updates","s6":"Resources"};
     var secLabel = secNames[sec] || sec;
     div.innerHTML = "<span style='font-size:.7rem;background:var(--blue5);color:var(--blue);padding:.1rem .4rem;border-radius:4px;margin-right:.5rem;font-weight:500'>→ " + secLabel + "</span>" + hits[j].html;
     div.setAttribute("data-sec", sec);
