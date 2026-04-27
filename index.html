@@ -465,7 +465,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     </div>
     <div class="header-support" aria-label="Telegram and PayPal">
       <a class="support-btn telegram" href="https://t.me/eugen30" target="_blank" rel="noopener" title="Telegram @eugen30"><span class="support-mark">TG</span> eugen30</a>
-      <a class="support-btn paypal" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener" title="PayPal: eugenusachew@gmail.com"><span class="support-mark">PayPal</span> Spende</a>
+      <a class="support-btn paypal" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener" title="PayPal: eugenusachew@gmail.com"><span id="paypal-header-label">PayPal Spende</span></a>
     </div>
   </div>
 </header>
@@ -889,7 +889,7 @@ var T = {
   "hl": "Familie Kroeker",
   "hs": "Mennonitische Familiengeschichte \u00b7 1864\u20132026",
   "htg": "Kontakt: @eugen30",
-  "pp-label": "Spende",
+  "pp-label": "PayPal Spende",
   "n0": "STARTSEITE", "n1": "STAMMBAUM", "n2": "GESCHICHTE",
   "n3": "ZEITLEISTE", "n4": "FORSCHUNG", "n5": "AKTUALISIERUNGEN",
   "ht": "Familie Kroeker \u00b7 Usachew",
@@ -1010,7 +1010,7 @@ var T = {
   "hl": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440",
   "hs": "\u041c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u0441\u0435\u043c\u044c\u0438 \u00b7 1864\u20132026",
   "htg": "\u041a\u043e\u043d\u0442\u0430\u043a\u0442: @eugen30",
-  "pp-label": "\u041f\u043e\u0436\u0435\u0440\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435",
+  "pp-label": "PayPal \u043f\u043e\u0436\u0435\u0440\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435",
   "n0": "\u0413\u041b\u0410\u0412\u041d\u0410\u042f", "n1": "\u0414\u0420\u0415\u0412\u041e", "n2": "\u0418\u0421\u0422\u041e\u0420\u0418\u042f",
   "n3": "\u0425\u0420\u041e\u041d\u041e\u041b\u041e\u0413\u0418\u042f", "n4": "\u0418\u0421\u0421\u041b\u0415\u0414\u041e\u0412\u0410\u041d\u0418\u0415", "n5": "\u041e\u0411\u041d\u041e\u0412\u041b\u0415\u041d\u0418\u042f",
   "ht": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u00b7 \u0423\u0441\u0430\u0447\u0435\u0432",
@@ -1131,7 +1131,7 @@ var T = {
   "hl": "Kroeker Family",
   "hs": "Mennonite Family History \u00b7 1864\u20132026",
   "htg": "Contact: @eugen30",
-  "pp-label": "Donate",
+  "pp-label": "PayPal Donate",
   "n0": "HOME", "n1": "TREE", "n2": "HISTORY",
   "n3": "TIMELINE", "n4": "RESEARCH", "n5": "UPDATES",
   "ht": "Kroeker \u00b7 Usachew Family",
@@ -1337,6 +1337,8 @@ function R(){
   document.documentElement.lang = lang;
   var sp = {"de":"Suche auf der Website...","ru":"\u041f\u043e\u0438\u0441\u043a...","en":"Search the website..."};
   var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
+  var paypalHeader = document.getElementById("paypal-header-label");
+  if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
   document.getElementById("search-results").style.display="none";
 }
 
