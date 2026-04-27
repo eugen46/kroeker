@@ -108,7 +108,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .top-search{position:relative;flex:0 1 240px;max-width:240px;min-width:165px}
 .search-wrap{display:flex;align-items:center;width:100%}
 .search-input{
-  width:100%;height:38px;padding:.15rem .9rem;
+  width:100%;height:38px;padding:.15rem 2.25rem .15rem .9rem;
   border:1px solid rgba(255,255,255,.28);border-radius:12px;
   font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1f2937;
   background:rgba(255,255,255,.92);outline:none;box-shadow:0 1px 4px rgba(15,23,42,.12)
@@ -116,6 +116,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .search-input::placeholder{color:#6b7280}
 .search-input:focus{box-shadow:0 0 0 3px rgba(147,197,253,.45),0 1px 4px rgba(15,23,42,.14)}
 .search-btn{display:none}
+.search-clear{
+  position:absolute;right:.45rem;top:50%;transform:translateY(-50%);
+  width:24px;height:24px;border:0;border-radius:8px;background:transparent;color:#6b7280;
+  display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;line-height:1;
+  transition:background .15s,color .15s
+}
+.search-clear:hover{background:rgba(15,45,92,.08);color:#1f2937}
 .home-btn,.lang-btn{
   height:38px;padding:0;cursor:pointer;
   font-size:.82rem;border-radius:11px;font-family:'DM Sans',sans-serif;font-weight:700;
@@ -445,6 +452,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div class="top-search">
       <div class="search-wrap">
         <input class="search-input" id="search-input" type="text" oninput="doSearch(this.value)"/>
+        <button class="search-clear" id="search-clear" type="button" onclick="clearSearch()" aria-label="Clear search">&times;</button>
         <button class="search-btn" onclick="doSearch(document.getElementById('search-input').value)">&#128269;</button>
       </div>
       <div id="search-results"></div>
@@ -550,8 +558,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <text x="455" y="292" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:9px;fill:#d1d5db">1955&#x2013;2019</text>
 <text x="455" y="306" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:9px;fill:#9ca3af">Rostower Oblast</text>
 <rect x="0" y="0" width="680" height="58" fill="#0f2d5c"/>
-<text x="340" y="26" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:17px;fill:#ffffff;font-weight:500;letter-spacing:0">Familie Kroeker</text>
-<text x="340" y="46" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;fill:#93c5fd;font-weight:400;letter-spacing:0">&#1055;&#1091;&#1090;&#1100; &#1084;&#1077;&#1085;&#1085;&#1086;&#1085;&#1080;&#1090;&#1089;&#1082;&#1086;&#1081; &#1089;&#1077;&#1084;&#1100;&#1080; &#xB7; 1864&#x2013;2026</text>
+<text id="svg-map-title" x="340" y="26" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:17px;fill:#ffffff;font-weight:500;letter-spacing:0">Familie Kroeker</text>
+<text id="svg-map-sub" x="340" y="46" text-anchor="middle" style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;fill:#93c5fd;font-weight:400;letter-spacing:0">Der Weg der mennonitischen Familie &#xB7; 1864&#x2013;2026</text>
 <rect x="20" y="460" width="310" height="52" rx="6" fill="rgba(255,255,255,0.75)" stroke="#bfdbfe" stroke-width="0.5"/>
 <line x1="35" y1="476" x2="65" y2="476" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3"/>
 <text x="72" y="480" class="lbl-sm">Lydia 1943 &#x2192; Deutschland</text>
@@ -992,6 +1000,8 @@ var T = {
   "con-search": "Ich suche Nachkommen oder Informationen zu folgenden Familiennamen:",
   "con-names": "Kr\u00f6ker / Kroeker / Kröker \u2022 Dreger \u2022 Schulz (aus Wiktorowka, Kiew) \u2022 Usachew / Usachev \u2022 \nBesonders: Leo Dreger (* 08.06.1937, Knowrow) \u2014 Sohn von Lydia Dreger geb. Kr\u00f6ker \u2022 \nWassili (Nachname unbekannt) \u2014 Kasachstan ~1949–1950",
   "map-title": "Der Weg der Familie Kroeker — eine Karte",
+  "svg-map-title": "Familie Kroeker",
+  "svg-map-sub": "Der Weg der mennonitischen Familie \u00b7 1864\u20132026",
   "visits-label": "Besucherstatistik",
   "visits-sub": "Klicken Sie auf den Link um die vollst\u00e4ndige Statistik zu sehen",
   "ft": "Familie Kroeker \u00b7 Usachew \u00b7 Berlin 2026 \u00b7 Erstellt von Eugen Usachew"
@@ -1111,6 +1121,8 @@ var T = {
   "con-search": "\u0418\u0449\u0443 \u043f\u043e\u0442\u043e\u043c\u043a\u043e\u0432 \u0438\u043b\u0438 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0445 \u0444\u0430\u043c\u0438\u043b\u0438\u044f\u0445:",
   "con-names": "\u041a\u0440\u0451\u043a\u0435\u0440 / Kroeker / Kr\u00f6ker \u2022 \u0414\u0440\u0435\u0433\u0435\u0440 \u2022 \u0428\u0443\u043b\u044c\u0446 (\u0438\u0437 \u0412\u0438\u043a\u0442\u043e\u0440\u043e\u0432\u043a\u0438, \u041a\u0438\u0435\u0432) \u2022 \u0423\u0441\u0430\u0447\u0435\u0432 \u2022 \n\u041e\u0441\u043e\u0431\u0435\u043d\u043d\u043e: \u041b\u0435\u043e \u0414\u0440\u0435\u0433\u0435\u0440 (* 08.06.1937, \u041a\u043d\u043e\u0440\u043e\u0432\u043e) \u2022 \u0412\u0430\u0441\u0438\u043b\u0438\u0439 \u041a\u0440\u0435\u043a\u0435\u0440 (\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d ~1949)",
   "map-title": "\u041f\u0443\u0442\u044c \u0441\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u2014 \u043a\u0430\u0440\u0442\u0430",
+  "svg-map-title": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440",
+  "svg-map-sub": "\u041f\u0443\u0442\u044c \u043c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u043e\u0439 \u0441\u0435\u043c\u044c\u0438 \u00b7 1864\u20132026",
   "visits-label": "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430 \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439",
   "visits-sub": "\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u0441\u0441\u044b\u043b\u043a\u0443 \u0447\u0442\u043e\u0431\u044b \u0443\u0432\u0438\u0434\u0435\u0442\u044c \u043f\u043e\u043b\u043d\u0443\u044e \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0443",
   "ft": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u00b7 \u0423\u0441\u0430\u0447\u0435\u0432 \u00b7 \u0411\u0435\u0440\u043b\u0438\u043d 2026 \u00b7 \u0410\u0432\u0442\u043e\u0440: \u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432"
@@ -1230,6 +1242,8 @@ var T = {
   "con-search": "I am looking for descendants or information about the following families:",
   "con-names": "Kr\u00f6ker / Kroeker \u2022 Dreger \u2022 Schulz (from Wiktorowka, Kyiv) \u2022 Usachew \u2022 \nEspecially: Leo Dreger (* 08.06.1937, Knowrow) \u2022 Wassili (surname unknown) \u2014 Kazakhstan ~1949",
   "map-title": "The Kroeker family journey — a map",
+  "svg-map-title": "Kroeker Family",
+  "svg-map-sub": "Mennonite family journey \u00b7 1864\u20132026",
   "visits-label": "Visitor Statistics",
   "visits-sub": "Click the link to see full statistics",
   "ft": "Kroeker \u00b7 Usachew Family History \u00b7 Berlin 2026 \u00b7 Created by Eugen Usachew"
@@ -1252,6 +1266,7 @@ function R(){
     "ra","rw","rs","rd","ul","u-sbu-d","u-sbu-t","u0d","u0t","u1d","u1t","u2d","u2t","u3d","u3t","u4d","u4t","u5d","u5t","u6d","u6t",
     "r-done","r-wait","r-prog","r-deny","r-search-title","r-search-desc","r-grandma","r-odessa","r-other-title","copyright",
     "chip-years","chip-km","chip-gen",
+    "svg-map-title","svg-map-sub",
     "s6","s7","s8",
     "map-title","map-desc","map-l1","map-l2","map-l3","map-l4","map-l5","map-l6",
     "con-why-t","con-why","con-how-t","con-donate","con-donate-sub","con-search-t","con-search","con-names",
@@ -1358,6 +1373,8 @@ function buildSearchIndex(){
 
 function doSearch(q){
   var res = document.getElementById("search-results");
+  var clear = document.getElementById("search-clear");
+  if(clear) clear.style.display = q ? "inline-flex" : "none";
   if(!q || q.length < 2){ res.style.display="none"; return; }
   q = q.toLowerCase();
   buildSearchIndex();
@@ -1393,6 +1410,8 @@ function doSearch(q){
       S(s);
       document.getElementById("search-results").style.display = "none";
       document.getElementById("search-input").value = "";
+      var clearBtn = document.getElementById("search-clear");
+      if(clearBtn) clearBtn.style.display = "none";
       window.scrollTo({top:0, behavior:"smooth"});
     });
     html += div.outerHTML;
@@ -1407,9 +1426,21 @@ function doSearch(q){
       S(s);
       res.style.display = "none";
       document.getElementById("search-input").value = "";
+      var clearBtn = document.getElementById("search-clear");
+      if(clearBtn) clearBtn.style.display = "none";
       window.scrollTo({top:0, behavior:"smooth"});
     });
   });
+}
+
+function clearSearch(){
+  var input = document.getElementById("search-input");
+  var res = document.getElementById("search-results");
+  var clear = document.getElementById("search-clear");
+  if(input) input.value = "";
+  if(res) res.style.display = "none";
+  if(clear) clear.style.display = "none";
+  if(input) input.focus();
 }
 
 
