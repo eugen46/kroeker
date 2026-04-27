@@ -59,57 +59,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* HEADER */
 .hdr{
-  background:var(--navy);
-  padding:.85rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;
+  background:#354a72;
+  min-height:98px;
+  padding:1.15rem 2.55rem;
+  display:grid;
+  grid-template-columns:minmax(270px,1fr) auto minmax(430px,1fr);
+  align-items:center;
+  gap:1.6rem;
   position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 0 rgba(255,255,255,.08),0 4px 20px rgba(0,0,0,.2);
-  flex-wrap:wrap;gap:.6rem;
+  box-shadow:0 1px 0 rgba(255,255,255,.1),0 5px 22px rgba(10,25,52,.22);
 }
-.hdr-logo{color:#fff;font-family:'DM Serif Display',serif;font-size:1.25rem;letter-spacing:-.01em}
-.hdr-sub{color:rgba(255,255,255,.5);font-size:.72rem;margin-top:.1rem;font-weight:300}
-.hdr-right{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.tg-btn{
-  display:inline-flex;align-items:center;gap:.35rem;
-  background:#2ca5e0;color:#fff;
-  padding:.32rem .85rem;border-radius:20px;
-  font-size:.77rem;font-weight:500;text-decoration:none;white-space:nowrap;
-  transition:background .15s
+.brand{display:flex;align-items:center;gap:1.05rem;min-width:0}
+.brand-mark{
+  width:58px;height:58px;border-radius:11px;background:#2859d8;color:#fff;
+  display:grid;place-items:center;font-size:1.7rem;font-weight:700;line-height:1;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12)
 }
-.tg-btn:hover{background:#1a8fc8}
-.pp-btn{
-  display:inline-flex;align-items:center;gap:.35rem;
-  background:#ffc439;color:#003087;
-  padding:.32rem .85rem;border-radius:20px;
-  font-size:.77rem;font-weight:600;text-decoration:none;white-space:nowrap;
-  transition:background .15s
+.hdr-logo{
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:1.36rem;
+  font-weight:500;
+  letter-spacing:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-.pp-btn:hover{background:#f0b429}
-.lang-btn{
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
-  color:rgba(255,255,255,.7);padding:.26rem .68rem;cursor:pointer;
-  font-size:.76rem;border-radius:6px;font-family:'DM Sans',sans-serif;
-  transition:all .15s
-}
-.lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.4)}
-
-/* SEARCH BAR */
-.search-bar{background:var(--white);border-bottom:1px solid var(--border);padding:.65rem 2rem}
-.search-wrap{max-width:1060px;margin:0 auto;display:flex;gap:.5rem;align-items:center}
+.hdr-sub{display:none}
+.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:.72rem;min-width:0}
+.top-search{position:relative;flex:1 1 300px;max-width:380px;min-width:210px}
+.search-wrap{display:flex;align-items:center;width:100%}
 .search-input{
-  flex:1;padding:.45rem 1rem;
-  border:1px solid var(--border);border-radius:20px;
-  font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--text);
-  background:var(--blue6);outline:none;transition:border-color .15s
+  width:100%;height:48px;padding:.2rem 1.2rem;
+  border:0;border-radius:999px;
+  font-family:'DM Sans',sans-serif;font-size:1rem;color:#1f2937;
+  background:#fff;outline:none;box-shadow:0 1px 4px rgba(15,23,42,.14)
 }
-.search-input:focus{border-color:var(--blue3);background:#fff}
-.search-btn{
-  background:var(--blue);color:#fff;border:none;
-  padding:.45rem 1rem;border-radius:20px;cursor:pointer;font-size:.85rem;
-  transition:background .15s
+.search-input::placeholder{color:#6b7280}
+.search-input:focus{box-shadow:0 0 0 3px rgba(147,197,253,.45),0 1px 4px rgba(15,23,42,.14)}
+.search-btn{display:none}
+.home-btn{
+  width:58px;height:58px;border:0;border-radius:50%;background:#2859d8;color:#fff;
+  display:grid;place-items:center;text-decoration:none;font-size:1.45rem;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  transition:background .15s,transform .15s;cursor:pointer
 }
-.search-btn:hover{background:var(--blue2)}
-#search-results{max-width:1060px;margin:.4rem auto 0;display:none}
+.home-btn:hover{background:#3467ef;transform:translateY(-1px)}
+.lang-group{display:flex;align-items:center;gap:.5rem}
+.lang-btn{
+  background:rgba(255,255,255,.18);border:0;
+  color:rgba(255,255,255,.78);padding:.43rem .8rem;cursor:pointer;
+  font-size:.88rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;
+  transition:all .15s;line-height:1
+}
+.lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,.3);color:#fff}
+#search-results{
+  position:absolute;left:0;right:0;top:calc(100% + .55rem);
+  max-width:380px;margin:0;display:none;z-index:250
+}
 .s-hit{
   padding:.5rem .8rem;margin:.2rem 0;
   background:#fff;border-radius:var(--radius-sm);cursor:pointer;
@@ -120,22 +127,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* NAV */
 .nav{
-  background:var(--white);
-  border-bottom:1px solid var(--border);
-  display:flex;overflow-x:auto;padding:0 2rem;
-  position:sticky;top:57px;z-index:99;
+  display:flex;align-items:center;justify-content:center;gap:1.1rem;
+  overflow:visible;padding:0;background:transparent;border:0;position:static;
 }
 .nav-item{position:relative;display:inline-block}
 .nav-item>a{
-  color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;
-  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;cursor:pointer;
-  padding:.75rem 1rem;border-bottom:2px solid transparent;
+  color:rgba(255,255,255,.64);text-decoration:none;font-size:.9rem;font-weight:600;
+  letter-spacing:.02em;text-transform:none;white-space:nowrap;cursor:pointer;
+  padding:.45rem 0;border-bottom:2px solid transparent;
   transition:all .15s;display:inline-flex;align-items:center;gap:.3rem
 }
-.nav-item>a:hover,.nav-item:hover>a{color:var(--blue)}
-.nav-item>a.on{color:var(--blue);border-bottom-color:var(--blue)}
-.nav-item>a .arr{font-size:.6rem;opacity:.5;transition:transform .15s}
-.nav-item:hover>a .arr{transform:rotate(180deg);opacity:1}
+.nav-item>a:hover,.nav-item:hover>a,.nav-item>a.on{color:#fff}
+.nav-item>a.on{border-bottom-color:rgba(255,255,255,.72)}
+.nav-item>a .arr{display:none}
+.nav-item:nth-child(n+8){display:none}
 .dropdown{
   display:none;position:absolute;top:100%;left:0;
   background:var(--white);border:1px solid var(--border);
@@ -152,6 +157,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .dropdown a:last-child{border-bottom:none}
 .dropdown a:hover{background:var(--blue6);color:var(--blue)}
 .dropdown-sep{height:1px;background:var(--blue5);margin:.2rem 0}
+
+@media(max-width:980px){
+  .hdr{grid-template-columns:1fr;gap:1rem;padding:1rem 1.1rem}
+  .nav{justify-content:flex-start;gap:1rem;overflow-x:auto;width:100%}
+  .hdr-right{justify-content:flex-start;width:100%;flex-wrap:wrap}
+  .top-search{max-width:none;flex:1 1 260px}
+}
+
+@media(max-width:1450px) and (min-width:981px){
+  .hdr{grid-template-columns:1fr auto;gap:.9rem 1.1rem}
+  .nav{grid-column:1/-1;justify-content:flex-start;flex-wrap:wrap}
+}
+
+@media(max-width:560px){
+  .brand-mark,.home-btn{width:48px;height:48px}
+  .hdr-logo{font-size:1.12rem}
+  .nav-item>a{font-size:.92rem}
+  .lang-btn{padding:.38rem .62rem}
+}
 
 /* HERO */
 .hero{
@@ -307,69 +331,65 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <body>
 
 <header class="hdr">
-  <div>
-    <div class="hdr-logo" id="hl"></div>
-    <div class="hdr-sub" id="hs"></div>
-  </div>
-  <div class="hdr-right">
-    <a class="tg-btn" href="https://t.me/eugen30" target="_blank">&#9992; <span id="htg"></span></a>
-    <a class="pp-btn" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank">&#9733; <span id="pp-label"></span></a>
+  <div class="brand">
+    <div class="brand-mark">K</div>
     <div>
+      <div class="hdr-logo" id="hl">Kroeker Family</div>
+      <div class="hdr-sub" id="hs"></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-item">
+      <a id="n0" class="on" onclick="S('s0')"><span id="n0-txt"></span></a>
+    </div>
+    <div class="nav-item">
+      <a id="n1" onclick="S('s1')"><span id="n1-txt"></span> <span class="arr">&#9660;</span></a>
+      <div class="dropdown" id="dd1"></div>
+    </div>
+    <div class="nav-item">
+      <a id="n2" onclick="S('s2')"><span id="n2-txt"></span> <span class="arr">&#9660;</span></a>
+      <div class="dropdown" id="dd2"></div>
+    </div>
+    <div class="nav-item">
+      <a id="n3" onclick="S('s3')"></a>
+    </div>
+    <div class="nav-item">
+      <a id="n4" onclick="S('s4')"><span id="n4-txt"></span> <span class="arr">&#9660;</span></a>
+      <div class="dropdown" id="dd4"></div>
+    </div>
+    <div class="nav-item">
+      <a id="n5" onclick="S('s5')"><span id="n5-txt"></span> <span class="arr">&#9660;</span></a>
+      <div class="dropdown" id="dd5"></div>
+    </div>
+    <div class="nav-item">
+      <a id="n6" onclick="S('s6')"><span id="n6-txt"></span> <span class="arr">&#9660;</span></a>
+      <div class="dropdown" id="dd6"></div>
+    </div>
+    <div class="nav-item">
+      <a id="n7" onclick="S('s7')"></a>
+    </div>
+    <div class="nav-item">
+      <a id="n8" onclick="S('s8')"></a>
+    </div>
+  </nav>
+
+  <div class="hdr-right">
+    <div class="top-search">
+      <div class="search-wrap">
+        <input class="search-input" id="search-input" type="text" oninput="doSearch(this.value)"/>
+        <button class="search-btn" onclick="doSearch(document.getElementById('search-input').value)">&#128269;</button>
+      </div>
+      <div id="search-results"></div>
+    </div>
+    <a class="home-btn" onclick="S('s0')" aria-label="Home">&#127968;</a>
+    <div class="lang-group">
       <button class="lang-btn active" onclick="L('de')">DE</button>
       <button class="lang-btn" onclick="L('ru')">RU</button>
       <button class="lang-btn" onclick="L('en')">EN</button>
     </div>
   </div>
 </header>
-
-<div class="search-bar">
-  <div class="search-wrap">
-    <input class="search-input" id="search-input" type="text" oninput="doSearch(this.value)"/>
-    <button class="search-btn" onclick="doSearch(document.getElementById('search-input').value)">&#128269;</button>
-  </div>
-  <div id="search-results"></div>
-</div>
-
-<nav class="nav">
-  <div class="nav-item">
-    <a id="n0" class="on" onclick="S('s0')"><span id="n0-txt"></span></a>
-  </div>
-  <div class="nav-item">
-    <a id="n1" onclick="S('s1')"><span id="n1-txt"></span> <span class="arr">&#9660;</span></a>
-    <div class="dropdown" id="dd1"></div>
-  </div>
-  <div class="nav-item">
-    <a id="n2" onclick="S('s2')"><span id="n2-txt"></span> <span class="arr">&#9660;</span></a>
-    <div class="dropdown" id="dd2"></div>
-  </div>
-  <div class="nav-item">
-    <a id="n3" onclick="S('s3')"></a>
-  </div>
-  <div class="nav-item">
-    <a id="n4" onclick="S('s4')"><span id="n4-txt"></span> <span class="arr">&#9660;</span></a>
-    <div class="dropdown" id="dd4"></div>
-  </div>
-  <div class="nav-item">
-    <a id="n5" onclick="S('s5')"><span id="n5-txt"></span> <span class="arr">&#9660;</span></a>
-    <div class="dropdown" id="dd5"></div>
-  </div>
-  <div class="nav-item">
-    <a id="n6" onclick="S('s6')"><span id="n6-txt"></span> <span class="arr">&#9660;</span></a>
-    <div class="dropdown" id="dd6"></div>
-  </div>
-  <div class="nav-item">
-    <a id="n7" onclick="S('s7')"></a>
-  </div>
-  <div class="nav-item">
-    <a id="n8" onclick="S('s8')"></a>
-  </div>
-</nav>
-
-<div class="hero">
-  <h1 class="hero-title" id="ht"></h1>
-  <p class="hero-sub" id="hx"></p>
-  <small class="hero-dates">1864 &mdash; 2026</small>
-</div>
 
 <div class="main">
 
@@ -805,7 +825,7 @@ var lang = "de";
 
 var T = {
 "de": {
-  "hl": "Familie Kroeker \u00b7 Usachew",
+  "hl": "Familie Kroeker",
   "hs": "Mennonitische Familiengeschichte \u00b7 1864\u20132026",
   "htg": "Kontakt: @eugen30",
   "pp-label": "Spende",
@@ -921,7 +941,7 @@ var T = {
   "ft": "Familie Kroeker \u00b7 Usachew \u00b7 Berlin 2026 \u00b7 Erstellt von Eugen Usachew"
 },
 "ru": {
-  "hl": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u00b7 \u0423\u0441\u0430\u0447\u0435\u0432",
+  "hl": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440",
   "hs": "\u041c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u0441\u0435\u043c\u044c\u0438 \u00b7 1864\u20132026",
   "htg": "\u041a\u043e\u043d\u0442\u0430\u043a\u0442: @eugen30",
   "pp-label": "\u041f\u043e\u0436\u0435\u0440\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435",
@@ -1037,11 +1057,11 @@ var T = {
   "ft": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u00b7 \u0423\u0441\u0430\u0447\u0435\u0432 \u00b7 \u0411\u0435\u0440\u043b\u0438\u043d 2026 \u00b7 \u0410\u0432\u0442\u043e\u0440: \u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432"
 },
 "en": {
-  "hl": "Kroeker \u00b7 Usachew Family",
+  "hl": "Kroeker Family",
   "hs": "Mennonite Family History \u00b7 1864\u20132026",
   "htg": "Contact: @eugen30",
   "pp-label": "Donate",
-  "n0": "HOME", "n1": "FAMILY TREE", "n2": "HISTORY",
+  "n0": "HOME", "n1": "TREE", "n2": "HISTORY",
   "n3": "TIMELINE", "n4": "RESEARCH", "n5": "UPDATES",
   "ht": "Kroeker \u00b7 Usachew Family",
   "hx": "The story of a Mennonite family \u2014 from Prussia through Volhynia and Kazakhstan to Germany",
