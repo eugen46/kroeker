@@ -88,26 +88,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 }
 .hdr-sub{display:none}
 .hdr-stats{
-  position:absolute;left:216px;bottom:.64rem;
+  position:absolute;left:2.55rem;bottom:.64rem;
   display:flex;align-items:center;justify-content:flex-start;
-  gap:.42rem;margin:0;flex-wrap:nowrap
+  gap:.5rem;margin:0;flex-wrap:nowrap
 }
 .hdr-stat{
-  width:48px;height:48px;padding:.18rem .22rem;
-  border:1px solid rgba(255,255,255,.36);
-  border-radius:13px;
-  background:
-    radial-gradient(circle at 28% 18%,rgba(255,255,255,.58),rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 64%),
-    linear-gradient(145deg,rgba(255,255,255,.26),rgba(255,255,255,.07));
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.36),inset 0 -10px 18px rgba(255,255,255,.08),0 8px 22px rgba(8,20,44,.14);
-  backdrop-filter:blur(18px) saturate(180%);
-  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  width:56px;height:38px;padding:.12rem .18rem;
+  border:0;border-radius:11px;
+  background:rgba(255,255,255,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   color:#fff;line-height:1;overflow:hidden
 }
-.hdr-stat-num{font-family:'DM Serif Display',Georgia,serif;font-size:.98rem;font-weight:700;color:#fff}
-.hdr-stat:nth-child(2) .hdr-stat-num{font-size:.8rem}
-.hdr-stat-label{font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.68);white-space:nowrap;margin-top:.12rem}
+.hdr-stat-num{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;color:#fff}
+.hdr-stat:nth-child(2) .hdr-stat-num{font-size:.7rem}
+.hdr-stat-label{font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:0;color:rgba(255,255,255,.72);white-space:nowrap;margin-top:.12rem}
 .hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:.72rem;min-width:0;padding-top:.2rem}
 .top-search{position:relative;flex:0 1 240px;max-width:240px;min-width:165px}
 .search-wrap{display:flex;align-items:center;width:100%}
@@ -202,9 +197,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   .brand-mark{width:48px;height:48px}
   .hdr-logo{font-size:1.12rem}
   .hdr-stats{gap:.32rem;left:1rem;bottom:.68rem}
-  .hdr-stat{width:42px;height:42px;padding:.12rem .16rem;border-radius:11px}
-  .hdr-stat-num{font-size:.86rem}
-  .hdr-stat:nth-child(2) .hdr-stat-num{font-size:.72rem}
+  .hdr-stat{width:48px;height:36px;padding:.1rem .14rem;border-radius:11px}
+  .hdr-stat-num{font-size:.72rem}
+  .hdr-stat:nth-child(2) .hdr-stat-num{font-size:.64rem}
   .hdr-stat-label{font-size:.38rem}
   .nav-item>a{font-size:.92rem}
   .top-search{max-width:210px;min-width:155px}
