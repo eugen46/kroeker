@@ -60,11 +60,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 /* HEADER */
 .hdr{
   background:#354a72;
-  min-height:98px;
-  padding:1.15rem 2.55rem;
+  min-height:132px;
+  padding:1.15rem 2.55rem 4.2rem;
   display:grid;
   grid-template-columns:minmax(270px,1fr) auto minmax(430px,1fr);
-  align-items:center;
+  align-items:start;
   gap:1.6rem;
   position:sticky;top:0;z-index:100;
   box-shadow:0 1px 0 rgba(255,255,255,.1),0 5px 22px rgba(10,25,52,.22);
@@ -75,6 +75,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   display:grid;place-items:center;font-size:1.7rem;font-weight:700;line-height:1;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.12)
 }
+.brand-copy{min-width:0}
 .hdr-logo{
   color:#fff;
   font-family:'DM Sans',sans-serif;
@@ -86,36 +87,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   text-overflow:ellipsis;
 }
 .hdr-sub{display:none}
-.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:.72rem;min-width:0}
-.top-search{position:relative;flex:1 1 300px;max-width:380px;min-width:210px}
+.hdr-stats{
+  position:absolute;right:2.55rem;bottom:.68rem;
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:.42rem;margin:0;flex-wrap:nowrap
+}
+.hdr-stat{
+  width:48px;height:48px;padding:.18rem .22rem;
+  border:1px solid rgba(255,255,255,.36);
+  border-radius:13px;
+  background:
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,.58),rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 64%),
+    linear-gradient(145deg,rgba(255,255,255,.26),rgba(255,255,255,.07));
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.36),inset 0 -10px 18px rgba(255,255,255,.08),0 8px 22px rgba(8,20,44,.14);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;line-height:1;overflow:hidden
+}
+.hdr-stat-num{font-family:'DM Serif Display',Georgia,serif;font-size:.98rem;font-weight:700;color:#fff}
+.hdr-stat:nth-child(2) .hdr-stat-num{font-size:.8rem}
+.hdr-stat-label{font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.68);white-space:nowrap;margin-top:.12rem}
+.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:.72rem;min-width:0;padding-top:.2rem}
+.top-search{position:relative;flex:0 1 240px;max-width:240px;min-width:165px}
 .search-wrap{display:flex;align-items:center;width:100%}
 .search-input{
-  width:100%;height:48px;padding:.2rem 1.2rem;
-  border:0;border-radius:999px;
-  font-family:'DM Sans',sans-serif;font-size:1rem;color:#1f2937;
-  background:#fff;outline:none;box-shadow:0 1px 4px rgba(15,23,42,.14)
+  width:100%;height:38px;padding:.15rem .9rem;
+  border:1px solid rgba(255,255,255,.28);border-radius:12px;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1f2937;
+  background:rgba(255,255,255,.92);outline:none;box-shadow:0 1px 4px rgba(15,23,42,.12)
 }
 .search-input::placeholder{color:#6b7280}
 .search-input:focus{box-shadow:0 0 0 3px rgba(147,197,253,.45),0 1px 4px rgba(15,23,42,.14)}
 .search-btn{display:none}
-.home-btn{
-  width:58px;height:58px;border:0;border-radius:50%;background:#2859d8;color:#fff;
-  display:grid;place-items:center;text-decoration:none;font-size:1.45rem;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
-  transition:background .15s,transform .15s;cursor:pointer
+.home-btn,.lang-btn{
+  width:38px;height:38px;padding:0;cursor:pointer;
+  background:
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.56),rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 66%),
+    linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.08));
+  border:1px solid rgba(255,255,255,.34);
+  color:rgba(255,255,255,.86);
+  font-size:.82rem;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;
+  transition:all .15s;line-height:1;text-decoration:none;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.34),inset 0 -9px 16px rgba(255,255,255,.07),0 7px 18px rgba(8,20,44,.13);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  display:inline-flex;align-items:center;justify-content:center
 }
-.home-btn:hover{background:#3467ef;transform:translateY(-1px)}
+.home-btn:hover,.lang-btn:hover,.lang-btn.active{
+  background:
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.7),rgba(255,255,255,.14) 40%,rgba(255,255,255,0) 68%),
+    linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.12));
+  border-color:rgba(255,255,255,.48);color:#fff
+}
+.home-icon{font-size:1rem;line-height:1;transform:translateY(-.02em)}
 .lang-group{display:flex;align-items:center;gap:.5rem}
-.lang-btn{
-  background:rgba(255,255,255,.18);border:0;
-  color:rgba(255,255,255,.78);padding:.43rem .8rem;cursor:pointer;
-  font-size:.88rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;
-  transition:all .15s;line-height:1
-}
-.lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,.3);color:#fff}
 #search-results{
   position:absolute;left:0;right:0;top:calc(100% + .55rem);
-  max-width:380px;margin:0;display:none;z-index:250
+  max-width:240px;margin:0;display:none;z-index:250
 }
 .s-hit{
   padding:.5rem .8rem;margin:.2rem 0;
@@ -128,7 +157,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 /* NAV */
 .nav{
   display:flex;align-items:center;justify-content:center;gap:1.1rem;
-  overflow:visible;padding:0;background:transparent;border:0;position:static;
+  overflow:visible;padding:.55rem 0 0;background:transparent;border:0;position:static;
 }
 .nav-item{position:relative;display:inline-block}
 .nav-item>a{
@@ -159,10 +188,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .dropdown-sep{height:1px;background:var(--blue5);margin:.2rem 0}
 
 @media(max-width:980px){
-  .hdr{grid-template-columns:1fr;gap:1rem;padding:1rem 1.1rem}
+  .hdr{grid-template-columns:1fr;gap:1rem;padding:1rem 1.1rem 4.1rem;min-height:178px}
   .nav{justify-content:flex-start;gap:1rem;overflow-x:auto;width:100%}
   .hdr-right{justify-content:flex-start;width:100%;flex-wrap:wrap}
-  .top-search{max-width:none;flex:1 1 260px}
+  .hdr-stats{right:1.1rem;bottom:.7rem}
+  .top-search{max-width:240px;flex:0 1 220px}
 }
 
 @media(max-width:1450px) and (min-width:981px){
@@ -171,10 +201,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 }
 
 @media(max-width:560px){
-  .brand-mark,.home-btn{width:48px;height:48px}
+  .brand-mark{width:48px;height:48px}
   .hdr-logo{font-size:1.12rem}
+  .hdr-stats{gap:.32rem;right:1rem;bottom:.68rem}
+  .hdr-stat{width:42px;height:42px;padding:.12rem .16rem;border-radius:11px}
+  .hdr-stat-num{font-size:.86rem}
+  .hdr-stat:nth-child(2) .hdr-stat-num{font-size:.72rem}
+  .hdr-stat-label{font-size:.38rem}
   .nav-item>a{font-size:.92rem}
-  .lang-btn{padding:.38rem .62rem}
+  .top-search{max-width:210px;min-width:155px}
+  .search-input{height:36px;font-size:.84rem}
+  .home-btn,.lang-btn{width:36px;height:36px;border-radius:11px}
 }
 
 /* HERO */
@@ -333,9 +370,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <header class="hdr">
   <div class="brand">
     <div class="brand-mark">K</div>
-    <div>
+    <div class="brand-copy">
       <div class="hdr-logo" id="hl">Kroeker Family</div>
       <div class="hdr-sub" id="hs"></div>
+      <div class="hdr-stats" aria-label="Family statistics">
+        <div class="hdr-stat">
+          <span class="hdr-stat-num" id="cnt-years">162</span>
+          <span class="hdr-stat-label" id="chip-years"></span>
+        </div>
+        <div class="hdr-stat">
+          <span class="hdr-stat-num">3&thinsp;200+</span>
+          <span class="hdr-stat-label" id="chip-km"></span>
+        </div>
+        <div class="hdr-stat">
+          <span class="hdr-stat-num">5</span>
+          <span class="hdr-stat-label" id="chip-gen"></span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -382,7 +433,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       </div>
       <div id="search-results"></div>
     </div>
-    <a class="home-btn" onclick="S('s0')" aria-label="Home">&#127968;</a>
+    <a class="home-btn" onclick="S('s0')" aria-label="Home"><span class="home-icon" aria-hidden="true">&#8962;</span></a>
     <div class="lang-group">
       <button class="lang-btn active" onclick="L('de')">DE</button>
       <button class="lang-btn" onclick="L('ru')">RU</button>
@@ -492,26 +543,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     </div>
   </div>
 </div>
-
-
-<div class="g3" style="margin:1.2rem 0">
-  <div class="stat-card" style="text-align:center;background:linear-gradient(135deg,#0f2d5c,#1a3a7c);border:none">
-    <div style="font-size:2.5rem;font-weight:700;color:#fff;font-family:DM Serif Display,Georgia,serif" id="cnt-years">162</div>
-    <div style="font-size:.75rem;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-top:.4rem" id="t-cnt-years"></div>
-  </div>
-  <div class="stat-card" style="text-align:center;background:linear-gradient(135deg,#1a3a7c,#1a56db);border:none">
-    <div style="font-size:2.5rem;font-weight:700;color:#fff;font-family:DM Serif Display,Georgia,serif">3&thinsp;200<span style="font-size:1.4rem">+</span></div>
-    <div style="font-size:.75rem;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-top:.4rem" id="t-cnt-km"></div>
-    <div style="font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.2rem">Danzig &#10230; Berlin</div>
-  </div>
-  <div class="stat-card" style="text-align:center;background:linear-gradient(135deg,#1a56db,#2563eb);border:none">
-    <div style="font-size:2.5rem;font-weight:700;color:#fff;font-family:DM Serif Display,Georgia,serif">5</div>
-    <div style="font-size:.75rem;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-top:.4rem" id="t-cnt-gen"></div>
-    <div style="font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.2rem">1864 &#10230; 2026</div>
-  </div>
-</div>
-
-
 
 
   <div class="qbox"><strong id="t-qt"></strong><br><br><span id="t-q"></span></div>
@@ -923,6 +954,9 @@ var T = {
   "cnt-years": "Jahre seit 1864",
   "cnt-km": "km Familienreise",
   "cnt-gen": "Generationen",
+  "chip-years": "Jahre",
+  "chip-km": "km",
+  "chip-gen": "Gen.",
   "map-desc": "Die wichtigsten Orte der Familiengeschichte auf einer interaktiven Karte. Klicken Sie auf einen Marker f\u00fcr mehr Informationen.",
   "map-l1": "Ursprung", "map-l2": "Stammkolonie",
   "map-l3": "Zwangsumsiedlung", "map-l4": "Deportation",
@@ -1039,6 +1073,9 @@ var T = {
   "cnt-years": "\u043b\u0435\u0442 \u0441 1864 \u0433\u043e\u0434\u0430",
   "cnt-km": "\u043a\u043c \u043f\u0443\u0442\u0438 \u0441\u0435\u043c\u044c\u0438",
   "cnt-gen": "\u043f\u043e\u043a\u043e\u043b\u0435\u043d\u0438\u0439",
+  "chip-years": "\u043b\u0435\u0442",
+  "chip-km": "\u043a\u043c",
+  "chip-gen": "\u043f\u043e\u043a.",
   "map-desc": "\u0413\u043b\u0430\u0432\u043d\u044b\u0435 \u043c\u0435\u0441\u0442\u0430 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0441\u0435\u043c\u044c\u0438 \u043d\u0430 \u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u043a\u0430\u0440\u0442\u0435.",
   "map-l1": "\u041f\u0440\u043e\u0438\u0441\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u0435", "map-l2": "\u041a\u043e\u043b\u043e\u043d\u0438\u044f",
   "map-l3": "\u041f\u0435\u0440\u0435\u0441\u0435\u043b\u0435\u043d\u0438\u0435", "map-l4": "\u0414\u0435\u043f\u043e\u0440\u0442\u0430\u0446\u0438\u044f",
@@ -1155,6 +1192,9 @@ var T = {
   "cnt-years": "years since 1864",
   "cnt-km": "km family journey",
   "cnt-gen": "generations",
+  "chip-years": "years",
+  "chip-km": "km",
+  "chip-gen": "gen.",
   "map-desc": "Key locations of the family history on an interactive map. Click a marker for more information.",
   "map-l1": "Origins", "map-l2": "Home colony",
   "map-l3": "Forced resettlement", "map-l4": "Deportation",
@@ -1189,7 +1229,7 @@ function R(){
     "tl7","tl8","tl9","tl10","tl12","tl11","tl13","tl14","tl15",
     "ra","rw","rs","rd","ul","u-sbu-d","u-sbu-t","u0d","u0t","u1d","u1t","u2d","u2t","u3d","u3t","u4d","u4t","u5d","u5t","u6d","u6t",
     "r-done","r-wait","r-prog","r-deny","r-search-title","r-search-desc","r-grandma","r-odessa","r-other-title","copyright",
-    "cnt-years","cnt-km","cnt-gen",
+    "chip-years","chip-km","chip-gen",
     "s6","s7","s8",
     "map-title","map-desc","map-l1","map-l2","map-l3","map-l4","map-l5","map-l6",
     "con-why-t","con-why","con-how-t","con-donate","con-donate-sub","con-search-t","con-search","con-names",
