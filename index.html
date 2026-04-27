@@ -135,6 +135,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 }
 .home-icon{font-size:1rem;line-height:1;transform:translateY(-.02em)}
 .lang-group{display:flex;align-items:center;gap:.5rem}
+.header-support{
+  position:absolute;right:2.55rem;bottom:.64rem;
+  display:flex;align-items:center;justify-content:flex-end;gap:.5rem
+}
+.support-btn{
+  height:38px;padding:0 .9rem;border-radius:11px;
+  border:0;background:rgba(255,255,255,.18);
+  color:rgba(255,255,255,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  display:inline-flex;align-items:center;justify-content:center;gap:.42rem;
+  font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;line-height:1;
+  text-decoration:none;white-space:nowrap;transition:all .15s
+}
+.support-btn:hover{background:rgba(255,255,255,.26);color:#fff}
+.support-mark{font-size:.72rem;color:rgba(255,255,255,.72)}
 #search-results{
   position:absolute;left:0;right:0;top:calc(100% + .55rem);
   max-width:240px;margin:0;display:none;z-index:250
@@ -185,6 +199,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   .nav{justify-content:flex-start;gap:1rem;overflow-x:auto;width:100%}
   .hdr-right{justify-content:flex-start;width:100%;flex-wrap:wrap}
   .hdr-stats{left:1.1rem;bottom:.7rem}
+  .header-support{right:1.1rem;bottom:.7rem}
   .top-search{max-width:240px;flex:0 1 220px}
 }
 
@@ -206,6 +221,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   .search-input{height:36px;font-size:.84rem}
   .home-btn{width:38px;height:36px;border-radius:11px}
   .lang-btn{width:48px;height:36px;border-radius:11px}
+  .header-support{position:static;width:100%;justify-content:flex-start}
+  .support-btn{height:36px;padding:0 .72rem}
 }
 
 /* HERO */
@@ -432,6 +449,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <button class="lang-btn active" onclick="L('de')">DE</button>
       <button class="lang-btn" onclick="L('ru')">RU</button>
       <button class="lang-btn" onclick="L('en')">EN</button>
+    </div>
+    <div class="header-support" aria-label="Telegram and PayPal">
+      <a class="support-btn" href="https://t.me/eugen30" target="_blank" rel="noopener" title="Telegram @eugen30"><span class="support-mark">TG</span> eugen30</a>
+      <a class="support-btn" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener" title="PayPal: eugenusachew@gmail.com"><span class="support-mark">PP</span> Spende</a>
     </div>
   </div>
 </header>
