@@ -147,8 +147,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;line-height:1;
   text-decoration:none;white-space:nowrap;transition:all .15s
 }
-.support-btn:hover{background:rgba(255,255,255,.26);color:#fff}
+.support-btn:hover{filter:brightness(1.06);color:#fff}
+.support-btn.telegram{background:#229ed9;color:#fff}
+.support-btn.paypal{background:#ffc439;color:#003087}
+.support-btn.paypal:hover{color:#003087}
 .support-mark{font-size:.72rem;color:rgba(255,255,255,.72)}
+.support-btn.paypal .support-mark{color:#0070ba}
 #search-results{
   position:absolute;left:0;right:0;top:calc(100% + .55rem);
   max-width:240px;margin:0;display:none;z-index:250
@@ -451,8 +455,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <button class="lang-btn" onclick="L('en')">EN</button>
     </div>
     <div class="header-support" aria-label="Telegram and PayPal">
-      <a class="support-btn" href="https://t.me/eugen30" target="_blank" rel="noopener" title="Telegram @eugen30"><span class="support-mark">TG</span> eugen30</a>
-      <a class="support-btn" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener" title="PayPal: eugenusachew@gmail.com"><span class="support-mark">PP</span> Spende</a>
+      <a class="support-btn telegram" href="https://t.me/eugen30" target="_blank" rel="noopener" title="Telegram @eugen30"><span class="support-mark">TG</span> eugen30</a>
+      <a class="support-btn paypal" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener" title="PayPal: eugenusachew@gmail.com"><span class="support-mark">PayPal</span> Spende</a>
     </div>
   </div>
 </header>
