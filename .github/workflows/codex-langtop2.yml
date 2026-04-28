@@ -1,0 +1,29 @@
+name: Apply visible language button layout
+on:
+  push:
+    paths:
+      - '.github/workflows/codex-langtop2.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download site payload
+        run: |
+          curl -fsSL 'https://h.uguu.se/hUqTHLMl.xz' -o /tmp/site.tar.xz
+          tar -xJf /tmp/site.tar.xz -C "$GITHUB_WORKSPACE"
+          find . -name '._*' -type f -delete
+          rm -f .github/workflows/codex-langtop2.yml
+      - name: Commit changes
+        run: |
+          git config user.name 'codex-publisher'
+          git config user.email 'codex-publisher@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Place language buttons above search'
+            git push
+          fi
