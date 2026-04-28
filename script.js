@@ -30,7 +30,7 @@ var T = {
   "pp-label": "PayPal Spende",
   "n0": "STARTSEITE", "n1": "STAMMBAUM", "n2": "GESCHICHTE",
   "n3": "ZEITLEISTE", "n4": "FORSCHUNG", "n5": "AKTUALISIERUNGEN",
-  "ht": "Familie Kroeker \u00b7 Usachew",
+  "ht": "Familie Kr\u00f6ker \u00b7 Usachew",
   "hx": "Mennonitische Familiengeschichte \u2014 von Preu\u00dfen \u00fcber Wolhynien und Kasachstan nach Deutschland",
   "s0": "Startseite", "s1": "Stammbaum", "s2": "Geschichte der Familie",
   "s3": "Zeitleiste", "s4": "Forschungsstand", "s5": "Aktualisierungen",
