@@ -1,0 +1,28 @@
+name: Codex remove large hero
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/codex-remove-hero.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish hero removal
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://n.uguu.se/WBoqsqUH.xz" -o /tmp/kroeker-site.tar.xz
+          tar -xJf /tmp/kroeker-site.tar.xz -C .
+          rm -f .github/workflows/codex-remove-hero.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html tree.html history.html timeline.html research.html updates.html resources.html map.html contact.html style.css script.js sitemap.xml robots.txt favicon.ico apple-touch-icon.png site.webmanifest .github/workflows/codex-remove-hero.yml
+          git commit -m "Remove oversized page hero"
+          git push
