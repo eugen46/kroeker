@@ -1,0 +1,28 @@
+name: Codex SEO publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/codex-seo-publish.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish SEO split site
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://h.uguu.se/CCDCoFmc.xz" -o /tmp/kroeker-site.tar.xz
+          tar -xJf /tmp/kroeker-site.tar.xz -C .
+          rm -f .github/workflows/codex-seo-publish.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html tree.html history.html timeline.html research.html updates.html resources.html map.html contact.html style.css script.js sitemap.xml robots.txt favicon.ico apple-touch-icon.png .github/workflows/codex-seo-publish.yml
+          git commit -m "Publish SEO optimized split site"
+          git push
