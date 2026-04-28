@@ -18,6 +18,30 @@
 
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
+function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
+function getSavedLang(){
+  var qLang = "";
+  try{ qLang = new URLSearchParams(window.location.search).get("lang") || ""; }catch(e){}
+  if(validLang(qLang)) return qLang;
+  try{
+    var saved = localStorage.getItem("kroeker-lang");
+    if(validLang(saved)) return saved;
+  }catch(e){}
+  return "de";
+}
+function withLang(url){
+  if(!url || /^(https?:|mailto:|tel:|#)/i.test(url)) return url;
+  var l = validLang(lang) ? lang : "de";
+  var clean = url.replace(/[?&]lang=(de|ru|en)\b/, "").replace(/[?&]$/, "");
+  if(l === "de") return clean;
+  return clean + (clean.indexOf("?") === -1 ? "?" : "&") + "lang=" + l;
+}
+function syncLanguageLinks(){
+  document.querySelectorAll("a[href]").forEach(function(a){
+    var href = a.getAttribute("href");
+    if(href && /\.html(\?|$)/.test(href)) a.setAttribute("href", withLang(href));
+  });
+}
 function currentSection(){return document.body.getAttribute("data-section") || "s0";}
 function setActiveNav(){var cs=currentSection();document.querySelectorAll(".nav a").forEach(function(a){a.classList.toggle("on", a.getAttribute("data-sec") === cs);});}
 function setPageHero(t){var cs=currentSection();var titleEl=document.getElementById("page-title");var subEl=document.getElementById("page-subtitle");if(titleEl) titleEl.innerHTML = cs === "s0" ? (t["ht"] || "Familie Kröker") : (t[cs] || "Familie Kröker");if(subEl) subEl.innerHTML = t["hx"] || "";}
@@ -462,7 +486,7 @@ function R(){
       if(item.url){
         html2 += "<a href=\""+item.url+"\" target=\"_blank\">&#128279; "+item.txt+"</a>";
       } else {
-        html2 += "<a href=\""+(pageBySection[item.sec]||"index.html")+"\">"+item.txt+"</a>";
+        html2 += "<a href=\""+withLang(pageBySection[item.sec]||"index.html")+"\">"+item.txt+"</a>";
       }
     }
     ddEl.innerHTML = html2;
@@ -477,18 +501,20 @@ function R(){
   var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
-  var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; setActiveNav(); setPageHero(t);
+  var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; syncLanguageLinks(); setActiveNav(); setPageHero(t);
 }
 
 function setLang(l){
+  if(!validLang(l)) l = "de";
   lang=l;
+  try{ localStorage.setItem("kroeker-lang", l); }catch(e){}
   document.querySelectorAll(".lang-btn").forEach(function(b){
     b.classList.toggle("active", b.textContent===l.toUpperCase());
   });
   R();
 }
 
-function S(id){ window.location.href = pageBySection[id] || "index.html"; }
+function S(id){ window.location.href = withLang(pageBySection[id] || "index.html"); }
 
 
 // Search index
@@ -544,7 +570,7 @@ function doSearch(q){
     div.setAttribute("data-sec", sec);
     div.addEventListener("click", function(){
       var s = this.getAttribute("data-sec");
-      window.location.href = pageBySection[s] || "index.html";
+      window.location.href = withLang(pageBySection[s] || "index.html");
       document.getElementById("search-results").style.display = "none";
       document.getElementById("search-input").value = "";
       var clearBtn = document.getElementById("search-clear");
@@ -628,4 +654,4 @@ countYears();
 if(document.getElementById("leaflet-map")) setTimeout(initMap,300);
 
 
-setLang("de");
+setLang(getSavedLang());
