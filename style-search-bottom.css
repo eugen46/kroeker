@@ -433,3 +433,51 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 @media(max-width:1320px) and (min-width:981px){.hdr{grid-template-columns:1fr auto!important;grid-template-areas:"brand langs" "nav nav" "actions search"!important}.nav{grid-area:nav!important;justify-content:flex-start!important}.top-search{grid-area:search!important;width:260px!important;max-width:260px!important;min-width:190px!important;transform:none!important}.lang-group{grid-area:langs!important;justify-self:end!important}.home-btn{grid-area:actions!important;justify-self:start!important}.header-support{grid-area:actions!important;justify-self:start!important;margin-left:52px!important}}
 @media(max-width:980px){.hdr .top-search{width:260px!important;max-width:34vw!important;min-width:190px!important;transform:none!important}}
 @media(max-width:560px){.hdr .top-search{width:135px!important;max-width:135px!important;min-width:0!important;transform:none!important}}
+
+/* Compact header: about 30% smaller */
+.hdr{
+  min-height:60px!important;
+  padding:.5rem 1.4rem!important;
+  gap:.38rem .85rem!important;
+  grid-template-columns:minmax(220px,auto) minmax(0,1fr) minmax(160px,auto)!important
+}
+.brand{gap:.65rem!important}
+.brand-mark{width:38px!important;height:38px!important;border-radius:9px!important;font-size:1.22rem!important}
+.hdr-logo{min-height:38px!important;font-size:1.24rem!important;padding:0 .72rem!important;border-radius:9px!important}
+.nav{gap:.78rem!important}
+.nav-item>a{font-size:.66rem!important;padding:.28rem 0!important;border-bottom-width:2px!important}
+.home-btn,.lang-btn{height:27px!important;border-radius:8px!important;font-size:.62rem!important}
+.home-btn{width:31px!important}
+.home-icon{font-size:.78rem!important}
+.lang-btn{width:40px!important}
+.lang-group{gap:.34rem!important}
+.header-support{margin-left:36px!important;gap:.36rem!important}
+.support-btn{height:27px!important;padding:0 .62rem!important;border-radius:8px!important;font-size:.58rem!important;gap:.28rem!important}
+.support-mark{font-size:.54rem!important}
+.hdr .top-search{width:182px!important;max-width:182px!important;min-width:133px!important}
+.search-input{height:27px!important;border-radius:9px!important;font-size:.64rem!important;padding:.1rem 1.65rem .1rem .65rem!important}
+.search-clear{width:20px!important;height:20px!important;border-radius:7px!important;font-size:1rem!important}
+#search-results{max-width:200px!important;top:calc(100% + .35rem)!important}
+.s-hit{font-size:.68rem!important;padding:.42rem .62rem!important}
+@media(max-width:1320px) and (min-width:981px){
+  .hdr{grid-template-columns:1fr auto!important;grid-template-areas:"brand langs" "nav nav" "actions search"!important;padding:.48rem 1.1rem!important}
+  .hdr .top-search{width:182px!important;max-width:182px!important;min-width:133px!important}
+}
+@media(max-width:980px){
+  .hdr{padding:.46rem .8rem!important;gap:.34rem!important}
+  .hdr .top-search{width:182px!important;max-width:32vw!important;min-width:133px!important}
+}
+@media(max-width:560px){
+  .hdr{padding:.4rem .55rem!important;gap:.3rem!important}
+  .brand{gap:.36rem!important}
+  .brand-mark{width:30px!important;height:30px!important;border-radius:7px!important;font-size:1rem!important}
+  .hdr-logo{min-height:30px!important;font-size:.96rem!important;padding:0 .5rem!important;border-radius:7px!important}
+  .nav{gap:.5rem!important}
+  .nav-item>a{font-size:.62rem!important;padding:.18rem 0!important}
+  .home-btn{width:28px!important;height:26px!important;border-radius:7px!important}
+  .lang-btn{width:35px!important;height:26px!important;border-radius:7px!important;font-size:.62rem!important}
+  .header-support{margin-left:34px!important;gap:.28rem!important}
+  .support-btn{height:25px!important;padding:0 .45rem!important;border-radius:7px!important;font-size:.58rem!important}
+  .hdr .top-search{width:122px!important;max-width:122px!important;min-width:0!important}
+  .search-input{height:26px!important;font-size:.65rem!important;border-radius:8px!important;padding-left:.55rem!important}
+}
