@@ -378,3 +378,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .nav a[href]{cursor:pointer}
 
 .seo-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Final header search placement: bottom-right on every desktop width */
+.hdr .top-search{align-self:end!important;justify-self:end!important;width:260px!important;max-width:260px!important;min-width:190px!important;transform:translateY(.8rem)!important}
+@media(max-width:1320px) and (min-width:981px){.hdr{grid-template-columns:1fr auto!important;grid-template-areas:"brand langs" "nav nav" "actions search"!important}.nav{grid-area:nav!important;justify-content:flex-start!important}.top-search{grid-area:search!important;width:260px!important;max-width:260px!important;min-width:190px!important;transform:translateY(.65rem)!important}.lang-group{grid-area:langs!important;justify-self:end!important}.home-btn{grid-area:actions!important;justify-self:start!important}.header-support{grid-area:actions!important;justify-self:start!important;margin-left:52px!important}}
+@media(max-width:560px){.hdr .top-search{width:135px!important;max-width:135px!important;min-width:0!important;transform:translateY(8px)!important}}
