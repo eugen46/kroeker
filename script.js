@@ -414,6 +414,107 @@ var T = {
 
 function g(id){ return document.getElementById(id); }
 
+var SEO_TEXT = {
+  de: {
+    "seo-intro-title": "Kroeker Familiengeschichte und Genealogie",
+    "seo-intro-p1": "Diese Website dokumentiert die Geschichte der Familie Kroeker von Preußen über Wolhynien, Kasachstan und Deutschland. Sie sammelt genealogische Notizen, Familienzweige, Archivhinweise und Wanderungswege der Familien Kroeker, Schulz, Dreger und Fröhlich.",
+    "seo-intro-p2": "Die Forschung konzentriert sich auf mennonitische und wolhyniendeutsche Wurzeln, deutsche Siedler in Kasachstan, EWZ-Unterlagen, Familienerinnerungen und Archivanfragen zu Westpreußen, Wolhynien, Ukraine, Nordkasachstan und Deutschland.",
+    "seo-link-tree": "Kroeker Stammbaum",
+    "seo-link-history": "Geschichte der Familie Kroeker",
+    "seo-link-timeline": "Migrationschronologie",
+    "seo-link-research": "Archivforschung",
+    "seo-link-contact": "Kontakt und Verwandte",
+    "seo-branches-title": "Familiennamen und Zweige",
+    "seo-kroeker-title": "Familie Kroeker / Kröker",
+    "seo-kroeker-p1": "Die Linie Kroeker ist mit Westpreußen, Wolhynien und später Kasachstan und Deutschland verbunden. Wichtige Namen sind Johann Kroeker / Johann Kröker und Emma Iwanowna Kroeker.",
+    "seo-kroeker-link": "Siehe Kroeker Stammbaum",
+    "seo-and-1": "und",
+    "seo-timeline-link": "Migrationschronologie",
+    "seo-schulz-title": "Familie Schulz aus Wolhynien",
+    "seo-schulz-p1": "Der Zweig Schulz umfasst Gottlieb Schulz und Emma Gotlibowna Schulz aus Wolhynien. Dieser Zweig ist wichtig für Suchanfragen zu Schulz Wolhynien Genealogie und Wolhyniendeutschen.",
+    "seo-schulz-link": "Siehe auch Geschichte der Familie Schulz",
+    "seo-dreger-title": "Familie Dreger in Wolhynien",
+    "seo-dreger-p1": "Der Zweig Dreger ist mit Lydia Dreger, Edmund Dreger, Leo Dreger und EWZ-Dokumenten von 1944 verbunden. Dieser Abschnitt hilft Verwandten, die nach Dreger-Familienunterlagen aus Wolhynien suchen.",
+    "seo-dreger-link": "Siehe Dreger Archivforschung",
+    "seo-froehlich-title": "Familie Fröhlich / Froehlich",
+    "seo-froehlich-p1": "Der Familienname Fröhlich erscheint im weiteren Forschungs- und Archivkontext. Alternative Schreibweisen wie Froehlich können Verwandten helfen, diese Seite über Google zu finden.",
+    "seo-froehlich-link": "Informationen zur Familie Fröhlich senden",
+    "seo-relatives-title": "Suchen Sie Verwandte?",
+    "seo-relatives-p1": "Wenn Sie zu den Familien Kroeker, Kröker, Schulz, Dreger oder Fröhlich aus Preußen, Wolhynien, Ukraine, Kasachstan, Russland oder Deutschland forschen, melden Sie sich bitte. Familiendokumente, alte Fotos, Archivhinweise und DNA-Treffer können helfen, die Zweige zu verbinden.",
+    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-dna-line": "DNA-Forschung: GEDmatch- und MyHeritage-Treffer sind willkommen.",
+    "seo-clues-line": "Hilfreiche Hinweise: Familiennamen, Geburtsdaten, Dörfer, Deportationsunterlagen, EWZ-Akten und Familiengeschichten."
+  },
+  ru: {
+    "seo-intro-title": "История и генеалогия семьи Kroeker / Крёкер",
+    "seo-intro-p1": "Этот сайт документирует историю семьи Kroeker / Крёкер от Пруссии через Волынь и Казахстан до Германии. Здесь собраны генеалогические заметки, семейные ветви, архивные сведения и маршруты переселения семей Kroeker, Schulz, Dreger и Fröhlich.",
+    "seo-intro-p2": "Исследование посвящено меннонитским и волынско-немецким корням, немецким переселенцам в Казахстане, документам EWZ, семейным воспоминаниям и архивным запросам по Западной Пруссии, Волыни, Украине, Северному Казахстану и Германии.",
+    "seo-link-tree": "Древо семьи Kroeker",
+    "seo-link-history": "История семьи Kroeker",
+    "seo-link-timeline": "Хронология переселения",
+    "seo-link-research": "Архивные исследования",
+    "seo-link-contact": "Контакт и родственники",
+    "seo-branches-title": "Фамилии и семейные ветви",
+    "seo-kroeker-title": "Семья Kroeker / Крёкер",
+    "seo-kroeker-p1": "Линия Kroeker связана с Западной Пруссией, Волынью, затем Казахстаном и Германией. Важные имена: Johann Kroeker / Johann Kröker и Emma Iwanowna Kroeker.",
+    "seo-kroeker-link": "Смотреть древо Kroeker",
+    "seo-and-1": "и",
+    "seo-timeline-link": "хронологию переселения",
+    "seo-schulz-title": "Семья Schulz из Волыни",
+    "seo-schulz-p1": "Ветвь Schulz включает Gottlieb Schulz и Emma Gotlibovna Schulz из Волыни. Эта ветвь важна для поиска Schulz Wolhynien genealogy и волынских немцев.",
+    "seo-schulz-link": "Смотреть историю семьи Schulz",
+    "seo-dreger-title": "Семья Dreger на Волыни",
+    "seo-dreger-p1": "Ветвь Dreger связана с Lydia Dreger, Edmund Dreger, Leo Dreger и документами EWZ 1944 года. Этот раздел помогает родственникам, которые ищут сведения о семье Dreger на Волыни.",
+    "seo-dreger-link": "Смотреть архивные исследования Dreger",
+    "seo-froehlich-title": "Семья Fröhlich / Froehlich",
+    "seo-froehlich-p1": "Фамилия Fröhlich встречается в расширенном семейном и архивном контексте. Вариант написания Froehlich помогает родственникам найти страницу через Google.",
+    "seo-froehlich-link": "Отправить сведения о семье Fröhlich",
+    "seo-relatives-title": "Ищете родственников?",
+    "seo-relatives-p1": "Если вы исследуете семьи Kroeker, Крёкер, Schulz, Dreger или Fröhlich из Пруссии, Волыни, Украины, Казахстана, России или Германии, пожалуйста, свяжитесь со мной. Семейные документы, старые фотографии, архивные ссылки и совпадения ДНК помогут соединить ветви.",
+    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-dna-line": "ДНК-исследования: совпадения GEDmatch и MyHeritage приветствуются.",
+    "seo-clues-line": "Полезные сведения: фамилии, даты рождения, деревни, документы о депортации, EWZ-акты и семейные истории."
+  },
+  en: {
+    "seo-intro-title": "Kroeker Family History and Genealogy",
+    "seo-intro-p1": "This website documents the Kroeker family history from Prussia to Volhynia, Kazakhstan and Germany. It collects genealogy notes, family branches, archival references and migration routes connected with the Kroeker, Schulz, Dreger and Fröhlich families.",
+    "seo-intro-p2": "The research focuses on Mennonite and Volhynian German roots, German settlers in Kazakhstan, EWZ records, family memories and archive requests related to West Prussia, Wolhynien, Ukraine, North Kazakhstan and Germany.",
+    "seo-link-tree": "Kroeker family tree",
+    "seo-link-history": "Kroeker family history",
+    "seo-link-timeline": "Migration timeline",
+    "seo-link-research": "Archive research",
+    "seo-link-contact": "Contact and relatives",
+    "seo-branches-title": "Family Surnames and Branches",
+    "seo-kroeker-title": "Kroeker / Kröker Family",
+    "seo-kroeker-p1": "The Kroeker family line is connected with West Prussia, Volhynia and later Kazakhstan and Germany. Key names include Johann Kroeker / Johann Kröker and Emma Iwanowna Kroeker.",
+    "seo-kroeker-link": "See the Kroeker family tree",
+    "seo-and-1": "and",
+    "seo-timeline-link": "migration timeline",
+    "seo-schulz-title": "Schulz Family from Wolhynien",
+    "seo-schulz-p1": "The Schulz branch includes Gottlieb Schulz and Emma Gotlibovna Schulz from Volhynia. This branch is important for searches around Schulz Wolhynien genealogy and Volhynian Germans.",
+    "seo-schulz-link": "See also Schulz family history",
+    "seo-dreger-title": "Dreger Family in Volhynia",
+    "seo-dreger-p1": "The Dreger branch is connected with Lydia Dreger, Edmund Dreger, Leo Dreger and EWZ documents from 1944. This section helps relatives searching for Dreger family Volhynia records.",
+    "seo-dreger-link": "See Dreger archive research",
+    "seo-froehlich-title": "Fröhlich / Froehlich Family",
+    "seo-froehlich-p1": "The Fröhlich surname appears in the wider family research and archival context. Alternative spellings such as Froehlich may help relatives find the page through Google search.",
+    "seo-froehlich-link": "Send Fröhlich family information",
+    "seo-relatives-title": "Looking for relatives?",
+    "seo-relatives-p1": "If you are researching the Kroeker, Kröker, Schulz, Dreger or Fröhlich families from Prussia, Volhynia, Ukraine, Kazakhstan, Russia or Germany, please get in touch. Family documents, old photos, archive references and DNA matches can help connect the branches.",
+    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-dna-line": "DNA research: GEDmatch and MyHeritage matches are welcome.",
+    "seo-clues-line": "Useful clues: surnames, birth dates, villages, deportation records, EWZ files and family stories."
+  }
+};
+
+function translateSeoBlock(){
+  var t = SEO_TEXT[lang] || SEO_TEXT.de;
+  Object.keys(t).forEach(function(id){
+    var el = g(id);
+    if(el) el.innerHTML = t[id];
+  });
+}
+
 function R(){
   var t = T[lang];
   var ids = ["hl","hs","htg","pp-label","ht","hx","s0","s1","s2","s3","s4","s5",
@@ -501,6 +602,7 @@ function R(){
   var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
+  translateSeoBlock();
   var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; syncLanguageLinks(); setActiveNav(); setPageHero(t);
 }
 
