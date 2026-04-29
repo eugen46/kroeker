@@ -424,7 +424,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Suchen Sie Verwandte?",
     "seo-relatives-p1": "Wenn Sie zu den Familien Kroeker, Kröker, Schulz, Dreger oder Fröhlich aus Preußen, Wolhynien, Ukraine, Kasachstan, Russland oder Deutschland forschen, melden Sie sich bitte. Familiendokumente, alte Fotos, Archivhinweise und DNA-Treffer können helfen, die Zweige zu verbinden.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA-Forschung: GEDmatch Kit MZ5630855 sowie MyHeritage-Treffer sind willkommen.",
+    "seo-dna-line": "DNA-Forschung: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a> sowie MyHeritage-Treffer sind willkommen.",
     "seo-clues-line": "Hilfreiche Hinweise: Familiennamen, Geburtsdaten, Dörfer, Deportationsunterlagen, EWZ-Akten und Familiengeschichten."
   },
   ru: {
@@ -454,7 +454,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Ищете родственников?",
     "seo-relatives-p1": "Если вы исследуете семьи Kroeker, Крёкер, Schulz, Dreger или Fröhlich из Пруссии, Волыни, Украины, Казахстана, России или Германии, пожалуйста, свяжитесь со мной. Семейные документы, старые фотографии, архивные ссылки и совпадения ДНК помогут соединить ветви.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "ДНК-исследования: GEDmatch Kit MZ5630855, а также совпадения MyHeritage приветствуются.",
+    "seo-dna-line": "ДНК-исследования: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a>, а также совпадения MyHeritage приветствуются.",
     "seo-clues-line": "Полезные сведения: фамилии, даты рождения, деревни, документы о депортации, EWZ-акты и семейные истории."
   },
   en: {
@@ -484,7 +484,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Looking for relatives?",
     "seo-relatives-p1": "If you are researching the Kroeker, Kröker, Schulz, Dreger or Fröhlich families from Prussia, Volhynia, Ukraine, Kazakhstan, Russia or Germany, please get in touch. Family documents, old photos, archive references and DNA matches can help connect the branches.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA research: GEDmatch Kit MZ5630855 and MyHeritage matches are welcome.",
+    "seo-dna-line": "DNA research: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a> and MyHeritage matches are welcome.",
     "seo-clues-line": "Useful clues: surnames, birth dates, villages, deportation records, EWZ files and family stories."
   }
 };
