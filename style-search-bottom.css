@@ -361,6 +361,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .footer{background:var(--navy);padding:1.6rem 2rem;margin-top:2.5rem}
 .footer-main{text-align:center;color:rgba(255,255,255,.6);font-size:.78rem;margin-bottom:.6rem}
 .footer-copy{text-align:center;color:rgba(255,255,255,.35);font-size:.7rem;line-height:1.6;max-width:800px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:.7rem}
+.analytics-link{
+  position:fixed;right:18px;bottom:18px;z-index:9999;
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(15,45,92,.94);color:#fff;text-decoration:none;
+  padding:.5rem .9rem;border-radius:20px;
+  font-size:.78rem;font-weight:700;line-height:1;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);
+  backdrop-filter:blur(8px);
+  transition:background .15s,transform .15s
+}
+.analytics-link:hover{background:rgba(26,86,219,.96);transform:translateY(-1px);color:#fff}
+@media(max-width:560px){.analytics-link{right:12px;bottom:12px;padding:.48rem .7rem;font-size:.72rem}.analytics-link span{display:none}}
 
 
 /* SVG */
