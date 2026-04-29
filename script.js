@@ -441,7 +441,7 @@ var SEO_TEXT = {
     "seo-froehlich-link": "Informationen zur Familie Fröhlich senden",
     "seo-relatives-title": "Suchen Sie Verwandte?",
     "seo-relatives-p1": "Wenn Sie zu den Familien Kroeker, Kröker, Schulz, Dreger oder Fröhlich aus Preußen, Wolhynien, Ukraine, Kasachstan, Russland oder Deutschland forschen, melden Sie sich bitte. Familiendokumente, alte Fotos, Archivhinweise und DNA-Treffer können helfen, die Zweige zu verbinden.",
-    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
     "seo-dna-line": "DNA-Forschung: GEDmatch- und MyHeritage-Treffer sind willkommen.",
     "seo-clues-line": "Hilfreiche Hinweise: Familiennamen, Geburtsdaten, Dörfer, Deportationsunterlagen, EWZ-Akten und Familiengeschichten."
   },
@@ -471,7 +471,7 @@ var SEO_TEXT = {
     "seo-froehlich-link": "Отправить сведения о семье Fröhlich",
     "seo-relatives-title": "Ищете родственников?",
     "seo-relatives-p1": "Если вы исследуете семьи Kroeker, Крёкер, Schulz, Dreger или Fröhlich из Пруссии, Волыни, Украины, Казахстана, России или Германии, пожалуйста, свяжитесь со мной. Семейные документы, старые фотографии, архивные ссылки и совпадения ДНК помогут соединить ветви.",
-    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
     "seo-dna-line": "ДНК-исследования: совпадения GEDmatch и MyHeritage приветствуются.",
     "seo-clues-line": "Полезные сведения: фамилии, даты рождения, деревни, документы о депортации, EWZ-акты и семейные истории."
   },
@@ -501,7 +501,7 @@ var SEO_TEXT = {
     "seo-froehlich-link": "Send Fröhlich family information",
     "seo-relatives-title": "Looking for relatives?",
     "seo-relatives-p1": "If you are researching the Kroeker, Kröker, Schulz, Dreger or Fröhlich families from Prussia, Volhynia, Ukraine, Kazakhstan, Russia or Germany, please get in touch. Family documents, old photos, archive references and DNA matches can help connect the branches.",
-    "seo-email-line": "Email: <a href=\"mailto:evusachev30@gmail.com\">evusachev30@gmail.com</a>",
+    "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
     "seo-dna-line": "DNA research: GEDmatch and MyHeritage matches are welcome.",
     "seo-clues-line": "Useful clues: surnames, birth dates, villages, deportation records, EWZ files and family stories."
   }
@@ -513,6 +513,66 @@ function translateSeoBlock(){
     var el = g(id);
     if(el) el.innerHTML = t[id];
   });
+}
+
+var CONTACT_FORM_TEXT = {
+  de: {
+    "contact-form-title": "Nachricht senden",
+    "contact-form-note": "Schreiben Sie kurz, zu welcher Familie oder welchem Ort Ihre Nachricht gehört. Beim Absenden wird die Nachricht kopiert und Telegram geöffnet.",
+    "contact-label-name": "Name",
+    "contact-label-relation": "Familie / Ort",
+    "contact-label-message": "Nachricht",
+    "contact-submit": "Über Telegram senden",
+    "contact-status-ready": "",
+    "contact-status-sent": "Die Nachricht wurde kopiert. Telegram ist geöffnet — bitte den Text in den Chat einfügen."
+  },
+  ru: {
+    "contact-form-title": "Отправить сообщение",
+    "contact-form-note": "Напишите коротко, к какой семье или месту относится сообщение. При отправке текст скопируется и откроется Telegram.",
+    "contact-label-name": "Имя",
+    "contact-label-relation": "Семья / место",
+    "contact-label-message": "Сообщение",
+    "contact-submit": "Отправить через Telegram",
+    "contact-status-ready": "",
+    "contact-status-sent": "Сообщение скопировано. Telegram открыт — вставьте текст в чат."
+  },
+  en: {
+    "contact-form-title": "Send a message",
+    "contact-form-note": "Write briefly which family or place your message is about. When you send it, the text is copied and Telegram opens.",
+    "contact-label-name": "Name",
+    "contact-label-relation": "Family / place",
+    "contact-label-message": "Message",
+    "contact-submit": "Send via Telegram",
+    "contact-status-ready": "",
+    "contact-status-sent": "The message was copied. Telegram is open — paste the text into the chat."
+  }
+};
+
+function translateContactForm(){
+  var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
+  Object.keys(t).forEach(function(id){
+    var el = g(id);
+    if(el) el.innerHTML = t[id];
+  });
+}
+
+function submitContactForm(e){
+  if(e) e.preventDefault();
+  var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
+  var name = (g("contact-name") && g("contact-name").value || "").trim();
+  var relation = (g("contact-relation") && g("contact-relation").value || "").trim();
+  var message = (g("contact-message") && g("contact-message").value || "").trim();
+  var status = g("contact-status");
+  var text = "Kroeker family website contact\n\nName: " + (name || "-") + "\nFamily / place: " + (relation || "-") + "\nMessage:\n" + (message || "-");
+  function done(){
+    if(status) status.textContent = t["contact-status-sent"];
+    window.open("https://t.me/eugen30", "_blank", "noopener");
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(done);
+  }else{
+    done();
+  }
 }
 
 function R(){
@@ -603,6 +663,7 @@ function R(){
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
   translateSeoBlock();
+  translateContactForm();
   var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; syncLanguageLinks(); setActiveNav(); setPageHero(t);
 }
 
