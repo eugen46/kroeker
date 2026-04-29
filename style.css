@@ -376,3 +376,5 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .sec{display:block}
 .sec.on{display:block}
 .nav a[href]{cursor:pointer}
+
+.seo-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
