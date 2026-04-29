@@ -1,21 +1,3 @@
-(function(){
-  var isLiveSite = location.hostname === "kroeker-family.com" || location.hostname === "www.kroeker-family.com";
-  if(!isLiveSite) return;
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){ dataLayer.push(arguments); };
-  gtag("js", new Date());
-  gtag("config", "G-Z6EYVJ4FVW");
-  var analytics = document.createElement("script");
-  analytics.async = true;
-  analytics.src = "https://www.googletagmanager.com/gtag/js?id=G-Z6EYVJ4FVW";
-  document.head.appendChild(analytics);
-  var ads = document.createElement("script");
-  ads.async = true;
-  ads.crossOrigin = "anonymous";
-  ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2321812148317390";
-  document.head.appendChild(ads);
-})();
-
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
@@ -442,7 +424,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Suchen Sie Verwandte?",
     "seo-relatives-p1": "Wenn Sie zu den Familien Kroeker, Kröker, Schulz, Dreger oder Fröhlich aus Preußen, Wolhynien, Ukraine, Kasachstan, Russland oder Deutschland forschen, melden Sie sich bitte. Familiendokumente, alte Fotos, Archivhinweise und DNA-Treffer können helfen, die Zweige zu verbinden.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA-Forschung: GEDmatch- und MyHeritage-Treffer sind willkommen.",
+    "seo-dna-line": "DNA-Forschung: GEDmatch Kit MZ5630855 sowie MyHeritage-Treffer sind willkommen.",
     "seo-clues-line": "Hilfreiche Hinweise: Familiennamen, Geburtsdaten, Dörfer, Deportationsunterlagen, EWZ-Akten und Familiengeschichten."
   },
   ru: {
@@ -472,7 +454,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Ищете родственников?",
     "seo-relatives-p1": "Если вы исследуете семьи Kroeker, Крёкер, Schulz, Dreger или Fröhlich из Пруссии, Волыни, Украины, Казахстана, России или Германии, пожалуйста, свяжитесь со мной. Семейные документы, старые фотографии, архивные ссылки и совпадения ДНК помогут соединить ветви.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "ДНК-исследования: совпадения GEDmatch и MyHeritage приветствуются.",
+    "seo-dna-line": "ДНК-исследования: GEDmatch Kit MZ5630855, а также совпадения MyHeritage приветствуются.",
     "seo-clues-line": "Полезные сведения: фамилии, даты рождения, деревни, документы о депортации, EWZ-акты и семейные истории."
   },
   en: {
@@ -502,7 +484,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Looking for relatives?",
     "seo-relatives-p1": "If you are researching the Kroeker, Kröker, Schulz, Dreger or Fröhlich families from Prussia, Volhynia, Ukraine, Kazakhstan, Russia or Germany, please get in touch. Family documents, old photos, archive references and DNA matches can help connect the branches.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA research: GEDmatch and MyHeritage matches are welcome.",
+    "seo-dna-line": "DNA research: GEDmatch Kit MZ5630855 and MyHeritage matches are welcome.",
     "seo-clues-line": "Useful clues: surnames, birth dates, villages, deportation records, EWZ files and family stories."
   }
 };
@@ -518,33 +500,33 @@ function translateSeoBlock(){
 var CONTACT_FORM_TEXT = {
   de: {
     "contact-form-title": "Nachricht senden",
-    "contact-form-note": "Schreiben Sie kurz, zu welcher Familie oder welchem Ort Ihre Nachricht gehört. Beim Absenden wird die Nachricht kopiert und Telegram geöffnet.",
+    "contact-form-note": "Schreiben Sie kurz, zu welcher Familie, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Beim Absenden wird eine E-Mail an Eugen vorbereitet.",
     "contact-label-name": "Name",
-    "contact-label-relation": "Familie / Ort",
+    "contact-label-relation": "Familie / Ort / GEDmatch",
     "contact-label-message": "Nachricht",
-    "contact-submit": "Über Telegram senden",
+    "contact-submit": "Per E-Mail senden",
     "contact-status-ready": "",
-    "contact-status-sent": "Die Nachricht wurde kopiert. Telegram ist geöffnet — bitte den Text in den Chat einfügen."
+    "contact-status-sent": "Das E-Mail-Fenster wurde geöffnet. Bitte die Nachricht dort absenden."
   },
   ru: {
     "contact-form-title": "Отправить сообщение",
-    "contact-form-note": "Напишите коротко, к какой семье или месту относится сообщение. При отправке текст скопируется и откроется Telegram.",
+    "contact-form-note": "Напишите коротко, к какой семье, месту или ДНК-совпадению относится сообщение. При отправке откроется письмо на email Евгена.",
     "contact-label-name": "Имя",
-    "contact-label-relation": "Семья / место",
+    "contact-label-relation": "Семья / место / GEDmatch",
     "contact-label-message": "Сообщение",
-    "contact-submit": "Отправить через Telegram",
+    "contact-submit": "Отправить на email",
     "contact-status-ready": "",
-    "contact-status-sent": "Сообщение скопировано. Telegram открыт — вставьте текст в чат."
+    "contact-status-sent": "Окно письма открыто. Нажмите отправку в почтовой программе."
   },
   en: {
     "contact-form-title": "Send a message",
-    "contact-form-note": "Write briefly which family or place your message is about. When you send it, the text is copied and Telegram opens.",
+    "contact-form-note": "Write briefly which family, place or DNA match your message is about. When you send it, an email to Eugen is prepared.",
     "contact-label-name": "Name",
-    "contact-label-relation": "Family / place",
+    "contact-label-relation": "Family / place / GEDmatch",
     "contact-label-message": "Message",
-    "contact-submit": "Send via Telegram",
+    "contact-submit": "Send by email",
     "contact-status-ready": "",
-    "contact-status-sent": "The message was copied. Telegram is open — paste the text into the chat."
+    "contact-status-sent": "The email window was opened. Please send the message from your mail app."
   }
 };
 
@@ -564,15 +546,10 @@ function submitContactForm(e){
   var message = (g("contact-message") && g("contact-message").value || "").trim();
   var status = g("contact-status");
   var text = "Kroeker family website contact\n\nName: " + (name || "-") + "\nFamily / place: " + (relation || "-") + "\nMessage:\n" + (message || "-");
-  function done(){
-    if(status) status.textContent = t["contact-status-sent"];
-    window.open("https://t.me/eugen30", "_blank", "noopener");
-  }
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(done).catch(done);
-  }else{
-    done();
-  }
+  var subject = "Kroeker family website contact";
+  var mailto = "mailto:evusachev30@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+  if(status) status.textContent = t["contact-status-sent"];
+  window.location.href = mailto;
 }
 
 function R(){
