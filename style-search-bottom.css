@@ -379,6 +379,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 .seo-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
+.seo-intro,.seo-branches,.seo-relatives{margin:1.2rem 0}
+.seo-intro h2,.seo-branches h2,.seo-relatives h2{font-size:1.15rem;color:var(--navy);margin-bottom:.7rem;line-height:1.3}
+.seo-intro p,.seo-branches p,.seo-relatives p{color:var(--muted);font-size:.92rem;line-height:1.75;margin:.45rem 0}
+.seo-link-list{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}
+.seo-link-list a,.seo-branches a,.seo-relatives a{color:var(--blue);font-weight:700;text-decoration:none}
+.seo-link-list a{padding:.42rem .7rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--blue6)}
+.seo-link-list a:hover,.seo-branches a:hover,.seo-relatives a:hover{color:var(--navy);border-color:var(--blue3)}
+.seo-relatives ul{margin:.7rem 0 0 1.1rem;color:var(--muted);font-size:.92rem;line-height:1.75}
+
 
 /* Final header search placement: right side, visually aligned under language buttons */
 .hdr .top-search{align-self:end!important;justify-self:end!important;width:260px!important;max-width:260px!important;min-width:190px!important;transform:none!important}
