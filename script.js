@@ -85,31 +85,55 @@ function cookieTexts(){
   };
   return copy[lang] || copy.de;
 }
+function footerTexts(){
+  var copy={
+    de:{privacy:"Datenschutz",cookies:"Cookie-Einstellungen"},
+    ru:{privacy:"Datenschutz",cookies:"Настройки cookies"},
+    en:{privacy:"Privacy",cookies:"Cookie settings"}
+  };
+  return copy[lang] || copy.de;
+}
 function updateCookieBannerText(){
   var b=document.getElementById("cookie-consent");
-  if(!b) return;
   var t=cookieTexts();
-  var title=b.querySelector("[data-cookie-title]");
-  var text=b.querySelector("[data-cookie-text]");
-  var accept=b.querySelector("[data-cookie-accept]");
-  var reject=b.querySelector("[data-cookie-reject]");
-  var privacy=b.querySelector("[data-cookie-privacy]");
-  if(title) title.textContent=t.title;
-  if(text) text.textContent=t.text;
-  if(accept) accept.textContent=t.accept;
-  if(reject) reject.textContent=t.reject;
-  if(privacy) privacy.textContent=t.privacy;
+  if(b){
+    var title=b.querySelector("[data-cookie-title]");
+    var text=b.querySelector("[data-cookie-text]");
+    var accept=b.querySelector("[data-cookie-accept]");
+    var reject=b.querySelector("[data-cookie-reject]");
+    var privacy=b.querySelector("[data-cookie-privacy]");
+    if(title) title.textContent=t.title;
+    if(text) text.textContent=t.text;
+    if(accept) accept.textContent=t.accept;
+    if(reject) reject.textContent=t.reject;
+    if(privacy) privacy.textContent=t.privacy;
+  }
+  var ft=footerTexts();
   var footerPrivacy=document.getElementById("footer-privacy-link");
-  if(footerPrivacy) footerPrivacy.textContent=t.privacy;
+  if(footerPrivacy) footerPrivacy.textContent=ft.privacy;
+  var footerCookies=document.getElementById("footer-cookie-settings");
+  if(footerCookies) footerCookies.textContent=ft.cookies;
 }
 function closeCookieBanner(){
   var b=document.getElementById("cookie-consent");
   if(b) b.classList.add("cookie-hidden");
 }
 function setCookieConsent(value){
+  var wasLoaded=!!window.__kroekerTrackingLoaded;
   saveConsent(value);
   closeCookieBanner();
   if(value==="accepted") loadTracking();
+  if(value==="rejected" && wasLoaded) window.location.reload();
+}
+function openCookieSettings(){
+  saveConsent("");
+  var b=document.getElementById("cookie-consent");
+  if(b){
+    b.classList.remove("cookie-hidden");
+    updateCookieBannerText();
+    return;
+  }
+  initCookieConsent();
 }
 function initCookieConsent(){
   var current=getConsent();

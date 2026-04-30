@@ -1428,12 +1428,22 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
   margin:.4rem auto 0;
   font-size:.78rem
 }
-.footer-links a{
+.footer-links a,
+.footer-links button{
   color:rgba(255,255,255,.68);
+  background:transparent;
+  border:0;
+  font-family:'DM Sans',sans-serif;
+  font-size:inherit;
   text-decoration:none;
-  font-weight:700
+  font-weight:700;
+  cursor:pointer
 }
-.footer-links a:hover{color:#fff;text-decoration:underline}
+.footer-links a+a,
+.footer-links a+button,
+.footer-links button+a{margin-left:.7rem}
+.footer-links a:hover,
+.footer-links button:hover{color:#fff;text-decoration:underline}
 
 /* Privacy page */
 .privacy-page{
