@@ -711,3 +711,21 @@ body{
   .sec-title{font-size:1.55rem!important}
   .card{padding:1.15rem 1.05rem!important;border-radius:16px!important}
 }
+
+/* Route scheme and background tuning */
+body{
+  background:linear-gradient(180deg,#e1ecfb 0,#f2f7ff 34%,#e8f1fc 100%)!important
+}
+svg[aria-labelledby="map-route-title map-route-desc"]{
+  width:92%!important;
+  max-width:960px!important;
+  height:auto!important;
+  display:block!important;
+  margin:0 auto!important
+}
+@media(max-width:720px){
+  svg[aria-labelledby="map-route-title map-route-desc"]{
+    width:100%!important;
+    max-width:none!important
+  }
+}
