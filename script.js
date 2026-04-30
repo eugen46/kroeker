@@ -1,5 +1,8 @@
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
+var GA_ID = "G-Z6EYVJ4FVW";
+var ADS_CLIENT = "ca-pub-2321812148317390";
+var CONSENT_KEY = "kroeker-cookie-consent";
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
 function getSavedLang(){
   var qLang = "";
@@ -23,6 +26,131 @@ function syncLanguageLinks(){
     var href = a.getAttribute("href");
     if(href && /\.html(\?|$)/.test(href)) a.setAttribute("href", withLang(href));
   });
+}
+function getConsent(){
+  try{return localStorage.getItem(CONSENT_KEY) || "";}catch(e){return "";}
+}
+function saveConsent(value){
+  try{localStorage.setItem(CONSENT_KEY, value);}catch(e){}
+}
+function loadScriptOnce(id, src, attrs, onload){
+  if(document.getElementById(id)){
+    if(onload) onload();
+    return;
+  }
+  var s=document.createElement("script");
+  s.id=id;
+  s.async=true;
+  s.src=src;
+  if(attrs){
+    Object.keys(attrs).forEach(function(k){s.setAttribute(k, attrs[k]);});
+  }
+  if(onload) s.onload=onload;
+  document.head.appendChild(s);
+}
+function loadTracking(){
+  if(window.__kroekerTrackingLoaded) return;
+  window.__kroekerTrackingLoaded=true;
+  loadScriptOnce("google-analytics-src","https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(GA_ID),{},function(){
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=function(){window.dataLayer.push(arguments);};
+    window.gtag("js",new Date());
+    window.gtag("config",GA_ID,{anonymize_ip:true});
+  });
+  loadScriptOnce("google-adsense-live","https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(ADS_CLIENT),{"crossorigin":"anonymous"});
+}
+function cookieTexts(){
+  var copy={
+    de:{
+      title:"Datenschutz & Cookies",
+      text:"Diese Website lädt Google Analytics und Google Ads/AdSense erst nach Ihrer Zustimmung. Wenn Sie ablehnen, werden diese Tracking-Skripte nicht geladen.",
+      accept:"Akzeptieren",
+      reject:"Ablehnen",
+      privacy:"Datenschutz"
+    },
+    ru:{
+      title:"Конфиденциальность и cookies",
+      text:"Google Analytics и Google Ads/AdSense загружаются только после вашего согласия. Если отклонить, tracking-скрипты не будут включены.",
+      accept:"Принять",
+      reject:"Отклонить",
+      privacy:"Datenschutz"
+    },
+    en:{
+      title:"Privacy & cookies",
+      text:"Google Analytics and Google Ads/AdSense load only after your consent. If you reject, these tracking scripts stay disabled.",
+      accept:"Accept",
+      reject:"Reject",
+      privacy:"Privacy"
+    }
+  };
+  return copy[lang] || copy.de;
+}
+function updateCookieBannerText(){
+  var b=document.getElementById("cookie-consent");
+  if(!b) return;
+  var t=cookieTexts();
+  var title=b.querySelector("[data-cookie-title]");
+  var text=b.querySelector("[data-cookie-text]");
+  var accept=b.querySelector("[data-cookie-accept]");
+  var reject=b.querySelector("[data-cookie-reject]");
+  var privacy=b.querySelector("[data-cookie-privacy]");
+  if(title) title.textContent=t.title;
+  if(text) text.textContent=t.text;
+  if(accept) accept.textContent=t.accept;
+  if(reject) reject.textContent=t.reject;
+  if(privacy) privacy.textContent=t.privacy;
+  var footerPrivacy=document.getElementById("footer-privacy-link");
+  if(footerPrivacy) footerPrivacy.textContent=t.privacy;
+}
+function closeCookieBanner(){
+  var b=document.getElementById("cookie-consent");
+  if(b) b.classList.add("cookie-hidden");
+}
+function setCookieConsent(value){
+  saveConsent(value);
+  closeCookieBanner();
+  if(value==="accepted") loadTracking();
+}
+function initCookieConsent(){
+  var current=getConsent();
+  if(current==="accepted"){
+    loadTracking();
+    return;
+  }
+  if(current==="rejected") return;
+  if(document.getElementById("cookie-consent")) return;
+  var t=cookieTexts();
+  var banner=document.createElement("div");
+  banner.id="cookie-consent";
+  banner.className="cookie-consent";
+  banner.setAttribute("role","dialog");
+  banner.setAttribute("aria-live","polite");
+  banner.innerHTML='<div class="cookie-copy"><strong data-cookie-title>'+t.title+'</strong><p data-cookie-text>'+t.text+'</p><a data-cookie-privacy href="'+withLang("datenschutz.html")+'">'+t.privacy+'</a></div><div class="cookie-actions"><button type="button" class="cookie-btn cookie-reject" data-cookie-reject>'+t.reject+'</button><button type="button" class="cookie-btn cookie-accept" data-cookie-accept>'+t.accept+'</button></div>';
+  document.body.appendChild(banner);
+  banner.querySelector("[data-cookie-accept]").addEventListener("click",function(){setCookieConsent("accepted");});
+  banner.querySelector("[data-cookie-reject]").addEventListener("click",function(){setCookieConsent("rejected");});
+}
+function initRevealAnimations(){
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var items=document.querySelectorAll(".card,.stat-card,.qbox,.timeline-item,.res-link,.contact-method,.seo-link-list a,.privacy-card");
+  if(!items.length) return;
+  items.forEach(function(el,i){
+    el.classList.add("reveal-card");
+    el.style.setProperty("--reveal-delay", Math.min(i%8,7)*60+"ms");
+  });
+  if(!("IntersectionObserver" in window)){
+    items.forEach(function(el){el.classList.add("in-view");});
+    return;
+  }
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add("in-view");
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.14,rootMargin:"0px 0px -5% 0px"});
+  items.forEach(function(el){obs.observe(el);});
 }
 function currentSection(){return document.body.getAttribute("data-section") || "s0";}
 function setActiveNav(){var cs=currentSection();document.querySelectorAll(".nav a").forEach(function(a){a.classList.toggle("on", a.getAttribute("data-sec") === cs);});}
@@ -686,6 +814,7 @@ function R(){
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
   var menuLabel = document.getElementById("menu-label");
   if(menuLabel) menuLabel.innerHTML = lang==="ru" ? "Меню" : (lang==="en" ? "Menu" : "Menü");
+  updateCookieBannerText();
   translateSeoBlock();
   translateContactForm();
   var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; syncLanguageLinks(); setActiveNav(); setPageHero(t);
@@ -842,3 +971,5 @@ if(document.getElementById("leaflet-map")) setTimeout(initMap,300);
 
 
 setLang(getSavedLang());
+initCookieConsent();
+initRevealAnimations();
