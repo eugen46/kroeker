@@ -3,8 +3,17 @@ var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3"
 var GA_ID = "G-Z6EYVJ4FVW";
 var ADS_CLIENT = "ca-pub-2321812148317390";
 var CONSENT_KEY = "kroeker-cookie-consent";
+var GEDMATCH_KIT = ["MZ","563","0855"].join("");
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
+function getPathLang(){
+  try{
+    var m = window.location.pathname.match(/^\/(de|ru|en)(\/|$)/);
+    return m ? m[1] : "";
+  }catch(e){ return ""; }
+}
 function getSavedLang(){
+  var pathLang = getPathLang();
+  if(validLang(pathLang)) return pathLang;
   var qLang = "";
   try{ qLang = new URLSearchParams(window.location.search).get("lang") || ""; }catch(e){}
   if(validLang(qLang)) return qLang;
@@ -18,13 +27,16 @@ function withLang(url){
   if(!url || /^(https?:|mailto:|tel:|#)/i.test(url)) return url;
   var l = validLang(lang) ? lang : "de";
   var clean = url.replace(/[?&]lang=(de|ru|en)\b/, "").replace(/[?&]$/, "");
-  if(l === "de") return clean;
-  return clean + (clean.indexOf("?") === -1 ? "?" : "&") + "lang=" + l;
+  clean = clean.replace(/^\/(de|ru|en)\//, "/").replace(/^\//, "");
+  if(clean === "") clean = "index.html";
+  return "/" + l + "/" + clean;
 }
 function syncLanguageLinks(){
   document.querySelectorAll("a[href]").forEach(function(a){
+    if(a.classList && a.classList.contains("lang-btn")) return;
+    if(a.hasAttribute && a.hasAttribute("hreflang")) return;
     var href = a.getAttribute("href");
-    if(href && /\.html(\?|$)/.test(href)) a.setAttribute("href", withLang(href));
+    if(href && /\.html(\?|$)/.test(href) && !/^(https?:|mailto:|tel:|#)/i.test(href)) a.setAttribute("href", withLang(href));
   });
 }
 function getConsent(){
@@ -134,6 +146,14 @@ function openCookieSettings(){
     return;
   }
   initCookieConsent();
+}
+function revealGedmatch(btn){
+  var text = "GEDmatch Kit " + GEDMATCH_KIT;
+  if(btn){
+    var small = btn.querySelector("small");
+    if(small) small.textContent = text;
+    btn.setAttribute("aria-label", text);
+  }
 }
 function initCookieConsent(){
   var current=getConsent();
@@ -245,7 +265,7 @@ var T = {
   "q": "Wer ist der biologische Vater von Wladimir Nikolajewitsch Usachew (geb. 08.04.1950, Sennoje, Nordkasachstan)? In der urspr\u00fcnglichen Geburtseintragung steht der Vater nur als \u201eWassili\u201c \u2014 laut Angaben von Emma Iwanowna selbst. Ob er den Familiennamen Kr\u00f6ker trug, ist nicht belegt. Seine Identit\u00e4t ist die Hauptfrage der Familienforschung.",
   "c1n": "Johann Kroeker", "c1d": "* 15.11.1864, Wolhynien (Dorf unbekannt)", "c1r": "Urgro\u00dfvater / \u041f\u0440\u0430\u043f\u0440\u0430\u0434\u0435\u0434",
   "c2n": "Emma Iwanowna Kroeker", "c2d": "* 05.05.1924, Uwarowka/Alexandrowka \u2192 Kasachstan", "c2r": "Gro\u00dfmutter / \u0411\u0430\u0431\u0443\u0448\u043a\u0430",
-  "c3n": "Eugen Usachew", "c3d": "* 25.01.1979, Schachty \u00b7 Berlin", "c3r": "Projektleiter / \u0410\u0432\u0442\u043e\u0440",
+  "c3n": "Eugen Usachew", "c3d": "* 1979, Schachty \u00b7 Berlin", "c3r": "Projektleiter / \u0410\u0432\u0442\u043e\u0440",
   "mn": "Mennonit", "uk": "Unbekannt",
   "tn-gs": "Gottlieb Schulz", "td-gs": "? \u2013 ? \u00b7 Wolhynien",
   "tn-ka": "??? Kroeker", "td-ka": "? \u2013 ? \u00b7 Westpreu\u00dfen",
@@ -254,8 +274,8 @@ var T = {
   "tn-wa": "??? Wassili (Nachname unbekannt)", "td-wa": "? \u00b7 Kasachstan ~1949",
   "tn-ei": "Emma Iwanowna Kroeker", "td-ei": "* 05.05.1924\nUwarowka/Alexandrowka\nPulin, Kiew\n\u2020 02.05.1987, Schachty", "tt-ei": "Gro\u00dfmutter",
   "tn-vl": "Vladimir N. Usachew", "td-vl": "* 08.04.1950, Sennoje\n\u2020 06.08.2023, Schachty", "tt-vl": "Vater",
-  "tn-lj": "Ljubow A. Kryschka", "td-lj": "* 13.06.1952\nStawropolski kraj", "tt-lj": "Mutter",
-  "tn-eu": "Eugen Usachew", "td-eu": "* 25.01.1979, Schachty\nBerlin, Deutschland", "tt-eu": "\u2605 Sie",
+  "tn-lj": "Ljubow K.", "td-lj": "* 1952\nStawropolski kraj", "tt-lj": "Mutter",
+  "tn-eu": "Eugen Usachew", "td-eu": "* 1979, Schachty\nBerlin, Deutschland", "tt-eu": "\u2605 Sie",
   "h1t": "Westpreu\u00dfische Wurzeln (vor 1864)",
   "h1": "Die Familie Kroeker ist eine mennonitische Familie friesischer Herkunft. Die Mennoniten stammten aus den Niederlanden und siedelten sich ab dem 16. Jahrhundert in der Region Danzig (Westpreu\u00dfen, heute Polen) an. Sie sprachen Plautdietsch und lebten als friedliche Glaubensgemeinschaft. Johann Kroeker trug den russifizierten Namen Iwan Iwanowitsch \u2014 dies deutet auf mehrere Generationen in Russland hin. Die Stammkolonie war Wolhynien (Dorf unbekannt). Das EWZ-Dokument A3342-EWZ50-B019 aus dem Bundesarchiv Berlin soll die preu\u00dfsischen Wurzeln kl\u00e4ren.",
   "h2t": "Wolhynien \u2014 Ukraine (1864\u20131941)",
@@ -267,7 +287,7 @@ var T = {
   "h4t": "Kasachstan und Russland (1950\u20132019)",
   "h4": "Im Dorf Sennoje lernte Emma Iwanowna einen Mann namens Wassili kennen. Am 8. April 1950 wurde Sohn Wladimir geboren. Laut Geburtsurkunde (Kasachstan, 2014): Vater \u2014 Kr\u00f6ker Wassili, Mutter \u2014 Kr\u00f6ker Emma Iwanowna, Nationalit\u00e4t: Deutsche.  Ein Wassili Franziskowitsch Kr\u00f6ker (1912, Krim) wurde auf openlist.wiki gefunden, wurde aber 1942 mobilisiert und starb vor 1950 \u2014 er kann nicht der biologische Vater sein. Im Jahr 1952 heiratete Emma Iwanowna den Russen Nikolaj Maximowitsch Usachew (Stiefvater). Wladimir Nikolajewitsch Usachew lebte in Schachty, Rostower Oblast und verstarb am 6. August 2023.",
   "h5t": "Deutschland (ab 2019)",
-  "h5": "Eugen Wladimirowitsch Usachew wurde am 25. Januar 1979 in Schachty, Rostower Oblast geboren (Geburtsurkunde mit Apostille). Vater: Wladimir Nikolajewitsch Usachew, Nationalit\u00e4t: Deutsch. Mutter: Ljubow Alexejewna Kryschka, geb. 13.06.1952, Stawropoler Krai, Nationalit\u00e4t: Russisch. Im Jahr 2019 zog Eugen nach Deutschland und lebt in Berlin, Zechliner Str. 16, 13055. Im Dezember 2019 \u00e4nderte er seinen Namen (Bundesverwaltungsamt Friedland, 11.12.2019). Im April 2026 erhielt er die EWZ-Dokumente (Film B019, Kader 1340\u20131353) aus MHSBC Kanada, die die Geschichte der Familie Kroeker-Dreger vollst\u00e4ndig belegen.",
+  "h5": "Eugen Usachew wurde am 1979 in Schachty, Rostower Oblast geboren (Geburtsurkunde mit Apostille). Vater: Wladimir Nikolajewitsch Usachew, Nationalit\u00e4t: Deutsch. Mutter: Ljubow K., geb. 1952, Stawropoler Krai, Nationalit\u00e4t: Russisch. Im Jahr 2019 zog Eugen nach Deutschland und lebt in Berlin, Berlin. Im Dezember 2019 \u00e4nderte er seinen Namen (Bundesverwaltungsamt Friedland, 11.12.2019). Im April 2026 erhielt er die EWZ-Dokumente (Film B019, Kader 1340\u20131353) aus MHSBC Kanada, die die Geschichte der Familie Kroeker-Dreger vollst\u00e4ndig belegen.",
   "tl1": "Vorfahren der Familie Kroeker in Westpreu\u00dfen. Auswanderung nach Wolhynien (Ukraine).",
   "tl2": "Johann Kroeker wird am 15. November in Wolhynien geboren (genaues Dorf unbekannt).",
   "tl3": "Emma Gotlibowna Schulz wird in Wiktorowka, Baryschiw-Rayon, Kiew geboren. Gottlieb Schulz ist ihr Vater.",
@@ -366,7 +386,7 @@ var T = {
   "q": "Кто этот Василий — биологический отец Владимира (р. 08.04.1950, с. Сенное)? В первичной записи отец записан только как «Василий» — со слов Эммы Ивановны. Фамилия неизвестна. Его личность — главный вопрос исследования.",
   "c1n": "\u0418\u043e\u0433\u0430\u043d\u043d \u041a\u0440\u0451\u043a\u0435\u0440", "c1d": "* 15.11.1864, \u0425\u0438\u0440\u0448\u0430\u0443, \u0412\u043e\u043b\u044b\u043d\u044c", "c1r": "\u041f\u0440\u0430\u043f\u0440\u0430\u0434\u0435\u0434",
   "c2n": "\u042d\u043c\u043c\u0430 \u0418\u0432\u0430\u043d\u043e\u0432\u043d\u0430 \u041a\u0440\u0435\u043a\u0435\u0440", "c2d": "* 05.05.1924, \u0423\u0432\u0430\u0440\u043e\u0432\u043a\u0430/\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u043a\u0430 \u2192 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d", "c2r": "\u0411\u0430\u0431\u0443\u0448\u043a\u0430",
-  "c3n": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432", "c3d": "* 25.01.1979, \u0428\u0430\u0445\u0442\u044b \u00b7 \u0411\u0435\u0440\u043b\u0438\u043d", "c3r": "\u0410\u0432\u0442\u043e\u0440 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+  "c3n": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432", "c3d": "* 1979, \u0428\u0430\u0445\u0442\u044b \u00b7 \u0411\u0435\u0440\u043b\u0438\u043d", "c3r": "\u0410\u0432\u0442\u043e\u0440 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
   "mn": "\u041c\u0435\u043d\u043d\u043e\u043d\u0438\u0442", "uk": "\u041d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u0435\u043d",
   "tn-gs": "\u0413\u043e\u0442\u043b\u0438\u0431 \u0428\u0443\u043b\u044c\u0446", "td-gs": "? \u2013 ? \u00b7 \u0412\u043e\u043b\u044b\u043d\u044c",
   "tn-ka": "??? \u041a\u0440\u0451\u043a\u0435\u0440", "td-ka": "? \u2013 ? \u00b7 \u0417\u0430\u043f. \u041f\u0440\u0443\u0441\u0441\u0438\u044f",
@@ -375,8 +395,8 @@ var T = {
   "tn-wa": "??? \u0412\u0430\u0441\u0438\u043b\u0438\u0439 \u041a\u0440\u0435\u043a\u0435\u0440", "td-wa": "? \u00b7 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d ~1949",
   "tn-ei": "\u042d\u043c\u043c\u0430 \u0418\u0432\u0430\u043d\u043e\u0432\u043d\u0430 \u041a\u0440\u0435\u043a\u0435\u0440", "td-ei": "* 05.05.1924\n\u0423\u0432\u0430\u0440\u043e\u0432\u043a\u0430/\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u043a\u0430\n\u041f\u0443\u043b\u0438\u043d, \u041a\u0438\u0435\u0432\n\u2020 02.05.1987, \u0428\u0430\u0445\u0442\u044b", "tt-ei": "\u0411\u0430\u0431\u0443\u0448\u043a\u0430",
   "tn-vl": "\u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u041d. \u0423\u0441\u0430\u0447\u0435\u0432", "td-vl": "* 08.04.1950, \u0421\u0435\u043d\u043d\u043e\u0435\n\u2020 06.08.2023, \u0428\u0430\u0445\u0442\u044b", "tt-vl": "\u041e\u0442\u0435\u0446",
-  "tn-lj": "\u041b\u044e\u0431\u043e\u0432\u044c \u0410. \u041a\u0440\u044b\u0448\u043a\u0430", "td-lj": "* 13.06.1952\n\u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439", "tt-lj": "\u041c\u0430\u0442\u044c",
-  "tn-eu": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432", "td-eu": "* 25.01.1979, \u0428\u0430\u0445\u0442\u044b\n\u0411\u0435\u0440\u043b\u0438\u043d, \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044f", "tt-eu": "\u2605 \u0412\u044b",
+  "tn-lj": "\u041b\u044e\u0431\u043e\u0432\u044c \u041a.", "td-lj": "* 1952\n\u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439", "tt-lj": "\u041c\u0430\u0442\u044c",
+  "tn-eu": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432", "td-eu": "* 1979, \u0428\u0430\u0445\u0442\u044b\n\u0411\u0435\u0440\u043b\u0438\u043d, \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044f", "tt-eu": "\u2605 \u0412\u044b",
   "h1t": "\u041f\u0440\u0443\u0441\u0441\u043a\u0438\u0435 \u043a\u043e\u0440\u043d\u0438 (\u0434\u043e 1864)",
   "h1": "\u0421\u0435\u043c\u044c\u044f \u041a\u0440\u0451\u043a\u0435\u0440 \u2014 \u043c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u0441\u043a\u0430\u044f \u0441\u0435\u043c\u044c\u044f \u0444\u0440\u0438\u0437\u0441\u043a\u043e\u0433\u043e \u043f\u0440\u043e\u0438\u0441\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u044f. \u041c\u0435\u043d\u043d\u043e\u043d\u0438\u0442\u044b \u043f\u0440\u0438\u0448\u043b\u0438 \u0438\u0437 \u041d\u0438\u0434\u0435\u0440\u043b\u0430\u043d\u0434\u043e\u0432 \u0438 \u0441 XVI \u0432\u0435\u043a\u0430 \u0436\u0438\u043b\u0438 \u0432 \u0440\u0430\u0439\u043e\u043d\u0435 \u0414\u0430\u043d\u0446\u0438\u0433\u0430 (\u0417\u0430\u043f\u0430\u0434\u043d\u0430\u044f \u041f\u0440\u0443\u0441\u0441\u0438\u044f). \u0413\u043e\u0432\u043e\u0440\u0438\u043b\u0438 \u043d\u0430 \u043f\u043b\u0430\u0443\u0442\u0434\u0438\u0447, \u0436\u0438\u043b\u0438 \u043c\u0438\u0440\u043d\u043e\u0439 \u043e\u0431\u0449\u0438\u043d\u043e\u0439. \u0418\u043e\u0433\u0430\u043d\u043d \u041a\u0440\u0451\u043a\u0435\u0440 \u043d\u043e\u0441\u0438\u043b \u0440\u0443\u0441\u0441\u0438\u0444\u0438\u0446\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u043e\u0435 \u0438\u043c\u044f \u0418\u0432\u0430\u043d \u0418\u0432\u0430\u043d\u043e\u0432\u0438\u0447 \u2014 \u0437\u043d\u0430\u0447\u0438\u0442 \u0441\u0435\u043c\u044c\u044f \u0436\u0438\u043b\u0430 \u0432 \u0420\u043e\u0441\u0441\u0438\u0438 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043f\u043e\u043a\u043e\u043b\u0435\u043d\u0438\u0439. \u041f\u0440\u043e\u0438\u0441\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u0435 \u0438\u0437 \u041f\u0440\u0443\u0441\u0441\u0438\u0438 \u0434\u043e\u043b\u0436\u0435\u043d \u043f\u0440\u043e\u044f\u0441\u043d\u0438\u0442\u044c \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 EWZ A3342-EWZ50-B019 \u0438\u0437 \u0411\u0443\u043d\u0434\u0435\u0441\u0430\u0440\u0445\u0438\u0432\u0430 \u0411\u0435\u0440\u043b\u0438\u043d\u0430.",
   "h2t": "\u0412\u043e\u043b\u044b\u043d\u044c \u2014 \u0423\u043a\u0440\u0430\u0438\u043d\u0430 (1864\u20131941)",
@@ -388,7 +408,7 @@ var T = {
   "h4t": "\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d \u0438 \u0420\u043e\u0441\u0441\u0438\u044f (1950\u20132019)",
   "h4": "\u0412 \u0441. \u0421\u0435\u043d\u043d\u043e\u0435 \u042d\u043c\u043c\u0430 \u0418\u0432\u0430\u043d\u043e\u0432\u043d\u0430 \u043f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u0438\u043b\u0430\u0441\u044c \u0441 \u0412\u0430\u0441\u0438\u043b\u0438\u0435\u043c \u041a\u0440\u0435\u043a\u0435\u0440\u043e\u043c. 08.04.1950 \u0440\u043e\u0434\u0438\u043b\u0441\u044f \u0441\u044b\u043d \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440. \u0421\u0432-\u0432\u043e \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d (2014): \u043e\u0442\u0435\u0446 \u041a\u0440\u0451\u043a\u0435\u0440 \u0412\u0430\u0441\u0438\u043b\u0438\u0439, \u043c\u0430\u0442\u044c \u041a\u0440\u0451\u043a\u0435\u0440 \u042d\u043c\u043c\u0430 \u0418\u0432\u0430\u043d\u043e\u0432\u043d\u0430, \u043d\u0430\u0446.: \u043d\u0435\u043c\u043a\u0430. \u041a\u0442\u043e \u0442\u0430\u043a\u043e\u0439 \u0412\u0430\u0441\u0438\u043b\u0438\u0439 \u041a\u0440\u0435\u043a\u0435\u0440 \u2014 \u0433\u043b\u0430\u0432\u043d\u044b\u0439 \u0432\u043e\u043f\u0440\u043e\u0441 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f. \u0412 1952 \u0433. \u042d\u043c\u043c\u0430 \u0432\u044b\u0448\u043b\u0430 \u0437\u0430\u043c\u0443\u0436 \u0437\u0430 \u041d\u0438\u043a\u043e\u043b\u0430\u044f \u041c. \u0423\u0441\u0430\u0447\u0435\u0432\u0430 (\u043e\u0442\u0447\u0438\u043c). \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0423\u0441\u0430\u0447\u0435\u0432 \u0443\u043c\u0435\u0440 06.08.2023 \u0432 \u0428\u0430\u0445\u0442\u0430\u0445.",
   "h5t": "\u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044f (\u0441 2019)",
-  "h5": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432 (\u0440. 25.01.1979, \u0428\u0430\u0445\u0442\u044b). \u041e\u0442\u0435\u0446: \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u041d. \u0423\u0441\u0430\u0447\u0435\u0432, \u043d\u0430\u0446.: \u043d\u0435\u043c\u0435\u0446. \u041c\u0430\u0442\u044c: \u041b\u044e\u0431\u043e\u0432\u044c \u0410. \u041a\u0440\u044b\u0448\u043a\u0430, \u0440. 13.06.1952, \u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439. \u0412 2019 \u0433. \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0432 \u0411\u0435\u0440\u043b\u0438\u043d, \u0441\u043c\u0435\u043d\u0438\u043b \u0438\u043c\u044f (\u0411\u0443\u043d\u0434\u0435\u0441\u0432\u0435\u0440\u0432\u0430\u043b\u0442\u0443\u043d\u0433\u0441\u0430\u043c\u0442, 11.12.2019). \u0412 \u0430\u043f\u0440\u0435\u043b\u0435 2026 \u043f\u043e\u043b\u0443\u0447\u0438\u043b EWZ-\u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438\u0437 MHSBC \u041a\u0430\u043d\u0430\u0434\u0430 (B019, \u043a\u0430\u0434\u0440\u044b 1340\u20131353).",
+  "h5": "\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0423\u0441\u0430\u0447\u0435\u0432 (\u0440. 1979, \u0428\u0430\u0445\u0442\u044b). \u041e\u0442\u0435\u0446: \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u041d. \u0423\u0441\u0430\u0447\u0435\u0432, \u043d\u0430\u0446.: \u043d\u0435\u043c\u0435\u0446. \u041c\u0430\u0442\u044c: \u041b\u044e\u0431\u043e\u0432\u044c \u041a., \u0440. 1952, \u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439. \u0412 2019 \u0433. \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0432 \u0411\u0435\u0440\u043b\u0438\u043d, \u0441\u043c\u0435\u043d\u0438\u043b \u0438\u043c\u044f (\u0411\u0443\u043d\u0434\u0435\u0441\u0432\u0435\u0440\u0432\u0430\u043b\u0442\u0443\u043d\u0433\u0441\u0430\u043c\u0442, 11.12.2019). \u0412 \u0430\u043f\u0440\u0435\u043b\u0435 2026 \u043f\u043e\u043b\u0443\u0447\u0438\u043b EWZ-\u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438\u0437 MHSBC \u041a\u0430\u043d\u0430\u0434\u0430 (B019, \u043a\u0430\u0434\u0440\u044b 1340\u20131353).",
   "tl1": "\u041f\u0440\u0435\u0434\u043a\u0438 \u0441\u0435\u043c\u044c\u0438 \u041a\u0440\u0451\u043a\u0435\u0440 \u0436\u0438\u0432\u0443\u0442 \u0432 \u0417\u0430\u043f\u0430\u0434\u043d\u043e\u0439 \u041f\u0440\u0443\u0441\u0441\u0438\u0438. \u041f\u0435\u0440\u0435\u0435\u0437\u0434 \u043d\u0430 \u0412\u043e\u043b\u044b\u043d\u044c.",
   "tl2": "\u0418\u043e\u0433\u0430\u043d\u043d \u041a\u0440\u0451\u043a\u0435\u0440 \u0440\u043e\u0436\u0434\u0430\u0435\u0442\u0441\u044f 15.11.1864 \u043d\u0430 \u0412\u043e\u043b\u044b\u043d\u0438 (\u0434\u0435\u0440\u0435\u0432\u043d\u044f \u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u0430). \u0423\u043c\u0435\u0440 \u043d\u0430 \u0412\u043e\u043b\u044b\u043d\u0438 \u2014 \u0434\u0430\u0442\u0430 \u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u0430. \u041f\u043e \u0430\u0432\u0442\u043e\u0431\u0438\u043e\u0433\u0440\u0430\u0444\u0438\u0438 \u041b\u0438\u0434\u0438\u0438 \u0435\u0439 \u0431\u044b\u043b\u043e \u043e\u043a. 7 \u043b\u0435\u0442 \u043a\u043e\u0433\u0434\u0430 \u043e\u043d \u0443\u043c\u0435\u0440.",
   "tl3": "\u042d\u043c\u043c\u0430 \u0413\u043e\u0442\u043b\u0438\u0431\u043e\u0432\u043d\u0430 \u0428\u0443\u043b\u044c\u0446 \u0440\u043e\u0436\u0434\u0430\u0435\u0442\u0441\u044f \u0432 \u0441. \u0412\u0438\u043a\u0442\u043e\u0440\u043e\u0432\u043a\u0430, \u0411\u0430\u0440\u044b\u0448\u0435\u0432\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u041a\u0438\u0435\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b.",
@@ -487,7 +507,7 @@ var T = {
   "q": "Who is the biological father of Vladimir Nikolaevich Usachew (born 08.04.1950, Sennoje, North Kazakhstan)? In the original birth record the father is listed only as \u201cWassili\u201d \u2014 based on the words of Emma Iwanovna herself. Whether he bore the surname Kr\u00f6ker is not documented. His identity is the main question of the research.",
   "c1n": "Johann Kroeker", "c1d": "* 15.11.1864, Volhynia (village unknown)", "c1r": "Great-great-grandfather",
   "c2n": "Emma Iwanovna Kroeker", "c2d": "* 05.05.1924, Uwarowka/Alexandrowka \u2192 Kazakhstan", "c2r": "Grandmother",
-  "c3n": "Eugen Usachew", "c3d": "* 25.01.1979, Shakhty \u00b7 Berlin", "c3r": "Project author",
+  "c3n": "Eugen Usachew", "c3d": "* 1979, Shakhty \u00b7 Berlin", "c3r": "Project author",
   "mn": "Mennonite", "uk": "Unknown",
   "tn-gs": "Gottlieb Schulz", "td-gs": "? \u2013 ? \u00b7 Volhynia",
   "tn-ka": "??? Kroeker", "td-ka": "? \u2013 ? \u00b7 West Prussia",
@@ -496,8 +516,8 @@ var T = {
   "tn-wa": "??? Wassili (Nachname unbekannt)", "td-wa": "? \u00b7 Kazakhstan ~1949",
   "tn-ei": "Emma Iwanovna Kroeker", "td-ei": "* 05.05.1924\nUwarowka/Alexandrowka\nPulin, Kyiv\n\u2020 02.05.1987, Shakhty", "tt-ei": "Grandmother",
   "tn-vl": "Vladimir N. Usachew", "td-vl": "* 08.04.1950, Sennoje\n\u2020 06.08.2023, Shakhty", "tt-vl": "Father",
-  "tn-lj": "Ljubow A. Kryschka", "td-lj": "* 13.06.1952\nStavropol krai", "tt-lj": "Mother",
-  "tn-eu": "Eugen Usachew", "td-eu": "* 25.01.1979, Shakhty\nBerlin, Germany", "tt-eu": "\u2605 You",
+  "tn-lj": "Ljubow K.", "td-lj": "* 1952\nStavropol krai", "tt-lj": "Mother",
+  "tn-eu": "Eugen Usachew", "td-eu": "* 1979, Shakhty\nBerlin, Germany", "tt-eu": "\u2605 You",
   "h1t": "Prussian Roots (before 1864)",
   "h1": "The Kroeker family is a Mennonite family of Frisian origin. Mennonites came from the Netherlands and settled in the Danzig region (West Prussia, now Poland) from the 16th century. They spoke Plautdietsch and lived as a peaceful religious community. Johann Kroeker bore the Russified name Ivan Ivanovich, suggesting the family had lived in Russia for several generations. Their colony was Volhynia (village unknown). The EWZ document A3342-EWZ50-B019 from the Federal Archives Berlin should clarify their Prussian origins.",
   "h2t": "Volhynia \u2014 Ukraine (1864\u20131941)",
@@ -509,7 +529,7 @@ var T = {
   "h4t": "Kazakhstan and Russia (1950\u20132019)",
   "h4": "In Sennoje Emma Iwanovna met a man named Wassili. On 8 April 1950 son Vladimir was born. Birth certificate (Kazakhstan, 2014): father \u2014 Kroeker Wassili, mother \u2014 Kroeker Emma Iwanovna, nationality: German.  In 1952 Emma married Nikolaj M. Usachew (stepfather). Vladimir Usachew died 6 August 2023 in Shakhty.",
   "h5t": "Germany (from 2019)",
-  "h5": "Eugen Vladimirovich Usachew born 25 January 1979 in Shakhty (birth certificate with Apostille). Father: Vladimir N. Usachew, nationality: German. Mother: Ljubow A. Kryshka, born 13.06.1952, Stavropol Krai, nationality: Russian. In 2019 moved to Germany, lives in Berlin, Zechliner Str. 16, 13055. Name changed to Eugen Usachew (Bundesverwaltungsamt Friedland, 11.12.2019). In April 2026 received EWZ documents from MHSBC Canada (Film B019, Frames 1340\u20131353).",
+  "h5": "Eugen Usachew born 1979 in Shakhty (birth certificate with Apostille). Father: Vladimir N. Usachew, nationality: German. Mother: Ljubow K., born 1952, Stavropol Krai, nationality: Russian. In 2019 moved to Germany, lives in Berlin, Berlin. Name changed to Eugen Usachew (Bundesverwaltungsamt Friedland, 11.12.2019). In April 2026 received EWZ documents from MHSBC Canada (Film B019, Frames 1340\u20131353).",
   "tl1": "Kroeker ancestors live in West Prussia. Migration to Volhynia, Ukraine.",
   "tl2": "Johann Kroeker born 15 November in Volhynia (exact village unknown).",
   "tl3": "Emma Gotlibovna Schulz born in Wiktorowka, Baryschiw district, Kyiv Oblast.",
@@ -621,7 +641,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Suchen Sie Verwandte?",
     "seo-relatives-p1": "Wenn Sie zu den Familien Kroeker, Kröker, Schulz, Dreger oder Fröhlich aus Preußen, Wolhynien, Ukraine, Kasachstan, Russland oder Deutschland forschen, melden Sie sich bitte. Familiendokumente, alte Fotos, Archivhinweise und DNA-Treffer können helfen, die Zweige zu verbinden.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA-Forschung: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a> sowie MyHeritage-Treffer sind willkommen.",
+    "seo-dna-line": "DNA-Forschung: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch</a> sowie MyHeritage-Treffer sind willkommen.",
     "seo-clues-line": "Hilfreiche Hinweise: Familiennamen, Geburtsdaten, Dörfer, Deportationsunterlagen, EWZ-Akten und Familiengeschichten."
   },
   ru: {
@@ -651,7 +671,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Ищете родственников?",
     "seo-relatives-p1": "Если вы исследуете семьи Kroeker, Крёкер, Schulz, Dreger или Fröhlich из Пруссии, Волыни, Украины, Казахстана, России или Германии, пожалуйста, свяжитесь со мной. Семейные документы, старые фотографии, архивные ссылки и совпадения ДНК помогут соединить ветви.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "ДНК-исследования: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a>, а также совпадения MyHeritage приветствуются.",
+    "seo-dna-line": "ДНК-исследования: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch</a>, а также совпадения MyHeritage приветствуются.",
     "seo-clues-line": "Полезные сведения: фамилии, даты рождения, деревни, документы о депортации, EWZ-акты и семейные истории."
   },
   en: {
@@ -681,7 +701,7 @@ var SEO_TEXT = {
     "seo-relatives-title": "Looking for relatives?",
     "seo-relatives-p1": "If you are researching the Kroeker, Kröker, Schulz, Dreger or Fröhlich families from Prussia, Volhynia, Ukraine, Kazakhstan, Russia or Germany, please get in touch. Family documents, old photos, archive references and DNA matches can help connect the branches.",
     "seo-telegram-line": "Telegram: <a href=\"https://t.me/eugen30\" target=\"_blank\" rel=\"noopener\">@eugen30</a>",
-    "seo-dna-line": "DNA research: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch Kit MZ5630855</a> and MyHeritage matches are welcome.",
+    "seo-dna-line": "DNA research: <a href=\"https://www.gedmatch.com/\" target=\"_blank\" rel=\"noopener\">GEDmatch</a> and MyHeritage matches are welcome.",
     "seo-clues-line": "Useful clues: surnames, birth dates, villages, deportation records, EWZ files and family stories."
   }
 };
@@ -744,7 +764,8 @@ function submitContactForm(e){
   var status = g("contact-status");
   var text = "Kroeker family website contact\n\nName: " + (name || "-") + "\nFamily / place: " + (relation || "-") + "\nMessage:\n" + (message || "-");
   var subject = "Kroeker family website contact";
-  var mailto = "mailto:evusachev30@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+  var contactAddress = ["evusachev30", "gmail.com"].join("@");
+  var mailto = "mailto:" + contactAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
   if(status) status.textContent = t["contact-status-sent"];
   window.location.href = mailto;
 }
@@ -771,6 +792,7 @@ function R(){
   ];
   for(var i=0;i<ids.length;i++){
     var el = g("t-"+ids[i]) || g(ids[i]);
+    if(/^s[0-8]$/.test(ids[i]) && el && el.id === ids[i]) continue;
     if(el && t[ids[i]] !== undefined){
       el.innerHTML = t[ids[i]].replace(/\n/g,"<br>");
     }

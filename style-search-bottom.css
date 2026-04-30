@@ -1536,3 +1536,238 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
     font-size:.68rem!important
   }
 }
+
+body,
+.hdr-logo,
+.nav-item>a,
+.card,
+.search-input,
+.support-btn,
+.lang-btn,
+.home-btn{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;
+}
+.skip-link{
+  position:absolute;
+  left:.8rem;
+  top:.8rem;
+  z-index:9999;
+  background:#fff;
+  color:#0f2d5c;
+  padding:.5rem .75rem;
+  border-radius:8px;
+  transform:translateY(-180%);
+  transition:transform .15s;
+}
+.skip-link:focus{transform:translateY(0)}
+.nav ul{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.1rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.8rem;
+  margin:.65rem auto;
+}
+.footer-links a,
+.footer-links button{
+  color:rgba(255,255,255,.82);
+  background:transparent;
+  border:0;
+  font:inherit;
+  font-size:.82rem;
+  text-decoration:underline;
+  cursor:pointer;
+}
+.footer-copy{
+  text-align:center;
+  color:rgba(255,255,255,.45);
+  font-size:.72rem;
+  line-height:1.6;
+  max-width:900px;
+  margin:.5rem auto 0;
+}
+.lead{
+  color:var(--muted);
+  margin:-.6rem 0 1.2rem;
+  max-width:780px;
+}
+.route-strip{
+  display:flex;
+  align-items:stretch;
+  gap:.5rem;
+  overflow-x:auto;
+  padding:.4rem 0 .2rem;
+}
+.route-stage{
+  min-width:130px;
+  padding:.65rem .75rem;
+  border-radius:12px;
+  background:var(--blue6);
+  border:1px solid var(--border);
+  color:var(--navy);
+  text-decoration:none;
+  font-weight:800;
+  text-align:center;
+}
+.route-arrow{
+  display:flex;
+  align-items:center;
+  color:var(--blue);
+  font-weight:900;
+}
+.photo-placeholder{
+  min-height:96px;
+  border:1px dashed var(--border);
+  border-radius:12px;
+  background:linear-gradient(135deg,#f8fbff,#eaf3ff);
+  margin-top:.8rem;
+  position:relative;
+}
+.photo-placeholder::after{
+  content:attr(aria-label);
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.family-tree{
+  display:grid;
+  gap:1.2rem;
+}
+.generation{
+  position:relative;
+  padding:1rem;
+  border-radius:16px;
+  background:rgba(255,255,255,.62);
+  border:1px solid var(--border);
+}
+.generation h2{
+  font-size:1.05rem;
+  color:var(--navy);
+  margin-bottom:.85rem;
+}
+.generation-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:.9rem;
+}
+.person-card{
+  position:relative;
+  padding:1rem;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.person-card::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-.9rem;
+  width:1px;
+  height:.9rem;
+  background:var(--border);
+}
+.generation:first-child .person-card::before{display:none}
+.person-card h3{
+  border:0;
+  padding:0;
+  margin:.65rem 0 .3rem;
+  font-size:1rem;
+}
+.person-photo{
+  min-height:72px;
+  margin-top:0;
+}
+.person-dates,
+.person-place,
+.privacy-note{
+  color:var(--muted);
+  font-size:.84rem;
+  margin:.15rem 0;
+}
+.person-card.living{
+  background:#f7fbff;
+  border-color:#93c5fd;
+}
+.privacy-note{
+  display:inline-flex;
+  padding:.2rem .45rem;
+  border-radius:999px;
+  background:#dbeafe;
+  color:#0f2d5c;
+  font-weight:700;
+}
+.table-card{overflow-x:auto}
+.stbl{
+  width:100%;
+  border-collapse:collapse;
+}
+.stbl th,
+.stbl td{
+  padding:.75rem;
+  border-bottom:1px solid var(--blue5);
+  text-align:left;
+  vertical-align:top;
+}
+.stbl th{
+  background:var(--blue6);
+  color:var(--navy);
+  font-weight:800;
+}
+.badge{
+  display:inline-flex;
+  padding:.18rem .48rem;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#0f2d5c;
+  font-weight:800;
+  font-size:.78rem;
+}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-red{background:#fee2e2;color:#991b1b}
+.resource-list{
+  display:grid;
+  gap:.45rem;
+}
+.leaflet-shell{
+  height:420px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--blue6);
+  display:grid;
+  place-items:center;
+}
+.contact-action.dna{
+  cursor:pointer;
+  border:0;
+  width:100%;
+  text-align:left;
+}
+@media(max-width:980px){
+  .nav ul{
+    justify-content:flex-start;
+    overflow-x:auto;
+    width:100%;
+  }
+}
+@media(max-width:380px){
+  .main{padding:1.1rem .75rem}
+  .hdr{padding:.6rem .7rem}
+  .nav ul{gap:.68rem}
+  .route-stage{min-width:116px;font-size:.82rem}
+  .card{padding:1rem}
+  .sec-title{font-size:1.35rem}
+  .leaflet-shell{height:340px}
+}
