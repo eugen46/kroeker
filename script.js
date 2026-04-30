@@ -27,6 +27,40 @@ function syncLanguageLinks(){
 function currentSection(){return document.body.getAttribute("data-section") || "s0";}
 function setActiveNav(){var cs=currentSection();document.querySelectorAll(".nav a").forEach(function(a){a.classList.toggle("on", a.getAttribute("data-sec") === cs);});}
 function setPageHero(t){var cs=currentSection();var titleEl=document.getElementById("page-title");var subEl=document.getElementById("page-subtitle");if(titleEl) titleEl.innerHTML = cs === "s0" ? (t["ht"] || "Familie Kröker") : (t[cs] || "Familie Kröker");if(subEl) subEl.innerHTML = t["hx"] || "";}
+function closeMainMenu(){
+  var nav=document.getElementById("main-nav");
+  var btn=document.querySelector(".menu-toggle");
+  if(nav) nav.classList.remove("open");
+  if(btn){
+    btn.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+  }
+}
+function toggleMainMenu(ev){
+  if(ev) ev.stopPropagation();
+  var nav=document.getElementById("main-nav");
+  var btn=document.querySelector(".menu-toggle");
+  if(!nav || !btn) return;
+  var open=!nav.classList.contains("open");
+  if(open){
+    nav.classList.add("open");
+    btn.classList.add("open");
+  } else {
+    nav.classList.remove("open");
+    btn.classList.remove("open");
+  }
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+}
+document.addEventListener("click", function(e){
+  var nav=document.getElementById("main-nav");
+  var btn=document.querySelector(".menu-toggle");
+  if(!nav || !btn) return;
+  if(nav.contains(e.target) || btn.contains(e.target)) return;
+  closeMainMenu();
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape") closeMainMenu();
+});
 
 var T = {
 "de": {
@@ -639,6 +673,8 @@ function R(){
   var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
+  var menuLabel = document.getElementById("menu-label");
+  if(menuLabel) menuLabel.innerHTML = lang==="ru" ? "Меню" : (lang==="en" ? "Menu" : "Menü");
   translateSeoBlock();
   translateContactForm();
   var sr=document.getElementById("search-results"); if(sr) sr.style.display="none"; syncLanguageLinks(); setActiveNav(); setPageHero(t);
