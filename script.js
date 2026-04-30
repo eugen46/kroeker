@@ -36,6 +36,11 @@ function closeMainMenu(){
     btn.setAttribute("aria-expanded","false");
   }
 }
+function isMainMenuTarget(target){
+  var nav=document.getElementById("main-nav");
+  var btn=document.querySelector(".menu-toggle");
+  return !!((nav && nav.contains(target)) || (btn && btn.contains(target)));
+}
 function toggleMainMenu(ev){
   if(ev) ev.stopPropagation();
   var nav=document.getElementById("main-nav");
@@ -51,16 +56,22 @@ function toggleMainMenu(ev){
   }
   btn.setAttribute("aria-expanded", open ? "true" : "false");
 }
+document.addEventListener("pointerdown", function(e){
+  if(!isMainMenuTarget(e.target)) closeMainMenu();
+}, true);
 document.addEventListener("click", function(e){
-  var nav=document.getElementById("main-nav");
-  var btn=document.querySelector(".menu-toggle");
-  if(!nav || !btn) return;
-  if(nav.contains(e.target) || btn.contains(e.target)) return;
+  var menuLink=e.target.closest ? e.target.closest("#main-nav a") : null;
+  if(menuLink){
+    closeMainMenu();
+    return;
+  }
+  if(isMainMenuTarget(e.target)) return;
   closeMainMenu();
 });
 document.addEventListener("keydown", function(e){
   if(e.key === "Escape") closeMainMenu();
 });
+window.addEventListener("pagehide", closeMainMenu);
 
 var T = {
 "de": {
