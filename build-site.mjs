@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = "https://kroeker-family.com";
-const CACHE = "20260430-full-refactor";
+const CACHE = "20260501-navphoto";
 const LANGS = ["de", "ru", "en"];
 const PAGES = ["index", "tree", "history", "timeline", "research", "updates", "resources", "map", "contact", "datenschutz", "impressum"];
 const SECTION = { index: "s0", tree: "s1", history: "s2", timeline: "s3", research: "s4", updates: "s5", resources: "s6", map: "s7", contact: "s8", datenschutz: "privacy", impressum: "impressum" };
@@ -292,7 +292,16 @@ function renderIndex(lang) {
     inLanguage: ["de", "ru", "en"],
     about: { "@type": "Person", name: "Eugen Usachew", alternateName: ["Евгений Усачев"], birthDate: "1979", birthPlace: "Schachty", homeLocation: "Berlin" }
   })}</script>`;
-  return layout(lang, "index", `<section class="sec" id="s0"><h1 class="sec-title">${esc(t.s0)}</h1><section class="seo-intro card" aria-labelledby="seo-intro-title"><h2 id="seo-intro-title">${esc(seo["seo-intro-title"] || META.index[lang][0])}</h2>${paragraphs(seo["seo-intro-p1"], lang)}${paragraphs(seo["seo-intro-p2"], lang)}<nav class="seo-link-list" aria-label="${UI[lang].nav}"><a href="${relPage(lang, "tree")}">${esc(seo["seo-link-tree"] || t.s1)}</a><a href="${relPage(lang, "history")}">${esc(seo["seo-link-history"] || t.s2)}</a><a href="${relPage(lang, "timeline")}">${esc(seo["seo-link-timeline"] || t.s3)}</a><a href="${relPage(lang, "research")}">${esc(seo["seo-link-research"] || t.s4)}</a><a href="${relPage(lang, "contact")}">${esc(seo["seo-link-contact"] || t.s8)}</a></nav></section><div class="g2"><article class="card"><h2>${esc(t.it)}</h2>${paragraphs(t.i, lang)}<div class="photo-placeholder" aria-label="${UI[lang].photo}"></div></article><article class="card"><h2>${esc(t.pt)}</h2>${paragraphs(t.p, lang)}<div class="route-strip" aria-label="${esc(t.p)}">${routeStages(lang)}</div></article></div><section class="qbox" aria-labelledby="main-question"><h2 id="main-question">${esc(t.qt)}</h2>${paragraphs(t.q, lang)}</section>${branchCards(lang)}${relativesCard(lang)}<div class="g3">${statCard(t.c1r, t.c1n, t.c1d)}${statCard(t.c2r, t.c2n, t.c2d)}${statCard(t.c3r, t.c3n, t.c3d)}</div></section>`, schema);
+  return layout(lang, "index", `<section class="sec" id="s0"><h1 class="sec-title">${esc(t.s0)}</h1><section class="seo-intro card" aria-labelledby="seo-intro-title"><h2 id="seo-intro-title">${esc(seo["seo-intro-title"] || META.index[lang][0])}</h2>${paragraphs(seo["seo-intro-p1"], lang)}${paragraphs(seo["seo-intro-p2"], lang)}<nav class="seo-link-list" aria-label="${UI[lang].nav}"><a href="${relPage(lang, "tree")}">${esc(seo["seo-link-tree"] || t.s1)}</a><a href="${relPage(lang, "history")}">${esc(seo["seo-link-history"] || t.s2)}</a><a href="${relPage(lang, "timeline")}">${esc(seo["seo-link-timeline"] || t.s3)}</a><a href="${relPage(lang, "research")}">${esc(seo["seo-link-research"] || t.s4)}</a><a href="${relPage(lang, "contact")}">${esc(seo["seo-link-contact"] || t.s8)}</a></nav></section><div class="g2"><article class="card"><h2>${esc(t.it)}</h2>${paragraphs(t.i, lang)}${projectVisual(lang)}</article><article class="card"><h2>${esc(t.pt)}</h2>${paragraphs(t.p, lang)}<div class="route-strip" aria-label="${esc(t.p)}">${routeStages(lang)}</div></article></div><section class="qbox" aria-labelledby="main-question"><h2 id="main-question">${esc(t.qt)}</h2>${paragraphs(t.q, lang)}</section>${branchCards(lang)}${relativesCard(lang)}<div class="g3">${statCard(t.c1r, t.c1n, t.c1d)}${statCard(t.c2r, t.c2n, t.c2d)}${statCard(t.c3r, t.c3n, t.c3d)}</div></section>`, schema);
+}
+
+function projectVisual(lang) {
+  const alt = {
+    de: "Historische Familienforschung mit Karte und Archivdokumenten",
+    ru: "Историческое семейное исследование с картой и архивными документами",
+    en: "Historical family research with a map and archive documents"
+  };
+  return `<figure class="project-visual-frame"><img class="project-visual" src="/assets/family-archive-journey.jpg" alt="${esc(alt[lang] || alt.de)}" loading="lazy"><span class="project-visual-glow" aria-hidden="true"></span></figure>`;
 }
 
 function routeStages(lang) {
