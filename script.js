@@ -99,9 +99,9 @@ function cookieTexts(){
 }
 function footerTexts(){
   var copy={
-    de:{privacy:"Datenschutz",cookies:"Cookie-Einstellungen"},
-    ru:{privacy:"Datenschutz",cookies:"Настройки cookies"},
-    en:{privacy:"Privacy",cookies:"Cookie settings"}
+    de:{privacy:"Datenschutz",cookies:"Cookies / Google"},
+    ru:{privacy:"Datenschutz",cookies:"Cookies / Google"},
+    en:{privacy:"Privacy",cookies:"Cookies / Google"}
   };
   return copy[lang] || copy.de;
 }
@@ -747,6 +747,78 @@ var CONTACT_FORM_TEXT = {
   }
 };
 
+var CONTACT_BOT_TEXT = {
+  de: {
+    title: "Kontakt-Assistent",
+    note: "Der Assistent hilft, die Nachricht kurz vorzubereiten. Es wird nichts automatisch gesendet.",
+    hello: "Hallo! Worum geht es bei Ihrer Nachricht?",
+    input: "Ihre kurze Nachricht",
+    placeholder: "Zum Beispiel: Ich suche Verwandte der Familie Kröker aus Wolhynien...",
+    prepare: "In Formular übernehmen",
+    email: "Per E-Mail senden",
+    telegram: "Telegram öffnen",
+    status: "Die Nachricht wurde in das Kontaktformular übernommen.",
+    topics: {
+      relatives: "Verwandte suchen",
+      dna: "DNA / GEDmatch",
+      archive: "Archivfund",
+      correction: "Korrektur"
+    },
+    replies: {
+      relatives: "Schreiben Sie bitte Familienname, Ort, Zeitraum und welche Verbindung Sie vermuten.",
+      dna: "Schreiben Sie bitte GEDmatch/MyHeritage-Hinweis, Namen und ungefähre Verwandtschaft.",
+      archive: "Schreiben Sie bitte Archiv, Aktenzeichen, Namen, Jahr und Ort.",
+      correction: "Schreiben Sie bitte, welche Stelle auf der Website korrigiert werden soll."
+    }
+  },
+  ru: {
+    title: "Контакт-бот",
+    note: "Помощник подготовит короткое сообщение. Сам он ничего не отправляет.",
+    hello: "Здравствуйте! О чём ваше сообщение?",
+    input: "Ваше короткое сообщение",
+    placeholder: "Например: Я ищу родственников семьи Крёкер из Волыни...",
+    prepare: "Перенести в форму",
+    email: "Отправить по email",
+    telegram: "Открыть Telegram",
+    status: "Сообщение перенесено в контактную форму.",
+    topics: {
+      relatives: "Ищу родственников",
+      dna: "DNA / GEDmatch",
+      archive: "Архивная находка",
+      correction: "Исправление"
+    },
+    replies: {
+      relatives: "Напишите фамилию, место, годы и какую связь вы предполагаете.",
+      dna: "Напишите GEDmatch/MyHeritage совпадение, имена и примерную степень родства.",
+      archive: "Напишите архив, номер дела, имена, год и место.",
+      correction: "Напишите, какое место на сайте нужно исправить."
+    }
+  },
+  en: {
+    title: "Contact Assistant",
+    note: "The assistant helps prepare a short message. Nothing is sent automatically.",
+    hello: "Hello! What is your message about?",
+    input: "Your short message",
+    placeholder: "For example: I am looking for relatives of the Kroeker family from Volhynia...",
+    prepare: "Copy to form",
+    email: "Send by email",
+    telegram: "Open Telegram",
+    status: "The message was copied into the contact form.",
+    topics: {
+      relatives: "Find relatives",
+      dna: "DNA / GEDmatch",
+      archive: "Archive find",
+      correction: "Correction"
+    },
+    replies: {
+      relatives: "Please write the family name, place, time period and the connection you suspect.",
+      dna: "Please write the GEDmatch/MyHeritage clue, names and approximate relationship.",
+      archive: "Please write the archive, file number, names, year and place.",
+      correction: "Please write which part of the website should be corrected."
+    }
+  }
+};
+
 function translateContactForm(){
   var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
   Object.keys(t).forEach(function(id){
@@ -768,6 +840,35 @@ function submitContactForm(e){
   var mailto = "mailto:" + contactAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
   if(status) status.textContent = t["contact-status-sent"];
   window.location.href = mailto;
+}
+
+function contactBotTexts(){
+  return CONTACT_BOT_TEXT[lang] || CONTACT_BOT_TEXT.de;
+}
+function contactBotPick(topic){
+  var t = contactBotTexts();
+  var input = g("contact-bot-input");
+  var log = g("contact-bot-log");
+  var reply = t.replies && t.replies[topic] ? t.replies[topic] : t.hello;
+  if(log){
+    log.innerHTML = '<div class="bot-message bot-message-assistant">' + reply + '</div>';
+  }
+  if(input && !input.value.trim()) input.value = reply + "\n";
+  var relation = g("contact-relation");
+  if(relation && t.topics && t.topics[topic]) relation.value = t.topics[topic];
+}
+function contactBotPrepare(){
+  var t = contactBotTexts();
+  var input = g("contact-bot-input");
+  var message = g("contact-message");
+  var status = g("contact-bot-status");
+  var text = input && input.value.trim() ? input.value.trim() : "";
+  if(message && text) message.value = text;
+  if(status) status.textContent = t.status;
+}
+function contactBotEmail(){
+  contactBotPrepare();
+  submitContactForm({preventDefault:function(){}});
 }
 
 function R(){
