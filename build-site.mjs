@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = "https://kroeker-family.com";
-const CACHE = "20260501-navphoto";
+const CACHE = "20260501-navfix";
 const LANGS = ["de", "ru", "en"];
 const PAGES = ["index", "tree", "history", "timeline", "research", "updates", "resources", "map", "contact", "datenschutz", "impressum"];
 const SECTION = { index: "s0", tree: "s1", history: "s2", timeline: "s3", research: "s4", updates: "s5", resources: "s6", map: "s7", contact: "s8", datenschutz: "privacy", impressum: "impressum" };
@@ -258,7 +258,7 @@ function head(lang, page, extra = "") {
 
 function header(lang, page) {
   const t = T[lang];
-  const nav = [
+  const navItems = [
     ["index", t.n0 || UI[lang].home, "s0"],
     ["tree", t.n1 || "Tree", "s1"],
     ["history", t.n2 || "History", "s2"],
@@ -268,9 +268,10 @@ function header(lang, page) {
     ["resources", t.n6 || "Resources", "s6"],
     ["map", t.n7 || "Map", "s7"],
     ["contact", t.n8 || "Contact", "s8"]
-  ].map(([target, label, sec], i) => `<li class="nav-item"><a id="n${i}" data-sec="${sec}" class="${target === page ? "on" : ""}" href="${relPage(lang, target)}">${esc(label)}</a></li>`).join("");
+  ];
+  const nav = navItems.map(([target, label, sec]) => `<li class="nav-item"><a data-sec="${sec}" class="${target === page ? "on" : ""}" href="${relPage(lang, target)}">${esc(label)}</a></li>`).join("");
   const langs = LANGS.map((l) => `<a class="lang-btn ${l === lang ? "active" : ""}" href="${relPage(l, page)}" hreflang="${l}" aria-label="${l.toUpperCase()}">${l.toUpperCase()}</a>`).join("");
-  return `<a class="skip-link" href="#main-content">${UI[lang].skip}</a><header class="hdr"><a class="brand brand-link" href="${relPage(lang, "index")}" aria-label="${UI[lang].home}"><div class="brand-mark">K</div><span class="brand-arrow" aria-hidden="true">→</span><div class="brand-copy"><div class="hdr-logo" id="hl">${esc(t.hl || "Kröker")}</div></div></a><button class="menu-toggle" type="button" onclick="toggleMainMenu(event)" aria-expanded="false" aria-controls="main-nav" aria-label="${UI[lang].menu}"><span class="menu-icon" aria-hidden="true">☰</span><span id="menu-label">${UI[lang].menu}</span></button><nav class="nav" id="main-nav" aria-label="${UI[lang].nav}"><ul>${nav}</ul></nav><div class="hdr-right"><div class="top-search"><div class="search-wrap"><input class="search-input" id="search-input" type="search" placeholder="${UI[lang].search}" oninput="updateSearchClear(this.value);doSearch(this.value)" aria-label="${UI[lang].search}"><button class="search-clear" id="search-clear" type="button" onclick="clearSearch()" aria-label="Clear search">×</button></div><div id="search-results"></div></div><div class="header-actions"><a class="home-btn" href="${relPage(lang, "index")}" aria-label="${UI[lang].home}"><span class="home-icon" aria-hidden="true">⌂</span></a><div class="header-support" aria-label="Telegram and PayPal"><a class="support-btn telegram" href="https://t.me/eugen30" target="_blank" rel="noopener"><span class="support-mark">TG</span> eugen30</a><a class="support-btn paypal" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener"><span id="paypal-header-label">${esc(t["pp-label"] || "PayPal")}</span></a></div></div><div class="lang-group">${langs}</div></div></header>`;
+  return `<a class="skip-link" href="#main-content">${UI[lang].skip}</a><header class="hdr"><a class="brand brand-link" href="${relPage(lang, "index")}" aria-label="${UI[lang].home}"><div class="brand-mark">K</div><span class="brand-arrow" aria-hidden="true">→</span><div class="brand-copy"><div class="hdr-logo" id="hl">${esc(t.hl || "Kröker")}</div></div></a><button class="menu-toggle" type="button" onclick="toggleMainMenu(event)" aria-expanded="false" aria-controls="main-nav" aria-label="${UI[lang].menu}"><span class="menu-icon" aria-hidden="true">☰</span><span id="menu-label">${UI[lang].menu}</span></button><nav class="nav nav-inline" aria-label="${UI[lang].nav}"><ul>${nav}</ul></nav><nav class="nav nav-dropdown" id="main-nav" aria-label="${UI[lang].nav}"><ul>${nav}</ul></nav><div class="hdr-right"><div class="top-search"><div class="search-wrap"><input class="search-input" id="search-input" type="search" placeholder="${UI[lang].search}" oninput="updateSearchClear(this.value);doSearch(this.value)" aria-label="${UI[lang].search}"><button class="search-clear" id="search-clear" type="button" onclick="clearSearch()" aria-label="Clear search">×</button></div><div id="search-results"></div></div><div class="header-actions"><a class="home-btn" href="${relPage(lang, "index")}" aria-label="${UI[lang].home}"><span class="home-icon" aria-hidden="true">⌂</span></a><div class="header-support" aria-label="Telegram and PayPal"><a class="support-btn telegram" href="https://t.me/eugen30" target="_blank" rel="noopener"><span class="support-mark">TG</span> eugen30</a><a class="support-btn paypal" href="https://www.paypal.com/paypalme/eugenusachew" target="_blank" rel="noopener"><span id="paypal-header-label">${esc(t["pp-label"] || "PayPal")}</span></a></div></div><div class="lang-group">${langs}</div></div></header>`;
 }
 
 function footer(lang) {
