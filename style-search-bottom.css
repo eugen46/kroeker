@@ -1819,6 +1819,18 @@ body,
   top:calc(100% + .35rem)!important;
   width:min(320px,calc(100vw - 4rem))!important;
 }
+.hdr .nav ul{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  align-items:stretch!important;
+  justify-content:stretch!important;
+  gap:.12rem!important;
+  width:100%!important;
+  list-style:none!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
 .main{
   padding-top:1.65rem!important;
 }
