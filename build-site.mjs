@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = "https://kroeker-family.com";
-const CACHE = "20260501-headerfix";
+const CACHE = "20260501-mobilefixed";
 const LANGS = ["de", "ru", "en"];
 const PAGES = ["index", "tree", "history", "timeline", "research", "updates", "resources", "map", "contact", "datenschutz", "impressum"];
 const SECTION = { index: "s0", tree: "s1", history: "s2", timeline: "s3", research: "s4", updates: "s5", resources: "s6", map: "s7", contact: "s8", datenschutz: "privacy", impressum: "impressum" };
@@ -23,7 +23,7 @@ const UI = {
     cookies: "Cookie-Einstellungen",
     footer: "Familie Kröker · Berlin 2026 · Familiengeschichte und Archivforschung",
     living: "Lebende Person: Daten reduziert",
-    photo: "Foto folgt",
+    photo: "",
     showDna: "DNA-Daten anzeigen",
     dnaDisclaimer: "Bitte verwenden Sie DNA-Daten nur für private Familienforschung und schreiben Sie zuerst über die Kontaktform.",
     contactMail: "Nachricht per E-Mail vorbereiten",
@@ -40,7 +40,7 @@ const UI = {
     cookies: "Настройки cookies",
     footer: "Семья Крёкер · Берлин 2026 · история семьи и архивное исследование",
     living: "Живой человек: данные сокращены",
-    photo: "Фото будет добавлено",
+    photo: "",
     showDna: "Показать DNA-данные",
     dnaDisclaimer: "Используйте DNA-данные только для личного семейного исследования и сначала напишите через форму контакта.",
     contactMail: "Подготовить письмо",
@@ -57,7 +57,7 @@ const UI = {
     cookies: "Cookie settings",
     footer: "Kroeker family · Berlin 2026 · family history and archive research",
     living: "Living person: data reduced",
-    photo: "Photo coming later",
+    photo: "",
     showDna: "Show DNA details",
     dnaDisclaimer: "Please use DNA details only for private family research and contact first through the form.",
     contactMail: "Prepare email message",
@@ -384,7 +384,7 @@ function generationTitle(lang, n) {
 
 function person(id, name, alt, dates, place, kind, birthDate = "", deathDate = "") {
   const living = kind === "living";
-  return `<article class="person-card ${living ? "living" : "ancestor"}" id="${id}" itemscope itemtype="https://schema.org/Person"><div class="person-photo photo-placeholder" aria-label="${esc(UI[activePersonLang].photo)}"></div><h3 itemprop="name">${esc(name)}</h3>${alt ? `<meta itemprop="alternateName" content="${esc(alt)}">` : ""}${birthDate ? `<meta itemprop="birthDate" content="${esc(birthDate)}">` : ""}${deathDate ? `<meta itemprop="deathDate" content="${esc(deathDate)}">` : ""}<p class="person-dates">${esc(dates)}</p><p class="person-place" itemprop="birthPlace" itemscope itemtype="https://schema.org/Place"><span itemprop="name">${esc(place)}</span></p>${living ? `<p class="privacy-note">${esc(UI[activePersonLang].living)}</p>` : ""}</article>`;
+  return `<article class="person-card ${living ? "living" : "ancestor"}" id="${id}" itemscope itemtype="https://schema.org/Person"><h3 itemprop="name">${esc(name)}</h3>${alt ? `<meta itemprop="alternateName" content="${esc(alt)}">` : ""}${birthDate ? `<meta itemprop="birthDate" content="${esc(birthDate)}">` : ""}${deathDate ? `<meta itemprop="deathDate" content="${esc(deathDate)}">` : ""}<p class="person-dates">${esc(dates)}</p><p class="person-place" itemprop="birthPlace" itemscope itemtype="https://schema.org/Place"><span itemprop="name">${esc(place)}</span></p>${living ? `<p class="privacy-note">${esc(UI[activePersonLang].living)}</p>` : ""}</article>`;
 }
 
 function personSchema() {
@@ -403,7 +403,7 @@ function personSchema() {
 function renderHistory(lang) {
   const t = T[lang];
   const sections = [["h1t", "h1"], ["h2t", "h2"], ["h3t", "h3"], ["h3b-t", "h3b"], ["h4t", "h4"], ["h5t", "h5"]];
-  return layout(lang, "history", `<section class="sec" id="s2"><h1 class="sec-title">${esc(t.s2)}</h1>${sections.map(([title, body]) => `<article class="card"><h2>${esc(t[title])}</h2>${paragraphs(t[body], lang)}<div class="photo-placeholder" aria-label="${UI[lang].photo}"></div></article>`).join("")}</section>`);
+  return layout(lang, "history", `<section class="sec" id="s2"><h1 class="sec-title">${esc(t.s2)}</h1>${sections.map(([title, body]) => `<article class="card"><h2>${esc(t[title])}</h2>${paragraphs(t[body], lang)}</article>`).join("")}</section>`);
 }
 
 function renderTimeline(lang) {
@@ -484,7 +484,7 @@ function placeTemplate(lang, slug, title) {
 }
 
 function documentTemplate(lang, slug, title) {
-  return layout(lang, "research", `<article class="sec document-template"><h1 class="sec-title">${esc(title)}</h1><section class="card"><h2>${lang === "ru" ? "Скан документа" : lang === "en" ? "Document scan" : "Dokumentenscan"}</h2><div class="photo-placeholder" aria-label="${UI[lang].photo}"></div></section><section class="card"><h2>${lang === "ru" ? "Расшифровка" : lang === "en" ? "Transcription" : "Transkription"}</h2><p>TODO: Originaltext eintragen.</p></section><section class="card"><h2>${lang === "ru" ? "Перевод" : lang === "en" ? "Translation" : "Übersetzung"}</h2><p>TODO: Übersetzung ergänzen.</p></section></article>`);
+  return layout(lang, "research", `<article class="sec document-template"><h1 class="sec-title">${esc(title)}</h1><section class="card"><h2>${lang === "ru" ? "Расшифровка" : lang === "en" ? "Transcription" : "Transkription"}</h2><p>TODO: Originaltext eintragen.</p></section><section class="card"><h2>${lang === "ru" ? "Перевод" : lang === "en" ? "Translation" : "Übersetzung"}</h2><p>TODO: Übersetzung ergänzen.</p></section></article>`);
 }
 
 function writeGeneratedSite() {

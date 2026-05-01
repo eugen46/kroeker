@@ -2895,3 +2895,69 @@ body,
     linear-gradient(#4285f4,#4285f4) 14px 2px/5px 20px no-repeat!important;
   box-shadow:none!important;
 }
+
+/* Remove all "photo coming later" placeholders and lower the menu line a little */
+.photo-placeholder{
+  display:none!important;
+}
+@media(min-width:981px){
+  .menu-toggle{
+    margin-top:.72rem!important;
+  }
+}
+@media(max-width:980px){
+  .menu-toggle{
+    margin-top:.48rem!important;
+  }
+}
+
+/* Mobile header stays fixed while the page scrolls, with a subtle living-glass motion */
+@media(max-width:980px){
+  body{
+    padding-top:178px!important;
+  }
+  .hdr{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:10000!important;
+    background:
+      linear-gradient(120deg,rgba(255,255,255,0),rgba(255,255,255,.09),rgba(255,255,255,0)),
+      linear-gradient(180deg,rgba(75,100,151,.98),rgba(52,74,114,.98))!important;
+    background-size:240% 100%,100% 100%!important;
+    animation:mobileHeaderGlass 6s ease-in-out infinite!important;
+    box-shadow:0 10px 28px rgba(15,45,92,.22),0 1px 0 rgba(255,255,255,.12)!important;
+  }
+  .menu-toggle{
+    animation:menuUnitShimmer 4s ease-in-out infinite, mobileMenuFloat 3.8s ease-in-out infinite!important;
+  }
+  .brand-mark,
+  .hdr-logo,
+  .lang-btn,
+  .home-btn,
+  .support-btn{
+    transition:transform .18s ease,filter .18s ease!important;
+  }
+  .brand-mark:hover,
+  .hdr-logo:hover,
+  .lang-btn:hover,
+  .home-btn:hover,
+  .support-btn:hover{
+    transform:translateY(-1px)!important;
+  }
+}
+@media(max-width:560px){
+  body{
+    padding-top:176px!important;
+  }
+}
+@keyframes mobileHeaderGlass{
+  0%,100%{background-position:115% 0,0 0}
+  50%{background-position:-65% 0,0 0}
+}
+@keyframes mobileMenuFloat{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.08)}
+}
