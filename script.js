@@ -1121,31 +1121,23 @@ setLang(getSavedLang());
 initCookieConsent();
 initRevealAnimations();
 
-/* === Header scroll-shrink (v20260501-header-final) === */
+/* === Header scroll-shrink (v20260501-header-final-3) === */
 (function(){
   function initHdrScroll(){
     var hdr = document.querySelector('.hdr');
     if(!hdr) return;
     var ticking = false;
     function update(){
-      if(window.scrollY > 24){
-        hdr.classList.add('scrolled');
-      } else {
-        hdr.classList.remove('scrolled');
-      }
+      if(window.scrollY > 24){ hdr.classList.add('scrolled'); }
+      else { hdr.classList.remove('scrolled'); }
       ticking = false;
     }
     window.addEventListener('scroll', function(){
-      if(!ticking){
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
+      if(!ticking){ window.requestAnimationFrame(update); ticking = true; }
     }, {passive:true});
     update();
   }
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', initHdrScroll);
-  } else {
-    initHdrScroll();
-  }
+  } else { initHdrScroll(); }
 })();
