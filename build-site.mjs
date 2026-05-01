@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = "https://kroeker-family.com";
-const CACHE = "20260501-googlecookies";
+const CACHE = "20260501-headerfix";
 const LANGS = ["de", "ru", "en"];
 const PAGES = ["index", "tree", "history", "timeline", "research", "updates", "resources", "map", "contact", "datenschutz", "impressum"];
 const SECTION = { index: "s0", tree: "s1", history: "s2", timeline: "s3", research: "s4", updates: "s5", resources: "s6", map: "s7", contact: "s8", datenschutz: "privacy", impressum: "impressum" };
@@ -277,7 +277,7 @@ function header(lang, page) {
 
 function footer(lang) {
   const t = T[lang];
-  return `<footer class="footer"><div class="footer-main">${esc(UI[lang].footer)}</div><div class="footer-links"><a id="footer-privacy-link" href="${relPage(lang, "datenschutz")}">${UI[lang].privacy}</a><a href="${relPage(lang, "impressum")}">${UI[lang].impressum}</a><button id="footer-cookie-settings" type="button" onclick="openCookieSettings()">Cookies / Google</button></div><div class="footer-copy">${t.copyright || ""}</div></footer><button class="google-cookie-toggle" type="button" onclick="openCookieSettings()" aria-label="Cookies / Google"><span aria-hidden="true"></span>Cookies / Google</button>`;
+  return `<footer class="footer"><div class="footer-main">${esc(UI[lang].footer)}</div><div class="footer-links"><a id="footer-privacy-link" href="${relPage(lang, "datenschutz")}">${UI[lang].privacy}</a><a href="${relPage(lang, "impressum")}">${UI[lang].impressum}</a><button id="footer-cookie-settings" type="button" onclick="openCookieSettings()">${UI[lang].cookies}</button></div><div class="footer-copy">${t.copyright || ""}</div></footer><button class="google-cookie-toggle" type="button" onclick="openCookieSettings()" aria-label="Google Analytics / Cookies"><span aria-hidden="true"></span><span class="sr-only">Google Analytics / Cookies</span></button>`;
 }
 
 function layout(lang, page, main, extraHead = "") {

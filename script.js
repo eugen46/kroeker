@@ -99,9 +99,9 @@ function cookieTexts(){
 }
 function footerTexts(){
   var copy={
-    de:{privacy:"Datenschutz",cookies:"Cookies / Google"},
-    ru:{privacy:"Datenschutz",cookies:"Cookies / Google"},
-    en:{privacy:"Privacy",cookies:"Cookies / Google"}
+    de:{privacy:"Datenschutz",cookies:"Cookie-Einstellungen"},
+    ru:{privacy:"Datenschutz",cookies:"Настройки cookies"},
+    en:{privacy:"Privacy",cookies:"Cookie settings"}
   };
   return copy[lang] || copy.de;
 }
