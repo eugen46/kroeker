@@ -1834,6 +1834,21 @@ body,
 .main{
   padding-top:1.65rem!important;
 }
+.g2{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;
+}
+.g2 > .card,
+.g2 > article{
+  min-width:0!important;
+}
+.route-strip{
+  max-width:100%!important;
+  overflow-x:auto!important;
+}
+.route-stage{
+  flex:0 0 auto!important;
+}
 @media(max-width:980px){
   .hdr{
     min-height:126px!important;
