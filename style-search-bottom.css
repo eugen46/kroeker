@@ -1963,3 +1963,22 @@ body, .card{
 }
 
 body{ scroll-padding-top: 90px; }
+
+/* === Fix v4: убираем фантомное пространство сверху на iOS Safari === */
+html, body{
+  margin: 0 !important;
+  padding-top: 0 !important;
+}
+body{
+  padding-top: 0 !important;
+}
+.hdr{
+  margin-top: 0 !important;
+}
+/* На мобильных безопаснее не использовать sticky — даёт глюки на iOS */
+@media (max-width: 760px){
+  .hdr{
+    position: relative !important;
+    top: auto !important;
+  }
+}
