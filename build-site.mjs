@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = "https://kroeker-family.com";
-const CACHE = "20260501-menufix";
+const CACHE = "20260501-header-no-overlap";
 const LANGS = ["de", "ru", "en"];
 const PAGES = ["index", "tree", "history", "timeline", "research", "updates", "resources", "map", "contact", "datenschutz", "impressum"];
 const SECTION = { index: "s0", tree: "s1", history: "s2", timeline: "s3", research: "s4", updates: "s5", resources: "s6", map: "s7", contact: "s8", datenschutz: "privacy", impressum: "impressum" };
@@ -292,7 +292,7 @@ function renderIndex(lang) {
     name: "Kroeker Family History",
     url: SITE,
     inLanguage: ["de", "ru", "en"],
-    about: { "@type": "Person", name: "Eugen Usachew", alternateName: ["Евгений Усачев"], birthDate: "1979", birthPlace: "Schachty", homeLocation: "Berlin" }
+    about: { "@type": "Person", name: "Eugen Usachew", alternateName: ["Евгений Усачев"], birthPlace: "Schachty", homeLocation: "Berlin" }
   })}</script>`;
   return layout(lang, "index", `<section class="sec" id="s0"><h1 class="sec-title">${esc(t.s0)}</h1><section class="seo-intro card" aria-labelledby="seo-intro-title"><h2 id="seo-intro-title">${esc(seo["seo-intro-title"] || META.index[lang][0])}</h2>${paragraphs(seo["seo-intro-p1"], lang)}${paragraphs(seo["seo-intro-p2"], lang)}<nav class="seo-link-list" aria-label="${UI[lang].nav}"><a href="${relPage(lang, "tree")}">${esc(seo["seo-link-tree"] || t.s1)}</a><a href="${relPage(lang, "history")}">${esc(seo["seo-link-history"] || t.s2)}</a><a href="${relPage(lang, "timeline")}">${esc(seo["seo-link-timeline"] || t.s3)}</a><a href="${relPage(lang, "research")}">${esc(seo["seo-link-research"] || t.s4)}</a><a href="${relPage(lang, "contact")}">${esc(seo["seo-link-contact"] || t.s8)}</a></nav></section><div class="g2"><article class="card"><h2>${esc(t.it)}</h2>${paragraphs(t.i, lang)}${projectVisual(lang)}</article><article class="card"><h2>${esc(t.pt)}</h2>${paragraphs(t.p, lang)}<div class="route-strip" aria-label="${esc(t.p)}">${routeStages(lang)}</div></article></div><section class="qbox" aria-labelledby="main-question"><h2 id="main-question">${esc(t.qt)}</h2>${paragraphs(t.q, lang)}</section>${branchCards(lang)}${relativesCard(lang)}<div class="g3">${statCard(t.c1r, t.c1n, t.c1d)}${statCard(t.c2r, t.c2n, t.c2d)}${statCard(t.c3r, t.c3n, t.c3d)}</div></section>`, schema);
 }
@@ -367,7 +367,7 @@ function renderTree(lang) {
       person("person-wassili-unknown", "Wassili", "Василий", "~1949–1950", "Kasachstan", "ancestor")
     ]],
     [generationTitle(lang, 5), [
-      person("person-eugen-usachew", lang === "ru" ? "Евгений Усачев" : "Eugen Usachew", "Eugen Usachew, Евгений Усачев", "1979", "Schachty / Berlin", "living", "1979")
+      person("person-eugen-usachew", lang === "ru" ? "Евгений Усачев" : "Eugen Usachew", "Eugen Usachew, Евгений Усачев", "", "Schachty / Berlin", "living")
     ]]
   ];
   return layout(lang, "tree", `<section class="sec" id="s1"><h1 class="sec-title">${esc(t.s1)}</h1><p class="lead">${esc(META.tree[lang][1])}</p><div class="family-tree">${generations.map(([title, people], i) => `<section class="generation generation-${i + 1}" aria-labelledby="generation-${i + 1}"><h2 id="generation-${i + 1}">${esc(title)}</h2><div class="generation-grid">${people.join("")}</div></section>`).join("")}</div><section class="card"><h2>${esc(UI[lang].noteDecision)}</h2>${paragraphs(t.h2, lang)}</section></section>`, schema);
@@ -384,7 +384,7 @@ function generationTitle(lang, n) {
 
 function person(id, name, alt, dates, place, kind, birthDate = "", deathDate = "") {
   const living = kind === "living";
-  return `<article class="person-card ${living ? "living" : "ancestor"}" id="${id}" itemscope itemtype="https://schema.org/Person"><h3 itemprop="name">${esc(name)}</h3>${alt ? `<meta itemprop="alternateName" content="${esc(alt)}">` : ""}${birthDate ? `<meta itemprop="birthDate" content="${esc(birthDate)}">` : ""}${deathDate ? `<meta itemprop="deathDate" content="${esc(deathDate)}">` : ""}<p class="person-dates">${esc(dates)}</p><p class="person-place" itemprop="birthPlace" itemscope itemtype="https://schema.org/Place"><span itemprop="name">${esc(place)}</span></p>${living ? `<p class="privacy-note">${esc(UI[activePersonLang].living)}</p>` : ""}</article>`;
+  return `<article class="person-card ${living ? "living" : "ancestor"}" id="${id}" itemscope itemtype="https://schema.org/Person"><h3 itemprop="name">${esc(name)}</h3>${alt ? `<meta itemprop="alternateName" content="${esc(alt)}">` : ""}${birthDate ? `<meta itemprop="birthDate" content="${esc(birthDate)}">` : ""}${deathDate ? `<meta itemprop="deathDate" content="${esc(deathDate)}">` : ""}${dates ? `<p class="person-dates">${esc(dates)}</p>` : ""}<p class="person-place" itemprop="birthPlace" itemscope itemtype="https://schema.org/Place"><span itemprop="name">${esc(place)}</span></p>${living ? `<p class="privacy-note">${esc(UI[activePersonLang].living)}</p>` : ""}</article>`;
 }
 
 function personSchema() {
@@ -395,7 +395,7 @@ function personSchema() {
       { "@type": "Person", "@id": `${SITE}/de/tree.html#person-emma-schulz`, name: "Emma Gotlibowna Schulz", alternateName: ["Emma Frelich", "Emma Fröhlich"], birthDate: "1884-11-11", birthPlace: "Wolhynien" },
       { "@type": "Person", "@id": `${SITE}/de/tree.html#person-emma-iwanowna-kroeker`, name: "Emma Iwanowna Kröker", alternateName: ["Emma Iwanowna Kroeker", "Эмма Ивановна Крёкер"], birthDate: "1924-05-05", deathDate: "1987-05-02" },
       { "@type": "Person", "@id": `${SITE}/de/tree.html#person-wladimir-usachew`, name: "Wladimir Usachew", alternateName: ["Vladimir Usachew", "Владимир Усачев"], birthDate: "1950-04-08", deathDate: "2023-08-06", birthPlace: "Sennoje" },
-      { "@type": "Person", "@id": `${SITE}/de/tree.html#person-eugen-usachew`, name: "Eugen Usachew", alternateName: ["Евгений Усачев"], birthDate: "1979", birthPlace: "Schachty" }
+      { "@type": "Person", "@id": `${SITE}/de/tree.html#person-eugen-usachew`, name: "Eugen Usachew", alternateName: ["Евгений Усачев"], birthPlace: "Schachty" }
     ]
   })}</script>`;
 }
@@ -408,7 +408,7 @@ function renderHistory(lang) {
 
 function renderTimeline(lang) {
   const t = T[lang];
-  const items = [["~1820–1860", "tl1"], ["1864", "tl2"], ["1877 / 1884", "tl3"], ["1917", "tl4"], ["1924", "tl5"], ["~1935", "tl6b"], ["1935", "tl6c"], ["1941", "tl6d"], ["1941", "tl6"], ["1943", "tl6e"], ["1944", "tl6f"], ["1950", "tl7"], ["1952", "tl8"], ["1955", "tl9"], ["1979", "tl10"], ["1987", "tl12"], ["1993", "tl11"], ["2019", "tl13"], ["2023", "tl14"], ["2026", "tl15"]];
+  const items = [["~1820–1860", "tl1"], ["1864", "tl2"], ["1877 / 1884", "tl3"], ["1917", "tl4"], ["1924", "tl5"], ["~1935", "tl6b"], ["1935", "tl6c"], ["1941", "tl6d"], ["1941", "tl6"], ["1943", "tl6e"], ["1944", "tl6f"], ["1950", "tl7"], ["1952", "tl8"], ["1955", "tl9"], ["1987", "tl12"], ["1993", "tl11"], ["2019", "tl13"], ["2023", "tl14"], ["2026", "tl15"]];
   return layout(lang, "timeline", `<section class="sec" id="s3"><h1 class="sec-title">${esc(t.s3)}</h1><div class="card"><ol class="tl">${items.map(([year, key]) => `<li class="tli"><time class="tly">${year}</time><div class="tlt">${linkify(esc(t[key] || ""), lang)}</div></li>`).join("")}</ol></div></section>`);
 }
 
