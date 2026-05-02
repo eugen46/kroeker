@@ -1,7 +1,6 @@
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
 var GA_ID = "G-Z6EYVJ4FVW";
-var YM_ID = 109006547;
 var ADS_CLIENT = "ca-pub-2321812148317390";
 var CONSENT_KEY = "kroeker-cookie-consent";
 var GEDMATCH_KIT = ["MZ","563","0855"].join("");
@@ -71,31 +70,26 @@ function loadTracking(){
     window.gtag("config",GA_ID,{anonymize_ip:true});
   });
   loadScriptOnce("google-adsense-live","https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(ADS_CLIENT),{"crossorigin":"anonymous"});
-  loadScriptOnce("yandex-metrika-src","https://mc.yandex.ru/metrika/tag.js?id="+YM_ID,{},function(){
-    window.ym=window.ym||function(){(window.ym.a=window.ym.a||[]).push(arguments)};
-    window.ym.l=1*new Date();
-    window.ym(YM_ID, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-  });
 }
 function cookieTexts(){
   var copy={
     de:{
       title:"Datenschutz & Cookies",
-      text:"Diese Website lädt Google Analytics, Google Ads/AdSense und Yandex Metrica erst nach Ihrer Zustimmung. Wenn Sie ablehnen, werden diese Tracking-Skripte nicht geladen.",
+      text:"Diese Website lädt Google Analytics und Google Ads/AdSense erst nach Ihrer Zustimmung. Wenn Sie ablehnen, werden diese Tracking-Skripte nicht geladen.",
       accept:"Akzeptieren",
       reject:"Ablehnen",
       privacy:"Datenschutz"
     },
     ru:{
       title:"Конфиденциальность и cookies",
-      text:"Google Analytics, Google Ads/AdSense и Яндекс.Метрика загружаются только после вашего согласия. Если отклонить, tracking-скрипты не будут включены.",
+      text:"Google Analytics и Google Ads/AdSense загружаются только после вашего согласия. Если отклонить, tracking-скрипты не будут включены.",
       accept:"Принять",
       reject:"Отклонить",
       privacy:"Datenschutz"
     },
     en:{
       title:"Privacy & cookies",
-      text:"Google Analytics, Google Ads/AdSense and Yandex Metrica load only after your consent. If you reject, these tracking scripts stay disabled.",
+      text:"Google Analytics and Google Ads/AdSense load only after your consent. If you reject, these tracking scripts stay disabled.",
       accept:"Accept",
       reject:"Reject",
       privacy:"Privacy"
