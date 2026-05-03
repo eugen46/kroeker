@@ -1660,8 +1660,7 @@ body, .card{
   box-shadow: 0 4px 14px rgba(40,70,140,.28);
   backdrop-filter: blur(4px);
 }
-.hdr.scrolled .brand-mark,
-.hdr.scrolled .hdr-logo{ transform: scale(.92); }
+
 
 .skip-link{ position:absolute; left:-9999px; }
 .skip-link:focus{ position:static; }
@@ -1686,10 +1685,7 @@ body, .card{
   box-shadow: 0 2px 8px rgba(0,0,0,.10);
   transition: transform .25s ease, background .25s ease;
 }
-.hdr .brand:hover .brand-mark{
-  background: rgba(255,255,255,.26);
-  transform: rotate(-3deg) scale(1.04);
-}
+
 .hdr .brand-copy{ display: inline-flex; align-items: center; }
 .hdr .hdr-logo{
   font-size: 1.18rem; font-weight: 700;
