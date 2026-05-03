@@ -2046,3 +2046,69 @@ body{
   .tree-visual h2{ font-size: 1.14rem; }
   .tree-visual-caption{ font-size: .8rem; }
 }
+
+/* === v20260503-hover-fx: яркие hover-эффекты === */
+
+/* --- "K" — liquid glass блик при наведении --- */
+.hdr .brand-mark{
+  position: relative;
+  overflow: hidden;
+}
+.hdr .brand-mark::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(255,255,255,.55) 50%,
+    rgba(255,255,255,.85) 55%,
+    rgba(255,255,255,.55) 60%,
+    transparent 80%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  transform: skewX(-20deg);
+  transition: left .65s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+.hdr .brand:hover .brand-mark::before{
+  left: 130%;
+}
+/* После блика буква остаётся «глянцевой» — лёгкий внутренний свет */
+.hdr .brand-mark::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,.18), transparent 50%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.hdr .brand:hover .brand-mark::after{ opacity: 1; }
+
+/* Само "K" поверх псевдоэлементов */
+.hdr .brand-mark{ z-index: 0; }
+.hdr .brand-mark > *,
+.hdr .brand-mark{
+  /* буква "K" — это текст самого .brand-mark, обернём через position context */
+}
+.hdr .brand-mark{ isolation: isolate; }
+
+/* --- Меню — ярче подсветка и жирнее подчёркивание --- */
+.hdr .nav-inline .nav-item > a:hover,
+.hdr .nav-inline .nav-item > a.on{
+  background: rgba(255,255,255,.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.10) inset;
+}
+.hdr .nav-inline .nav-item > a::after{
+  height: 3px !important;
+  bottom: 1px !important;
+  box-shadow: 0 0 6px rgba(255,255,255,.6);
+}
