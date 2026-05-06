@@ -1,6 +1,6 @@
 <svg width="100%" viewBox="0 0 760 1180" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif">
 <title>Kröker-Usachew family tree</title>
-<desc>Five generations of the Kröker family from Volhynia to Berlin — modern tree</desc>
+<desc>Five generations of the Kröker family from Volhynia to Berlin</desc>
 
 <style>
   .lbl-gen { font-size: 11px; font-weight: 500; fill: #1a56db; text-anchor: middle; }
@@ -37,15 +37,15 @@
 <line x1="220" y1="115" x2="220" y2="135" class="conn"/>
 <line x1="540" y1="115" x2="540" y2="135" class="conn"/>
 
-<!-- ============== ПОКОЛЕНИЕ 2: ПРАБАБУШКА И ЕЁ БРАТЬЯ + ПРАДЕД ============== -->
+<!-- ============== ПОКОЛЕНИЕ 2: ПРАБАБУШКА И ПРАДЕД ============== -->
 <text x="380" y="153" class="lbl-gen">2ND GENERATION — GREAT-GRANDMOTHER & GREAT-GRANDFATHER</text>
 
-<!-- Фридрих Шульц (двоюр. прадед) -->
+<!-- Фридрих Шульц -->
 <rect x="20" y="170" width="120" height="50" rx="10" class="ancestor-box"/>
 <text x="80" y="192" class="name">Friedrich Schulz</text>
 <text x="80" y="208" class="meta">great-grand-uncle</text>
 
-<!-- Генрих Шульц (двоюр. прадед) -->
+<!-- Генрих Шульц -->
 <rect x="160" y="170" width="120" height="50" rx="10" class="ancestor-box"/>
 <text x="220" y="192" class="name">Heinrich Schulz</text>
 <text x="220" y="208" class="meta">great-grand-uncle</text>
@@ -56,7 +56,7 @@
 <text x="400" y="206" class="meta">Schulz→Kröker</text>
 <text x="400" y="222" class="meta">great-grandmother · * 1877</text>
 
-<!-- + знак между прабабушкой и прадедом -->
+<!-- + знак -->
 <text x="500" y="205" class="plus">+</text>
 
 <!-- Иоганн Крёкер (прадед) -->
@@ -65,14 +65,18 @@
 <text x="600" y="206" class="meta">great-grandfather</text>
 <text x="600" y="222" class="meta">* 15.11.1864 · Volhynia</text>
 
-<!-- Линия от пары "Эмма + Иоганн" вниз к 3 поколению -->
+<!-- Соединение пары "Эмма Готлибовна + Иоганн" -->
+<line x1="480" y1="205" x2="494" y2="205" class="conn"/>
+<line x1="506" y1="205" x2="520" y2="205" class="conn"/>
+
+<!-- Линия от пары вниз к 3 поколению -->
 <line x1="500" y1="232" x2="500" y2="265" class="conn"/>
 <line x1="180" y1="265" x2="660" y2="265" class="conn"/>
 <line x1="180" y1="265" x2="180" y2="285" class="conn"/>
 <line x1="380" y1="265" x2="380" y2="285" class="conn"/>
 <line x1="660" y1="265" x2="660" y2="285" class="conn"/>
 
-<!-- ============== ПОКОЛЕНИЕ 3: БАБУШКА И ЕЁ СЁСТРЫ + БИОЛОГ. ДЕД ============== -->
+<!-- ============== ПОКОЛЕНИЕ 3: БАБУШКА И ЕЁ СЁСТРЫ ============== -->
 <text x="380" y="305" class="lbl-gen">3RD GENERATION — GRANDMOTHER AND HER SISTERS</text>
 
 <!-- Лидия -->
@@ -93,83 +97,76 @@
 <text x="660" y="356" class="meta-grand">Kröker→Usacheva</text>
 <text x="660" y="370" class="meta-grand">grandmother · 1924</text>
 
-<!-- + знак между бабушкой и биолог. дедом -->
-<text x="569" y="358" class="plus">+</text>
+<!-- ============== ПРОМЕЖУТОЧНЫЙ УРОВЕНЬ: ??? ВАСИЛИЙ (биолог. отец, не пара бабушке) ============== -->
+<!-- Линия от Эммы Ивановны вниз к Владимиру (через эту зону) -->
+<line x1="660" y1="382" x2="660" y2="430" class="conn"/>
+<line x1="240" y1="430" x2="660" y2="430" class="conn"/>
+<line x1="240" y1="430" x2="240" y2="465" class="conn"/>
 
-<!-- ??? Василий (биолог. дед) -->
-<rect x="445" y="320" width="120" height="62" rx="10" class="unknown-box"/>
-<text x="505" y="340" class="name">??? Vasiliy</text>
-<text x="505" y="356" class="meta">biol. grandfather</text>
-<text x="505" y="370" class="meta">unknown</text>
+<!-- ??? Василий — отдельный блок справа от линии, СО ЗНАКОМ ВОПРОСА, не парой -->
+<rect x="380" y="408" width="160" height="44" rx="10" class="unknown-box"/>
+<text x="460" y="426" class="name">??? Vasiliy</text>
+<text x="460" y="442" class="meta">Vladimir's biol. father · unknown</text>
 
-<!-- Линия от пары "Эмма Ивановна + Василий" вниз к Владимиру -->
-<line x1="580" y1="384" x2="580" y2="420" class="conn"/>
-<line x1="240" y1="420" x2="580" y2="420" class="conn"/>
-<line x1="240" y1="420" x2="240" y2="445" class="conn"/>
+<!-- Пунктирная стрелка от Василия → к Владимиру (биолог. связь) -->
+<line x1="460" y1="452" x2="460" y2="475" class="conn-dash"/>
+<line x1="240" y1="475" x2="460" y2="475" class="conn-dash"/>
+<line x1="240" y1="475" x2="240" y2="485" class="conn-dash"/>
 
 <!-- ============== ПОКОЛЕНИЕ 4: РОДИТЕЛИ ============== -->
-<text x="380" y="465" class="lbl-gen">4TH GENERATION — PARENTS</text>
+<text x="380" y="505" class="lbl-gen">4TH GENERATION — PARENTS</text>
 
-<!-- Владимир Усачев (отец) -->
-<rect x="155" y="480" width="170" height="68" rx="10" class="person-box"/>
-<text x="240" y="500" class="name">Vladimir Usachev</text>
-<text x="240" y="516" class="meta">father</text>
-<text x="240" y="530" class="meta">* 08.04.1950</text>
-<text x="240" y="544" class="meta">† 06.08.2023</text>
+<!-- Владимир Усачев -->
+<rect x="155" y="520" width="170" height="68" rx="10" class="person-box"/>
+<text x="240" y="540" class="name">Vladimir Usachev</text>
+<text x="240" y="556" class="meta">father</text>
+<text x="240" y="570" class="meta">* 08.04.1950</text>
+<text x="240" y="584" class="meta">† 06.08.2023</text>
 
-<!-- + знак между Владимиром и Любовью -->
-<text x="395" y="520" class="plus">+</text>
+<!-- + знак -->
+<text x="395" y="560" class="plus">+</text>
 
-<!-- Любовь (мать) -->
-<rect x="425" y="480" width="170" height="68" rx="10" class="person-box"/>
-<text x="510" y="500" class="name">Lyubov Alekseevna</text>
-<text x="510" y="516" class="meta">mother</text>
-<text x="510" y="530" class="meta">Kryshka</text>
-<text x="510" y="544" class="meta">* 13.06.1952</text>
+<!-- Любовь Алексеевна -->
+<rect x="425" y="520" width="170" height="68" rx="10" class="person-box"/>
+<text x="510" y="540" class="name">Lyubov Alekseevna</text>
+<text x="510" y="556" class="meta">mother</text>
+<text x="510" y="570" class="meta">Kryshka</text>
+<text x="510" y="584" class="meta">* 13.06.1952</text>
 
-<!-- Усачев Николай (отчим) — маленький блок справа от Владимира -->
-<rect x="155" y="560" width="170" height="32" rx="8" class="unknown-box"/>
-<text x="240" y="578" class="meta">Nikolay Usachev</text>
-<text x="240" y="588" class="small-note">Vladimir's stepfather · surname from him</text>
+<!-- Соединение пары -->
+<line x1="325" y1="560" x2="392" y2="560" class="conn"/>
+<line x1="398" y1="560" x2="425" y2="560" class="conn"/>
+
+<!-- Усачев Николай — отчим (маленький блок снизу слева) -->
+<rect x="155" y="600" width="170" height="32" rx="8" class="unknown-box"/>
+<text x="240" y="618" class="meta">Nikolay Usachev</text>
+<text x="240" y="628" class="small-note">Vladimir's stepfather · surname from him</text>
 
 <!-- Линия от пары "Владимир + Любовь" вниз к Eugen -->
-<line x1="395" y1="548" x2="395" y2="615" class="conn"/>
+<line x1="395" y1="588" x2="395" y2="655" class="conn"/>
 
 <!-- ============== ПОКОЛЕНИЕ 5: Я (Eugen) ============== -->
-<text x="395" y="635" class="lbl-gen">5TH GENERATION — ME</text>
-<rect x="295" y="650" width="200" height="62" rx="10" class="me-box"/>
-<text x="395" y="673" class="name-me">Eugen Usachew</text>
-<text x="395" y="690" class="meta-light">* 25.01.1979 · Shakhty</text>
-<text x="395" y="705" class="meta-light">since 2019 — Berlin</text>
+<text x="395" y="675" class="lbl-gen">5TH GENERATION — ME</text>
+<rect x="295" y="690" width="200" height="62" rx="10" class="me-box"/>
+<text x="395" y="713" class="name-me">Eugen Usachew</text>
+<text x="395" y="730" class="meta-light">* 25.01.1979 · Shakhty</text>
+<text x="395" y="745" class="meta-light">since 2019 — Berlin</text>
 
 <!-- ============== Архивный блок ============== -->
-<rect x="40" y="760" width="680" height="380" rx="12" fill="#f0f6ff" stroke="#bfdbfe" stroke-width="1"/>
-<text x="380" y="788" class="arch-title">MENTIONED IN ARCHIVAL CERTIFICATES</text>
+<rect x="40" y="800" width="680" height="370" rx="12" fill="#f0f6ff" stroke="#bfdbfe" stroke-width="1"/>
+<text x="380" y="828" class="arch-title">MENTIONED IN ARCHIVAL CERTIFICATES</text>
 
-<text x="60" y="824" class="arch-text" font-weight="500">Deported in October 1941 to Sennoje, North Kazakhstan:</text>
-<text x="60" y="852" class="arch-line">• Emma Ivanovna Kröker (1924) — grandmother</text>
-<text x="60" y="876" class="arch-line">• Emma Gottliebovna Schulz→Kröker (1877) — her mother (great-grandmother)</text>
-<text x="60" y="900" class="arch-line">• Zinaida Simentsova (1920) — her sister</text>
-<text x="60" y="924" class="arch-line">• Heinrich Gottliebovich Schulz — her uncle (brother of great-grandmother)</text>
-<text x="60" y="948" class="arch-line">• Friedrich Gottliebovich Schulz — her uncle (brother of great-grandmother)</text>
+<text x="60" y="864" class="arch-text" font-weight="500">Deported in October 1941 to Sennoje, North Kazakhstan:</text>
+<text x="60" y="892" class="arch-line">• Emma Ivanovna Kröker (1924) — grandmother</text>
+<text x="60" y="916" class="arch-line">• Emma Gottliebovna Schulz→Kröker (1877) — her mother (great-grandmother)</text>
+<text x="60" y="940" class="arch-line">• Zinaida Simentsova (1920) — her sister</text>
+<text x="60" y="964" class="arch-line">• Heinrich Gottliebovich Schulz — her uncle (brother of great-grandmother)</text>
+<text x="60" y="988" class="arch-line">• Friedrich Gottliebovich Schulz — her uncle (brother of great-grandmother)</text>
 
-<text x="60" y="990" class="arch-text" font-weight="500">Sources:</text>
-<text x="60" y="1018" class="arch-line">• Archival certificate of the General Prosecutor's Office of Kazakhstan, 27.09.2016 (No. 2-20-16-07254)</text>
-<text x="60" y="1042" class="arch-line">• Archival certificate of the Kharkiv GUMVS (2015)</text>
-<text x="60" y="1066" class="arch-line">• EWZ50 Film B019 (Bundesarchiv Berlin) — frames 1340–1364</text>
-<text x="60" y="1090" class="arch-line">• openlist.wiki (database of victims of political repression in the USSR)</text>
-
-
-<!-- Соединение пары: Эмма Готлибовна + Иоганн -->
-<line x1="480" y1="205" x2="494" y2="205" class="conn"/>
-<line x1="506" y1="205" x2="520" y2="205" class="conn"/>
-
-<!-- Соединение пары: Эмма Ивановна + Василий (биолог. дед) -->
-<line x1="565" y1="358" x2="566" y2="358" class="conn-dash"/>
-<line x1="572" y1="358" x2="595" y2="358" class="conn"/>
-
-<!-- Соединение пары: Владимир + Любовь -->
-<line x1="325" y1="520" x2="392" y2="520" class="conn"/>
-<line x1="398" y1="520" x2="425" y2="520" class="conn"/>
+<text x="60" y="1024" class="arch-text" font-weight="500">Sources:</text>
+<text x="60" y="1052" class="arch-line">• Archival certificate of the General Prosecutor's Office of Kazakhstan, 27.09.2016 (No. 2-20-16-07254)</text>
+<text x="60" y="1076" class="arch-line">• Archival certificate of the Kharkiv GUMVS (2015)</text>
+<text x="60" y="1100" class="arch-line">• EWZ50 Film B019 (Bundesarchiv Berlin) — frames 1340–1364</text>
+<text x="60" y="1124" class="arch-line">• openlist.wiki (database of victims of political repression in the USSR)</text>
 
 </svg>
