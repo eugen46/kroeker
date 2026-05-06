@@ -38,7 +38,7 @@
 <line x1="540" y1="115" x2="540" y2="135" class="conn"/>
 
 <!-- ============== ПОКОЛЕНИЕ 2: ПРАБАБУШКА И ПРАДЕД ============== -->
-<text x="380" y="153" class="lbl-gen">2ND GENERATION — GREAT-GRANDMOTHER & GREAT-GRANDFATHER</text>
+<text x="380" y="153" class="lbl-gen">2ND GENERATION — GREAT-GRANDMOTHER &amp; GREAT-GRANDFATHER</text>
 
 <!-- Фридрих Шульц -->
 <rect x="20" y="170" width="120" height="50" rx="10" class="ancestor-box"/>
