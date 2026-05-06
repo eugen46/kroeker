@@ -1,7 +1,6 @@
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
 var GA_ID = "G-Z6EYVJ4FVW";
-var ADS_CLIENT = "ca-pub-2321812148317390";
 var CONSENT_KEY = "kroeker-cookie-consent";
 var GEDMATCH_KIT = ["MZ","563","0855"].join("");
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
@@ -69,27 +68,26 @@ function loadTracking(){
     window.gtag("js",new Date());
     window.gtag("config",GA_ID,{anonymize_ip:true});
   });
-  loadScriptOnce("google-adsense-live","https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(ADS_CLIENT),{"crossorigin":"anonymous"});
 }
 function cookieTexts(){
   var copy={
     de:{
       title:"Datenschutz & Cookies",
-      text:"Diese Website lädt Google Analytics und Google Ads/AdSense erst nach Ihrer Zustimmung. Wenn Sie ablehnen, werden diese Tracking-Skripte nicht geladen.",
+      text:"Diese Website lädt Google Analytics erst nach Ihrer Zustimmung. Wenn Sie ablehnen, wird das Tracking-Skript nicht geladen.",
       accept:"Akzeptieren",
       reject:"Ablehnen",
       privacy:"Datenschutz"
     },
     ru:{
       title:"Конфиденциальность и cookies",
-      text:"Google Analytics и Google Ads/AdSense загружаются только после вашего согласия. Если отклонить, tracking-скрипты не будут включены.",
+      text:"Google Analytics загружается только после вашего согласия. Если отклонить, tracking-скрипт не будет включён.",
       accept:"Принять",
       reject:"Отклонить",
       privacy:"Datenschutz"
     },
     en:{
       title:"Privacy & cookies",
-      text:"Google Analytics and Google Ads/AdSense load only after your consent. If you reject, these tracking scripts stay disabled.",
+      text:"Google Analytics loads only after your consent. If you reject, this tracking script stays disabled.",
       accept:"Accept",
       reject:"Reject",
       privacy:"Privacy"
