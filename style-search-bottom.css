@@ -1644,6 +1644,7 @@ body, .card{
   padding: .55rem 1.1rem;
   margin: .6rem .8rem 1rem .8rem;
   border-radius: 18px;
+  border: 2px solid rgba(29, 95, 216, .55);
   background:
     linear-gradient(120deg, #4a6db5 0%, #5a7fc5 45%, #6890d0 75%, #5a7fc5 100%);
   background-size: 220% 220%;
@@ -1651,24 +1652,26 @@ body, .card{
     hdrFadeIn .55s ease both,
     hdrShift 18s ease-in-out infinite alternate;
   box-shadow:
+    0 0 0 3px rgba(29, 95, 216, .18),
     0 10px 30px rgba(60, 90, 160, .28),
     0 2px 6px rgba(40, 70, 140, .15),
-    inset 0 1px 0 rgba(255, 255, 255, .18);
+    inset 0 1px 0 rgba(255, 255, 255, .22);
   transition: padding .25s ease, box-shadow .25s ease, backdrop-filter .25s ease, margin .25s ease, border-radius .25s ease, top .25s ease;
 }
 @keyframes hdrFadeIn{ from{opacity:0;transform:translateY(-8px);} to{opacity:1;transform:translateY(0);} }
 @keyframes hdrShift{ from{background-position:0% 50%;} to{background-position:100% 50%;} }
 
-/* При прокрутке шапка слегка "прижимается" — но скругления и подсветка остаются */
+/* При прокрутке шапка слегка "прижимается" — но скругления, окантовка и подсветка остаются */
 .hdr.scrolled{
   top: .35rem;
   margin: .35rem .6rem .8rem .6rem;
   padding-top: .32rem;
   padding-bottom: .32rem;
   box-shadow:
+    0 0 0 3px rgba(29, 95, 216, .22),
     0 8px 24px rgba(40, 70, 140, .32),
     0 2px 6px rgba(40, 70, 140, .18),
-    inset 0 1px 0 rgba(255, 255, 255, .2);
+    inset 0 1px 0 rgba(255, 255, 255, .22);
   backdrop-filter: blur(4px);
 }
 
