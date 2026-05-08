@@ -1183,3 +1183,63 @@ initRevealAnimations();
     document.addEventListener('DOMContentLoaded', initReveal);
   } else { initReveal(); }
 })();
+
+/* ===== Тёмная/светлая тема =====
+   Логика:
+   1. При первой загрузке: смотрим localStorage. Если нет — смотрим prefers-color-scheme.
+   2. Применяем data-theme на <html>.
+   3. Кнопка в шапке переключает тему и сохраняет выбор в localStorage.
+   4. Если пользователь не выбирал явно — реагируем на смену темы ОС автоматически. */
+(function(){
+  var STORAGE_KEY = 'kroeker-theme';
+
+  function getStoredTheme(){
+    try { return localStorage.getItem(STORAGE_KEY); } catch(e) { return null; }
+  }
+  function storeTheme(theme){
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch(e) {}
+  }
+  function getSystemTheme(){
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  }
+  function applyTheme(theme){
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }
+
+  /* Применяем сразу — до DOMContentLoaded, чтобы не было "вспышки" светлой темы */
+  var initial = getStoredTheme() || getSystemTheme();
+  applyTheme(initial);
+
+  function initToggle(){
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = (current === 'dark') ? 'light' : 'dark';
+      applyTheme(next);
+      storeTheme(next);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initToggle);
+  } else { initToggle(); }
+
+  /* Реагируем на смену темы ОС — но только если пользователь сам не выбирал */
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) {
+      mq.addEventListener('change', function(e){
+        if (!getStoredTheme()) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    }
+  }
+})();

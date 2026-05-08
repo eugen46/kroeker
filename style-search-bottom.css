@@ -480,12 +480,44 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   --radius:16px;
   --radius-sm:10px;
   --shadow:0 1px 2px rgba(15,45,92,.06),0 12px 30px rgba(15,45,92,.08);
-  --shadow-md:0 8px 28px rgba(15,45,92,.12),0 2px 8px rgba(15,45,92,.08)
+  --shadow-md:0 8px 28px rgba(15,45,92,.12),0 2px 8px rgba(15,45,92,.08);
+  /* Семантические переменные для тёмной темы */
+  --surface:#ffffff;          /* фон карточек */
+  --surface-2:#f3f8ff;        /* фон вложенных блоков (qbox) */
+  --text-strong:#102b55;      /* основной текст */
+  --text-soft:#486a9d;        /* приглушённый текст (muted) */
+  --link:#1d5fd8;             /* ссылки */
+  --body-gradient: linear-gradient(180deg,#edf5ff 0%,#f9fcff 46%,#eef5ff 100%);
 }
+
+/* === ТЁМНАЯ ТЕМА === */
+[data-theme="dark"]{
+  --bg:#0a1428;
+  --white:#1a2640;             /* "белый" фон карточек теперь тёмно-синий */
+  --navy:#e8eef9;              /* "navy" текст теперь светлый */
+  --blue:#5b8ff0;              /* акценты слегка ярче */
+  --blue2:#7aa5f5;
+  --blue3:#a9c8ff;
+  --blue4:#3a5582;             /* линии в древе */
+  --blue5:#1f3358;             /* фон бейджей */
+  --blue6:#16243e;             /* очень тёмный фон вложенных блоков */
+  --muted:#a4b5d1;             /* приглушённый текст */
+  --border:#2a3f6b;            /* границы */
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.4);
+  --shadow-md:0 8px 28px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);
+  --surface:#1a2640;
+  --surface-2:#16243e;
+  --text-strong:#e8eef9;
+  --text-soft:#a4b5d1;
+  --link:#7aa5f5;
+  --body-gradient: linear-gradient(180deg,#0a1428 0%,#0e1a35 46%,#0a1428 100%);
+}
+
 body{
-  background:linear-gradient(180deg,#edf5ff 0,#f9fcff 46%,#eef5ff 100%);
+  background:var(--body-gradient);
   text-rendering:optimizeLegibility;
-  -webkit-font-smoothing:antialiased
+  -webkit-font-smoothing:antialiased;
+  transition: background .3s ease, color .3s ease;
 }
 
 
@@ -585,7 +617,7 @@ body{
 
 /* Modern refresh v2: more visible, still CSS only */
 body{
-  background:linear-gradient(180deg,#eaf3ff 0,#f8fbff 32%,#eef6ff 100%)!important
+  background:var(--body-gradient)!important
 }
 .main{
   max-width:1120px;
@@ -611,8 +643,8 @@ body{
 .card{
   border-radius:20px!important;
   padding:1.55rem 1.75rem!important;
-  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%)!important;
-  border:1px solid rgba(143,182,255,.75)!important;
+  background:var(--surface)!important;
+  border:1px solid var(--border)!important;
   box-shadow:0 14px 38px rgba(20,55,110,.1)!important
 }
 .card h3{
@@ -620,8 +652,8 @@ body{
   padding-bottom:.6rem!important
 }
 .seo-intro.card,.seo-relatives.card{
-  background:linear-gradient(135deg,#ffffff 0%,#eef6ff 100%)!important;
-  border-color:#9fc2ff!important
+  background:var(--surface)!important;
+  border-color:var(--border)!important
 }
 .seo-link-list a,.res-btn,.contact-submit{
   border-radius:12px!important;
@@ -676,7 +708,7 @@ body{
 
 /* Route scheme and background tuning */
 body{
-  background:linear-gradient(180deg,#e1ecfb 0,#f2f7ff 34%,#e8f1fc 100%)!important
+  background:var(--body-gradient)!important
 }
 svg[aria-labelledby="map-route-title map-route-desc"]{
   width:92%!important;
@@ -2238,4 +2270,196 @@ body{
 }
 .upd-item {
   padding-left: 0;
+}
+
+/* ============================================================
+ * ЭТАП 2: Тёмная тема — точечные переопределения
+ * ============================================================ */
+
+/* Карточки и таблицы — заменяем жёстко-белый фон на тёмный */
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .stbl td,
+[data-theme="dark"] .stbl th,
+[data-theme="dark"] article.card,
+[data-theme="dark"] .seo-relatives,
+[data-theme="dark"] .seo-intro {
+  background: var(--surface) !important;
+  color: var(--text-strong);
+  border-color: var(--border);
+}
+
+/* Внутренние блоки — qbox и т.п. */
+[data-theme="dark"] .qbox,
+[data-theme="dark"] .table-card {
+  background: var(--surface-2) !important;
+  border-color: var(--border);
+}
+
+/* Заголовки и тексты */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] .sec-title,
+[data-theme="dark"] .upd-content h2.upd-date,
+[data-theme="dark"] .nn,
+[data-theme="dark"] .sc-name {
+  color: var(--text-strong);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] td,
+[data-theme="dark"] .upd-text,
+[data-theme="dark"] .sc-dates,
+[data-theme="dark"] .nd {
+  color: var(--text-soft);
+}
+
+[data-theme="dark"] .sec-title {
+  border-bottom-color: var(--border);
+}
+
+/* Ссылки */
+[data-theme="dark"] a {
+  color: var(--link);
+}
+[data-theme="dark"] a:hover {
+  color: var(--blue3);
+}
+
+/* Формы — поля ввода */
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea,
+[data-theme="dark"] .search-input {
+  background: var(--surface-2);
+  color: var(--text-strong);
+  border-color: var(--border);
+}
+[data-theme="dark"] .contact-form input::placeholder,
+[data-theme="dark"] .contact-form textarea::placeholder,
+[data-theme="dark"] .search-input::placeholder {
+  color: var(--text-soft);
+  opacity: .65;
+}
+
+/* Древо (.tnode) */
+[data-theme="dark"] .tnode {
+  background: var(--surface);
+  border-color: var(--border);
+  border-top-color: var(--blue);
+}
+[data-theme="dark"] .tnode.you {
+  background: linear-gradient(135deg, var(--blue6), var(--surface));
+}
+[data-theme="dark"] .tnode.unk {
+  background: var(--surface-2);
+  border-color: var(--blue4);
+}
+
+/* Билеты-даты на updates */
+[data-theme="dark"] .upd-content h2.upd-date {
+  background: linear-gradient(135deg, var(--surface-2) 0%, var(--blue5) 100%);
+  border-color: var(--border);
+  color: var(--text-strong);
+}
+[data-theme="dark"] .upd-content h2.upd-date[data-country="kz"] {
+  background: linear-gradient(135deg, #14352b 0%, #1f5142 100%);
+  border-color: rgba(16, 185, 129, .35);
+  color: #6ee7b7;
+}
+[data-theme="dark"] .upd-content h2.upd-date[data-country="ua"] {
+  background: linear-gradient(135deg, #3a2f10 0%, #5a4515 100%);
+  border-color: rgba(234, 179, 8, .35);
+  color: #fde68a;
+}
+[data-theme="dark"] .upd-content h2.upd-date[data-country="de"] {
+  background: linear-gradient(135deg, #3f1417 0%, #6b1f25 100%);
+  border-color: rgba(244, 63, 94, .35);
+  color: #fda4af;
+}
+[data-theme="dark"] .upd-content h2.upd-date[data-country="ewz"] {
+  background: linear-gradient(135deg, #261c4d 0%, #3a2a6b 100%);
+  border-color: rgba(124, 58, 237, .35);
+  color: #c4b5fd;
+}
+
+/* Бейджи (research статусы) */
+[data-theme="dark"] .badge {
+  background: var(--blue5);
+  color: var(--text-soft);
+}
+[data-theme="dark"] .badge-green {
+  background: rgba(34,197,94,.18);
+  color: #6ee7b7;
+}
+[data-theme="dark"] .badge-red {
+  background: rgba(239,68,68,.18);
+  color: #fda4af;
+}
+
+/* Footer */
+[data-theme="dark"] .footer {
+  background: var(--surface-2);
+  color: var(--text-soft);
+}
+[data-theme="dark"] .footer-main {
+  color: var(--text-strong);
+}
+
+/* Cookie-баннер — настоящий класс .cookie-consent */
+[data-theme="dark"] .cookie-consent {
+  background: rgba(26, 38, 64, .96) !important;
+  color: var(--text-strong) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 18px 52px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.3) !important;
+}
+[data-theme="dark"] .cookie-consent strong,
+[data-theme="dark"] .cookie-copy strong {
+  color: var(--text-strong) !important;
+}
+[data-theme="dark"] .cookie-consent p,
+[data-theme="dark"] .cookie-copy p,
+[data-theme="dark"] .cookie-consent a {
+  color: var(--text-soft) !important;
+}
+[data-theme="dark"] .cookie-consent a {
+  color: var(--link) !important;
+}
+
+/* === Кнопка переключения темы в шапке === */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  margin: 0 .35rem;
+  transition: background .2s ease, transform .2s ease;
+  flex: 0 0 auto;
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, .22);
+  transform: scale(1.05);
+}
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+/* Иконку показываем в зависимости от темы */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Плавный переход между темами */
+body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
