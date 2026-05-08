@@ -1139,3 +1139,47 @@ initRevealAnimations();
     document.addEventListener('DOMContentLoaded', initHdrScroll);
   } else { initHdrScroll(); }
 })();
+
+/* ===== Анимация появления элементов при скролле =====
+   Использует IntersectionObserver. Если браузер не поддерживает —
+   просто все элементы остаются видимыми (без анимации). */
+(function(){
+  function initReveal(){
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.05 });
+
+    /* Авто-добавляем .reveal на основные блоки контента */
+    var SELECTORS = [
+      'main .card',
+      'main .stat-card',
+      'main .upd-item',
+      'main .qbox',
+      'main section.seo-relatives',
+      'main section.seo-branches > .g2 > article',
+      'main .g3 > article'
+    ];
+    SELECTORS.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el, idx){
+        el.classList.add('reveal');
+        /* Лёгкая задержка для каскадного появления */
+        if (idx < 8) {
+          el.style.transitionDelay = (idx * 0.06) + 's';
+        }
+        io.observe(el);
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else { initReveal(); }
+})();
