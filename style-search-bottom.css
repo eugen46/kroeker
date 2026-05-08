@@ -2463,3 +2463,313 @@ body{
 body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
   transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
+
+/* ============================================================
+ * ЭТАП 3: Карта-герой на главной + лонгриды + поиск
+ * ============================================================ */
+
+/* === Карта-герой === */
+.hero-map {
+  display: block;
+  margin: 0 0 1.6rem 0;
+  padding: 1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+.hero-map img,
+.hero-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+}
+.hero-map-caption {
+  margin-top: .6rem;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .hero-map { padding: .5rem; }
+  .hero-map img,
+  .hero-map svg { max-height: 280px; }
+  .hero-map-caption { font-size: .75rem; }
+}
+
+/* === Лонгриды (stories) === */
+.longread {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+}
+.longread .lead {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: var(--text-strong);
+  font-weight: 400;
+  margin-bottom: 1.6rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--blue);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.longread h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin: 2rem 0 .8rem 0;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--border);
+}
+.longread h3 {
+  font-size: 1.2rem;
+  margin: 1.6rem 0 .5rem 0;
+  color: var(--text-strong);
+}
+.longread p {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin: 0 0 1rem 0;
+  color: var(--text-soft);
+}
+.longread .pull-quote {
+  display: block;
+  margin: 1.8rem 0;
+  padding: 1.2rem 1.4rem;
+  background: var(--surface-2);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-strong);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.longread .pull-quote::before {
+  content: "“";
+  display: inline-block;
+  font-size: 2.2rem;
+  line-height: 0;
+  vertical-align: -0.45em;
+  color: var(--blue);
+  margin-right: .3rem;
+}
+.longread .pull-quote-attribution {
+  display: block;
+  font-size: .85rem;
+  font-style: normal;
+  margin-top: .6rem;
+  color: var(--text-soft);
+  text-align: right;
+}
+.longread .pull-quote-attribution::before {
+  content: "— ";
+}
+.longread .longread-meta {
+  font-size: .85rem;
+  color: var(--text-soft);
+  margin-bottom: 1.4rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* === Автоподсказки в поиске === */
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 14px 32px rgba(15, 45, 92, 0.18);
+  max-height: 360px;
+  overflow-y: auto;
+  z-index: 1100;
+  display: none;
+}
+.search-suggestions.is-open {
+  display: block;
+}
+.search-suggestion {
+  display: block;
+  padding: .6rem .85rem;
+  border-bottom: 1px solid rgba(199, 220, 255, 0.4);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-strong);
+  transition: background .12s ease;
+}
+.search-suggestion:last-child { border-bottom: none; }
+.search-suggestion:hover,
+.search-suggestion.is-active {
+  background: var(--blue6);
+}
+.search-suggestion-title {
+  font-size: .92rem;
+  font-weight: 600;
+  margin-bottom: .15rem;
+  color: var(--text-strong);
+}
+.search-suggestion-snippet {
+  font-size: .78rem;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+.search-suggestion-match {
+  background: rgba(234, 179, 8, .25);
+  font-weight: 600;
+  color: var(--text-strong);
+  padding: 0 2px;
+  border-radius: 3px;
+}
+[data-theme="dark"] .search-suggestion-match {
+  background: rgba(234, 179, 8, .22);
+  color: #fde68a;
+}
+
+/* === Улучшение поиска (Этап 3): большой выпадающий контейнер === */
+#search-results {
+  position: absolute !important;
+  top: calc(100% + .5rem) !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  min-width: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(15, 45, 92, 0.20), 0 4px 10px rgba(15, 45, 92, 0.08);
+  padding: .35rem;
+  z-index: 1100;
+}
+[data-theme="dark"] #search-results {
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+#search-results .s-hit {
+  display: block;
+  padding: .65rem .8rem !important;
+  margin: 0 0 .15rem 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+  font-size: .88rem !important;
+  color: var(--text-strong) !important;
+  line-height: 1.45 !important;
+  transition: background .12s ease !important;
+}
+#search-results .s-hit:hover {
+  background: var(--blue6) !important;
+  border-color: transparent !important;
+}
+[data-theme="dark"] #search-results .s-hit:hover {
+  background: rgba(91, 143, 240, 0.12) !important;
+}
+#search-results .s-hit + .s-hit {
+  border-top: 1px solid var(--border);
+  padding-top: .85rem !important;
+  margin-top: .15rem !important;
+  border-radius: 0 !important;
+}
+#search-results .s-hit + .s-hit:hover {
+  border-top-color: transparent;
+}
+#search-results .s-hit mark {
+  background: rgba(234, 179, 8, .35) !important;
+  color: var(--text-strong) !important;
+  padding: 0 2px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+[data-theme="dark"] #search-results .s-hit mark {
+  background: rgba(234, 179, 8, .25) !important;
+  color: #fde68a !important;
+}
+/* На мобилке выпадающий поиск — на всю ширину экрана */
+@media (max-width: 720px) {
+  #search-results {
+    position: fixed !important;
+    top: 70px !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    width: auto !important;
+    max-height: 60vh;
+  }
+}
+
+/* В тёмной теме инвертируем цвета карты, чтобы белый стал тёмным */
+[data-theme="dark"] .hero-map img {
+  filter: invert(0.92) hue-rotate(180deg);
+}
+
+/* === Этап 3 fix: компактная мобильная шапка === */
+@media (max-width: 720px) {
+  /* Уменьшаем все элементы шапки чтобы поместились в строку */
+  .hdr {
+    padding: .4rem .55rem;
+    gap: .2rem .35rem !important;
+  }
+  .hdr .brand {
+    flex: 0 0 auto;
+  }
+  .hdr .brand-mark {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1rem !important;
+  }
+  .hdr .hdr-logo {
+    font-size: .92rem !important;
+    padding: .25rem .5rem !important;
+  }
+  .hdr .menu-toggle {
+    padding: .25rem .5rem !important;
+    font-size: .75rem !important;
+    margin: 0 .15rem 0 auto !important;
+    flex: 0 0 auto;
+  }
+  .hdr .menu-toggle .menu-icon {
+    font-size: .8rem;
+  }
+  /* theme-toggle сделаем меньше */
+  .hdr .theme-toggle {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 13px !important;
+    margin: 0 .1rem !important;
+    flex: 0 0 auto;
+  }
+  /* Языковые кнопки компактнее */
+  .hdr .lang-group {
+    gap: .12rem !important;
+    flex: 0 0 auto;
+  }
+  .hdr .lang-btn {
+    padding: .22rem .42rem !important;
+    font-size: .72rem !important;
+    min-width: auto !important;
+  }
+}
+
+/* На очень маленьких экранах (старые телефоны 360px и меньше) — скрыть слово "Меню" */
+@media (max-width: 400px) {
+  .hdr .menu-toggle #menu-label {
+    display: none;
+  }
+  .hdr .menu-toggle {
+    padding: .35rem .45rem !important;
+  }
+  .hdr .hdr-logo {
+    font-size: .85rem !important;
+    padding: .2rem .42rem !important;
+  }
+}
