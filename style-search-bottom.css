@@ -21,7 +21,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
 
 /* HEADER */
 
@@ -108,7 +108,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 .hero-title{
-  font-family:'DM Sans',sans-serif;font-size:2.6rem;color:#fff;font-weight:600;
+  font-family:Inter,sans-serif;font-size:2.6rem;color:#fff;font-weight:600;
   line-height:1.15;margin-bottom:.6rem;position:relative;letter-spacing:0
 }
 .hero-sub{color:rgba(255,255,255,.75);font-size:1rem;margin-bottom:.8rem;position:relative;font-weight:300}
@@ -121,7 +121,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .main{max-width:1060px;margin:0 auto;padding:1.8rem 2rem}
 .sec{display:block}
 .sec-title{
-  font-family:'DM Sans',sans-serif;font-size:1.7rem;color:var(--navy);font-weight:600;
+  font-family:Inter,sans-serif;font-size:1.7rem;color:var(--navy);font-weight:600;
   margin-bottom:1.4rem;padding-bottom:.5rem;
   border-bottom:2px solid var(--blue5);letter-spacing:0
 }
@@ -133,7 +133,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   box-shadow:var(--shadow);border:1px solid var(--border);
 }
 .card h3{
-  font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--navy);
+  font-family:Inter,sans-serif;font-size:1rem;color:var(--navy);
   margin-bottom:.65rem;padding-bottom:.45rem;
   border-bottom:1px solid var(--blue5);font-weight:600
 }
@@ -164,7 +164,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   padding:1.2rem 1.4rem;box-shadow:var(--shadow)
 }
 .stat-card .sc-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
-.stat-card .sc-name{font-family:'DM Sans',sans-serif;font-size:1.05rem;color:var(--navy);font-weight:600;margin-bottom:.25rem}
+.stat-card .sc-name{font-family:Inter,sans-serif;font-size:1.05rem;color:var(--navy);font-weight:600;margin-bottom:.25rem}
 .stat-card .sc-dates{font-size:.82rem;color:var(--muted)}
 
 /* TREE */
@@ -186,7 +186,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .tnode::before{content:'';position:absolute;top:-.5rem;left:50%;transform:translateX(-50%);width:1px;height:.5rem;background:var(--blue4)}
 .tnode.you{background:linear-gradient(135deg,var(--blue6),#fff);border-color:var(--blue);border-top-color:var(--blue2);box-shadow:var(--shadow-md)}
 .tnode.unk{border-style:dashed;border-top-style:dashed;border-color:var(--blue4);background:var(--blue6)}
-.nn{font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--navy);font-weight:600;margin-bottom:.18rem}
+.nn{font-family:Inter,sans-serif;font-size:.85rem;color:var(--navy);font-weight:600;margin-bottom:.18rem}
 .nd{font-size:.69rem;color:var(--muted);line-height:1.4}
 .ntag{display:inline-block;font-size:.63rem;padding:.1rem .42rem;border-radius:10px;margin-top:.22rem;background:var(--blue5);color:var(--blue2);font-weight:500}
 .ntag.utag{background:#f0f9ff;color:#0369a1}
@@ -262,13 +262,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 
 /* SVG */
-.lbl{font-family:'DM Sans',Arial,sans-serif;font-size:13px;fill:#0f2d5c}.lbl-sm{font-family:'DM Sans',Arial,sans-serif;font-size:10px;fill:#4b6a9b}.lbl-wh{font-family:'DM Sans',Arial,sans-serif;font-size:12px;fill:#ffffff}.lbl-yr{font-family:'DM Sans',Arial,sans-serif;font-size:11px;fill:#1a56db;font-weight:bold}.title{font-family:'DM Sans',Arial,sans-serif;font-size:18px;fill:#0f2d5c;font-weight:bold}
+.lbl{font-family:Inter,Arial,sans-serif;font-size:13px;fill:#0f2d5c}.lbl-sm{font-family:Inter,Arial,sans-serif;font-size:10px;fill:#4b6a9b}.lbl-wh{font-family:Inter,Arial,sans-serif;font-size:12px;fill:#ffffff}.lbl-yr{font-family:Inter,Arial,sans-serif;font-size:11px;fill:#1a56db;font-weight:bold}.title{font-family:Inter,Arial,sans-serif;font-size:18px;fill:#0f2d5c;font-weight:bold}
 
-.tt2{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;fill:#0f2d5c}
-.tts{font-family:'DM Sans',sans-serif;font-size:14px;fill:#4b6a9b}
-.ttg{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;fill:#1a56db;text-transform:uppercase;letter-spacing:.08em}
-.ttw{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;fill:#fff}
-.ttwh{font-family:'DM Sans',sans-serif;font-size:14px;fill:#dbeafe}
+.tt2{font-family:Inter,sans-serif;font-size:17px;font-weight:500;fill:#0f2d5c}
+.tts{font-family:Inter,sans-serif;font-size:14px;fill:#4b6a9b}
+.ttg{font-family:Inter,sans-serif;font-size:14px;font-weight:600;fill:#1a56db;text-transform:uppercase;letter-spacing:.08em}
+.ttw{font-family:Inter,sans-serif;font-size:17px;font-weight:600;fill:#fff}
+.ttwh{font-family:Inter,sans-serif;font-size:14px;fill:#dbeafe}
 
 /* SEO page split */
 .sec{display:block}
@@ -911,7 +911,7 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
   padding:0 1rem;
   border-radius:11px;
   border:1px solid #bfdbfe;
-  font-family:'DM Sans',sans-serif;
+  font-family:Inter,sans-serif;
   font-size:.84rem;
   font-weight:800;
   cursor:pointer
@@ -942,7 +942,7 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
   box-shadow:0 12px 28px rgba(20,55,122,.16),inset 0 1px 0 rgba(255,255,255,.85);
   backdrop-filter:blur(14px) saturate(140%);
   -webkit-backdrop-filter:blur(14px) saturate(140%);
-  font-family:'DM Sans',sans-serif;
+  font-family:Inter,sans-serif;
   font-size:.78rem;
   font-weight:850;
   cursor:pointer;
@@ -970,7 +970,7 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
   color:rgba(255,255,255,.68);
   background:transparent;
   border:0;
-  font-family:'DM Sans',sans-serif;
+  font-family:Inter,sans-serif;
   font-size:inherit;
   text-decoration:none;
   font-weight:700;
@@ -1025,7 +1025,7 @@ svg[aria-labelledby="map-route-title map-route-desc"]{
   background:#eff6ff;
   color:#0f2d5c;
   font-weight:800;
-  font-family:'DM Sans',sans-serif;
+  font-family:Inter,sans-serif;
   font-size:.84rem;
   text-decoration:none;
   cursor:pointer
@@ -2519,7 +2519,7 @@ body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
   margin-bottom: 1.6rem;
   padding-left: 1rem;
   border-left: 3px solid var(--blue);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
 }
 .longread h2 {
   font-size: 1.5rem;
@@ -2551,7 +2551,7 @@ body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
   line-height: 1.5;
   font-style: italic;
   color: var(--text-strong);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
 }
 .longread .pull-quote::before {
   content: "“";
@@ -3154,4 +3154,19 @@ body, html { background: linear-gradient(180deg, #eaf3ff 0, #f8fbff 48%, #eef5ff
   background: linear-gradient(180deg, #16243e, #1a2640) !important;
   border-color: #2a3f6b !important;
   color: #e8eef9 !important;
+}
+
+/* === ГЛОБАЛЬНОЕ Inter — самое последнее правило, перебивает всё === */
+html, body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, select, textarea,
+li, dt, dd, td, th, label, figure, figcaption, blockquote, article, section,
+.card, .qbox, .tnode, .stat-card, .sec-title, .sc-name, .sc-label, .sc-dates,
+.route-stage, .route-arrow, .seo-intro, .seo-relatives, .seo-branches,
+.lbl, .tt2, .tts, .ttg, .ttw, .ttwh,
+.preview-header, .preview-header * {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Только для моноширинных элементов — оставляем системный моноширинный */
+code, pre, kbd, samp, tt {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important;
 }
