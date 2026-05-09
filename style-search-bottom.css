@@ -3559,3 +3559,100 @@ a.res-link:hover {
     inset 0 1px 0 rgba(255, 255, 255, .15),
     inset 0 -1px 0 rgba(0, 0, 0, .25) !important;
 }
+
+/* === ЧИСТЫЙ Liquid Glass для шапки (одобрено в превью) === */
+
+/* Лого K и Крёкер — БЕЗ синего фона, чистый текст */
+.preview-header .brand-mark,
+.preview-header .brand-name {
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, .25),
+    0 0 12px rgba(255, 255, 255, .15),
+    0 2px 4px rgba(0, 0, 0, .25) !important;
+  padding: 0 !important;
+  font-weight: 900 !important;
+  letter-spacing: .02em;
+  min-height: auto !important;
+  position: relative;
+  z-index: 1;
+}
+.preview-header .brand-mark::before,
+.preview-header .brand-mark::after,
+.preview-header .brand-name::before,
+.preview-header .brand-name::after {
+  display: none !important;
+  content: none !important;
+}
+.preview-header .brand-mark {
+  font-size: 28px !important;
+  width: auto !important;
+  padding: 0 6px !important;
+}
+.preview-header .brand-name {
+  font-size: 24px !important;
+  padding: 0 4px !important;
+}
+
+/* Кнопки шапки — все стеклянные без заливки */
+.preview-header .telegram,
+.preview-header .donate,
+.preview-header .lang-switch a,
+.preview-header .lang-switch button,
+.preview-header .search-button,
+.preview-header .theme-toggle {
+  background: rgba(255, 255, 255, .08) !important;
+  background-image: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.04) 100%) !important;
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, .25) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    inset 0 -1px 0 rgba(0, 0, 0, .08),
+    0 2px 8px rgba(0, 0, 0, .12) !important;
+  color: white !important;
+}
+
+/* TG — стеклянная капсула с голубым акцентом */
+.preview-header .telegram {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    inset 0 0 0 1px rgba(64, 188, 240, .35),
+    0 2px 12px rgba(40, 168, 233, .25) !important;
+}
+/* PayPal — стеклянная капсула с жёлтым акцентом */
+.preview-header .donate {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    inset 0 0 0 1px rgba(255, 200, 74, .45),
+    0 2px 12px rgba(255, 200, 74, .25) !important;
+  color: #fff5d9 !important;
+}
+
+/* Поле поиска — стеклянное */
+.preview-header .header-search .search-input {
+  background: rgba(255, 255, 255, .06) !important;
+  background-image: linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.02) 100%) !important;
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, .25) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25) !important;
+  color: white !important;
+}
+.preview-header .header-search .search-input::placeholder {
+  color: rgba(255, 255, 255, .55) !important;
+}
+
+/* Активный пункт меню — стеклянная капсула */
+.preview-header .main-nav a.active {
+  background: rgba(255, 255, 255, .12) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25);
+}
