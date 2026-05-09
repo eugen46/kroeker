@@ -3265,3 +3265,151 @@ code, pre, kbd, samp, tt {
   .preview-header .brand-mark { width: 40px !important; }
   .preview-header .brand-name { padding: 0 14px !important; }
 }
+
+/* ============================================================
+ * Убираем старый тёмный фон .hero на главной (новый дизайн)
+ * ============================================================ */
+body[data-section="s0"] .hero,
+.hero {
+  background: transparent !important;
+  background-image: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-align: left !important;
+  overflow: visible !important;
+}
+body[data-section="s0"] .hero::before,
+.hero::before {
+  display: none !important;
+  background: none !important;
+}
+
+/* ============================================================
+ * Ссылки в карточках (особенно на странице ресурсов)
+ * — единый стиль чтобы видно было что это ссылка
+ * ============================================================ */
+.card a[href^="http"],
+.card a[href^="https"],
+.research-table a[href^="http"],
+.stbl a[href^="http"],
+main p a[href^="http"],
+main li a[href^="http"] {
+  color: #2f66df;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(47, 102, 223, .45);
+  transition: color .15s, border-color .15s, background .15s;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+.card a[href^="http"]:hover,
+.card a[href^="https"]:hover,
+.research-table a[href^="http"]:hover,
+.stbl a[href^="http"]:hover,
+main p a[href^="http"]:hover,
+main li a[href^="http"]:hover {
+  color: #1d4ec4;
+  border-bottom-color: #1d4ec4;
+  border-bottom-style: solid;
+}
+/* Внешняя стрелка для ссылок на сторонние сайты */
+.card a[href^="http"]::after,
+.card a[href^="https"]::after {
+  content: " ↗";
+  font-size: .85em;
+  color: rgba(47, 102, 223, .6);
+}
+/* Тёмная тема — ссылки */
+[data-theme="dark"] .card a[href^="http"],
+[data-theme="dark"] .card a[href^="https"] {
+  color: #5b8ff0;
+  border-bottom-color: rgba(91, 143, 240, .4);
+}
+[data-theme="dark"] .card a[href^="http"]:hover {
+  color: #80a8ff;
+  border-bottom-color: #80a8ff;
+}
+
+/* ============================================================
+ * Кнопка-ссылка на странице ресурсов (.res-btn)
+ * — нормальный белый текст на синем фоне
+ * ============================================================ */
+.card a.res-btn,
+a.res-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .4rem !important;
+  margin-top: 1rem !important;
+  padding: .55rem 1.1rem !important;
+  background: #2f66df !important;
+  color: white !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  font-size: .9rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  transition: background .15s, transform .15s !important;
+  box-shadow: 0 4px 12px rgba(47, 102, 223, .25);
+}
+.card a.res-btn::after,
+a.res-btn::after {
+  content: " ↗" !important;
+  color: rgba(255, 255, 255, .8) !important;
+  font-size: .85em !important;
+}
+.card a.res-btn:hover,
+a.res-btn:hover {
+  background: #1d4ec4 !important;
+  border-color: transparent !important;
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .card a.res-btn {
+  background: #3b73f3 !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(59, 115, 243, .35);
+}
+
+/* res-link — для строчного списка "Других ресурсов" */
+.card a.res-link,
+a.res-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: .65rem .85rem !important;
+  background: #f3f8ff !important;
+  color: #2f66df !important;
+  border: 1px solid #d6e5ff !important;
+  border-bottom: 1px solid #d6e5ff !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  font-size: .9rem !important;
+  font-weight: 600 !important;
+  margin: .25rem 0 !important;
+  transition: background .15s, border-color .15s, transform .15s !important;
+}
+.card a.res-link::after,
+a.res-link::after {
+  content: " ↗" !important;
+  margin-left: auto !important;
+  color: rgba(47, 102, 223, .6) !important;
+}
+.card a.res-link:hover,
+a.res-link:hover {
+  background: #e5eeff !important;
+  border-color: #2f66df !important;
+  border-bottom-color: #2f66df !important;
+  transform: translateX(2px);
+}
+[data-theme="dark"] .card a.res-link {
+  background: #16243e !important;
+  color: #5b8ff0 !important;
+  border-color: #2a3f6b !important;
+}
+[data-theme="dark"] .card a.res-link:hover {
+  background: #1e2f4f !important;
+  border-color: #5b8ff0 !important;
+}
+.resource-list {
+  display: grid;
+  gap: .35rem;
+}
