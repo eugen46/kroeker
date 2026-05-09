@@ -2968,3 +2968,190 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 
 /* Внутренний контейнер main — увеличиваем отступ от шапки */
 body > main.main { margin-top: 30px !important; }
+
+/* === Поиск в новой шапке === */
+.preview-header .header-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.preview-header .header-search .search-input {
+  height: 34px;
+  width: 160px;
+  padding: 0 12px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .14);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  transition: width .2s ease, background .2s ease;
+}
+.preview-header .header-search .search-input::placeholder { color: rgba(255, 255, 255, .65); }
+.preview-header .header-search .search-input:focus {
+  width: 220px;
+  background: rgba(255, 255, 255, .22);
+  border-color: rgba(255, 255, 255, .55);
+}
+.preview-header .header-search #search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: auto;
+  width: 320px;
+  z-index: 1100;
+}
+@media (max-width: 720px) {
+  .preview-header .header-search .search-input { width: 130px; }
+  .preview-header .header-search .search-input:focus { width: 160px; }
+  .preview-header .header-search #search-results { width: 280px; right: -40px; }
+}
+
+/* ============================================================
+ * ЕДИНЫЙ СТИЛЬ КАРТОЧЕК на всех страницах
+ * Переопределение базовых .card, .qbox, .seo-intro и т.д.
+ * чтобы они выглядели как новые preview-modern карточки
+ * ============================================================ */
+
+body { color: #122b55; }
+body, html { background: linear-gradient(180deg, #eaf3ff 0, #f8fbff 48%, #eef5ff 100%); }
+
+/* Заголовок страницы (.sec-title) */
+.sec-title {
+  font-size: clamp(22px, 2.6vw, 32px) !important;
+  color: #122b55 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+  margin-bottom: .8rem !important;
+}
+
+/* Базовая карточка */
+.card {
+  background: rgba(255, 255, 255, .86) !important;
+  border: 1px solid #bcd3ff !important;
+  border-radius: 26px !important;
+  box-shadow: 0 18px 52px rgba(31, 59, 105, .16) !important;
+  padding: 32px !important;
+  margin-bottom: 22px !important;
+}
+.card h2, .card h3 {
+  color: #122b55 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+}
+.card p {
+  color: #58709a !important;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.card a { color: #2f66df; }
+
+/* SEO-блоки на главной (если они вернутся) */
+.seo-intro,
+.seo-relatives,
+.seo-branches > div .card {
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid #bcd3ff;
+  border-radius: 26px;
+  box-shadow: 0 18px 52px rgba(31, 59, 105, .16);
+}
+
+/* Главный вопрос */
+.qbox {
+  background: linear-gradient(180deg, #fff8e6, #fff3d2) !important;
+  border: 1px solid #ffd97a !important;
+  border-radius: 26px !important;
+  padding: 32px !important;
+  box-shadow: 0 18px 52px rgba(31, 59, 105, .12) !important;
+  margin-bottom: 22px !important;
+}
+.qbox h2 { color: #6b4e0e !important; }
+.qbox p  { color: #4a3a13 !important; }
+
+/* Стат-карточки */
+.stat-card {
+  background: rgba(255, 255, 255, .86) !important;
+  border: 1px solid #bcd3ff !important;
+  border-radius: 22px !important;
+  box-shadow: 0 12px 32px rgba(31, 59, 105, .12) !important;
+  padding: 22px !important;
+}
+.sc-label {
+  color: #2f66df !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .04em !important;
+  margin-bottom: 6px !important;
+}
+.sc-name { color: #122b55 !important; font-size: 18px !important; font-weight: 850 !important; }
+.sc-dates { color: #58709a !important; font-size: 13px !important; margin-top: 6px !important; }
+
+/* Древо — node */
+.tnode {
+  background: rgba(255, 255, 255, .92) !important;
+  border: 1px solid #bcd3ff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 6px 18px rgba(31, 59, 105, .12) !important;
+}
+.tnode strong { color: #122b55 !important; }
+
+/* Маршрут текстовый */
+.route-strip {
+  background: rgba(255, 255, 255, .9) !important;
+  border: 1px solid #bcd3ff !important;
+  border-radius: 18px !important;
+  padding: 14px !important;
+}
+.route-stage {
+  background: linear-gradient(180deg, #f7fbff, #edf5ff) !important;
+  border: 1px solid #d6e5ff !important;
+  border-radius: 12px !important;
+  color: #122b55 !important;
+  font-weight: 700 !important;
+}
+.route-stage:hover { background: #e8f0ff !important; border-color: #2f66df !important; }
+.route-arrow { color: #2f66df !important; }
+
+/* Тёмная тема — карточки */
+[data-theme="dark"] body,
+[data-theme="dark"] html {
+  background: linear-gradient(180deg, #0a1428 0, #0e1a35 48%, #0a1428 100%) !important;
+  color: #e8eef9 !important;
+}
+[data-theme="dark"] .card,
+[data-theme="dark"] .seo-intro,
+[data-theme="dark"] .seo-relatives,
+[data-theme="dark"] .stat-card {
+  background: rgba(26, 38, 64, .86) !important;
+  border-color: #2a3f6b !important;
+  color: #e8eef9 !important;
+}
+[data-theme="dark"] .card h2,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .sec-title,
+[data-theme="dark"] .sc-name { color: #e8eef9 !important; }
+[data-theme="dark"] .card p,
+[data-theme="dark"] .sc-dates { color: #a4b5d1 !important; }
+[data-theme="dark"] .card a { color: #5b8ff0 !important; }
+[data-theme="dark"] .qbox {
+  background: linear-gradient(180deg, #2d2515, #3d2f1a) !important;
+  border-color: #6b5527 !important;
+}
+[data-theme="dark"] .qbox h2 { color: #ffd97a !important; }
+[data-theme="dark"] .qbox p  { color: #d4c08a !important; }
+[data-theme="dark"] .tnode {
+  background: rgba(26, 38, 64, .92) !important;
+  border-color: #2a3f6b !important;
+}
+[data-theme="dark"] .tnode strong { color: #e8eef9 !important; }
+[data-theme="dark"] .route-strip {
+  background: rgba(26, 38, 64, .92) !important;
+  border-color: #2a3f6b !important;
+}
+[data-theme="dark"] .route-stage {
+  background: linear-gradient(180deg, #16243e, #1a2640) !important;
+  border-color: #2a3f6b !important;
+  color: #e8eef9 !important;
+}

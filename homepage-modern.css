@@ -46,7 +46,7 @@ body[data-section="s0"] .sec-title {
 .hero h1 {
   max-width: 880px;
   margin: 0 0 22px 0;
-  font-size: clamp(28px, 3.2vw, 44px);
+  font-size: clamp(22px, 2.4vw, 30px);
   line-height: 1.05;
   letter-spacing: 0;
   color: #122b55;
@@ -57,7 +57,7 @@ body[data-section="s0"] .sec-title {
 .contact-strip h2,
 .support-strip h2 {
   margin: 0 0 14px 0;
-  font-size: clamp(22px, 2.4vw, 32px);
+  font-size: clamp(18px, 2vw, 24px);
   line-height: 1.15;
   color: #122b55;
 }
@@ -128,29 +128,32 @@ body[data-section="s0"] .sec-title {
 }
 .hero-stats strong { display: block; color: #122b55; font-size: 28px; line-height: 1; }
 
-/* === SECTION GRID === */
-.section-grid {
-  margin-top: 34px;
-  display: grid;
-  grid-template-columns: 330px minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
+/* === SECTION CARD (заголовок ВНУТРИ карточки) === */
+.section-card {
+  margin-top: 26px;
+  padding: 32px;
+  border: 1px solid #bcd3ff;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 18px 52px rgba(31, 59, 105, .16);
 }
-.section-title { position: sticky; top: 120px; padding: 8px 0; }
+.section-card-header { margin-bottom: 22px; }
+.section-card-header .eyebrow { margin-bottom: 6px; }
+.section-card-header h2 { margin: 0; }
 
 /* === TIMELINE === */
-.timeline-card {
-  padding: 20px;
+.timeline-row {
   display: grid;
-  grid-template-columns: repeat(5, minmax(160px, 1fr));
-  gap: 14px;
-  overflow: auto;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
 }
 .timeline-item {
   position: relative;
-  min-height: 170px;
-  padding: 18px;
-  border-radius: 20px;
+  min-height: 140px;
+  padding: 14px 16px;
+  border-radius: 16px;
   background: linear-gradient(180deg, #f7fbff, #edf5ff);
   border: 1px solid #d6e5ff;
 }
@@ -163,11 +166,21 @@ body[data-section="s0"] .sec-title {
   display: block; margin-bottom: 10px;
   color: #2f66df; font-size: 12px; font-weight: 900;
 }
-.timeline-item strong { display: block; margin-bottom: 8px; font-size: 20px; color: #122b55; }
+.timeline-item strong { display: block; margin-bottom: 6px; font-size: 16px; color: #122b55; }
 .timeline-item p { color: #58709a; margin: 0; }
 
 /* === TREE PREVIEW === */
-.tree-preview { padding: 24px; }
+.tree-preview {
+  margin-top: 26px;
+  padding: 32px;
+  border: 1px solid #bcd3ff;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 18px 52px rgba(31, 59, 105, .16);
+}
+.tree-preview-header { margin-bottom: 22px; }
+.tree-preview-header .eyebrow { margin-bottom: 6px; }
+.tree-preview-header h2 { margin: 0; }
 .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 .filters a, .filters button,
 .contact-options a, .contact-options button {
@@ -187,16 +200,18 @@ body[data-section="s0"] .sec-title {
 .family-row { display: grid; grid-template-columns: repeat(4, minmax(170px, 1fr)); gap: 14px; }
 .person {
   position: relative;
-  min-height: 128px;
-  padding: 18px;
-  border-radius: 20px;
+  min-height: 110px;
+  padding: 14px 16px;
+  border-radius: 16px;
   background: white;
   border: 1px solid #d5e4ff;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 900;
   color: #122b55;
   text-decoration: none;
   display: block;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .person::after {
   content: "→"; position: absolute; right: -18px; top: 42%;
@@ -270,7 +285,7 @@ body[data-section="s0"] .sec-title {
 }
 @media (max-width: 720px) {
   .hero-copy { padding: 22px; }
-  .hero h1 { font-size: 22px; line-height: 1.2; max-width: 100%; }
+  .hero h1 { font-size: 20px; line-height: 1.25; max-width: 100%; }
   .lead { font-size: 15px; }
   .hero-actions a { width: 100%; text-align: center; }
   .hero-panel { padding: 14px; }
