@@ -1243,3 +1243,23 @@ initRevealAnimations();
     }
   }
 })();
+
+/* ===== Compact mode для новой шапки на главной ===== */
+(function(){
+  function initCompactHeader(){
+    var header = document.getElementById('preview-header');
+    if (!header) return;
+    var ticking = false;
+    function update(){
+      header.classList.toggle('compact', window.scrollY > 24);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompactHeader);
+  } else { initCompactHeader(); }
+})();
