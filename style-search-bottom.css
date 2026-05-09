@@ -2498,7 +2498,10 @@ body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
 @media (max-width: 600px) {
   .hero-map { padding: .5rem; }
   .hero-map img,
-  .hero-map svg { max-height: 280px; }
+  .hero-map svg {
+    max-height: none;
+    width: 100%;
+  }
   .hero-map-caption { font-size: .75rem; }
 }
 
@@ -2760,16 +2763,75 @@ body, .card, .stat-card, .hdr, .footer, .tnode, .qbox, .stbl td {
   }
 }
 
-/* На очень маленьких экранах (старые телефоны 360px и меньше) — скрыть слово "Меню" */
+/* На очень маленьких экранах — лого ещё компактнее, но подпись Меню остаётся */
 @media (max-width: 400px) {
-  .hdr .menu-toggle #menu-label {
-    display: none;
-  }
-  .hdr .menu-toggle {
-    padding: .35rem .45rem !important;
-  }
   .hdr .hdr-logo {
     font-size: .85rem !important;
     padding: .2rem .42rem !important;
   }
+  .hdr .menu-toggle {
+    padding: .3rem .55rem !important;
+    font-size: .78rem !important;
+  }
+}
+
+/* === Этап 3 fix v2: меню заметнее на мобильных === */
+@media (max-width: 720px) {
+  .hdr .menu-toggle {
+    background: rgba(255, 255, 255, .22) !important;
+    border: 1.5px solid rgba(255, 255, 255, .55) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: .35rem .7rem !important;
+    font-size: .82rem !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+  }
+  .hdr .menu-toggle:hover,
+  .hdr .menu-toggle:active {
+    background: rgba(255, 255, 255, .35) !important;
+  }
+  .hdr .menu-toggle .menu-icon {
+    font-size: .95rem !important;
+  }
+}
+
+/* === Кликабельная карта-герой === */
+.hero-map a {
+  display: block;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.hero-map a:hover {
+  transform: scale(1.01);
+}
+.hero-map a:hover img {
+  filter: brightness(1.02);
+}
+.hero-map a::after {
+  content: "↗";
+  position: absolute;
+  top: .6rem;
+  right: .8rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(29, 95, 216, .92);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+  opacity: .85;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.hero-map a:hover::after {
+  opacity: 1;
+  transform: scale(1.1);
+}
+[data-theme="dark"] .hero-map a::after {
+  background: rgba(91, 143, 240, .95);
 }
