@@ -4315,38 +4315,3 @@ input[type="search"]::placeholder{
 .preview-header.compact{
   background: rgba(28,55,120,0.70) !important;
 }
-
-/* ============================================================
- * LIQUID GLASS v7 — fix немецкого меню в одну строку
- * Дата: 9 мая 2026, версия v=20260509-de-menu-fit
- * AKTUALISIERUNGEN/STAMMBAUM/RESSOURCEN длиннее русских аналогов,
- * меню переносится. Уменьшаем шрифт и отступы для DE.
- * ============================================================ */
-
-/* === Немецкое меню — компактнее === */
-html[lang="de"] .preview-header .main-nav,
-html[lang="de"] .preview-header nav{
-  gap: 3px !important;
-}
-
-html[lang="de"] .preview-header .main-nav a{
-  padding: 6px 6px !important;
-  font-size: 11px !important;
-  letter-spacing: 0 !important;
-  white-space: nowrap !important;
-}
-
-/* На очень узких экранах (<1100px) — ещё чуть меньше */
-@media (max-width: 1180px){
-  html[lang="de"] .preview-header .main-nav a{
-    padding: 5px 5px !important;
-    font-size: 10.5px !important;
-  }
-}
-
-/* На совсем узких (мобилка) разрешаем перенос — это нормально */
-@media (max-width: 760px){
-  html[lang="de"] .preview-header .main-nav{
-    flex-wrap: wrap !important;
-  }
-}
