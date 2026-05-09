@@ -238,7 +238,7 @@ body.home-modern p {
 body.home-modern h1 {
   max-width: 880px;
   margin-bottom: 22px;
-  font-size: clamp(38px, 5vw, 70px);
+  font-size: clamp(28px, 3.2vw, 44px);
   line-height: 1.02;
   letter-spacing: 0;
   color: var(--ink);
@@ -246,7 +246,7 @@ body.home-modern h1 {
 }
 body.home-modern h2 {
   margin-bottom: 14px;
-  font-size: clamp(26px, 3vw, 40px);
+  font-size: clamp(22px, 2.4vw, 32px);
   line-height: 1.1;
   letter-spacing: 0;
   color: var(--ink);
@@ -254,7 +254,7 @@ body.home-modern h2 {
 body.home-modern .lead {
   max-width: 700px;
   color: var(--muted);
-  font-size: 20px;
+  font-size: 17px;
 }
 body.home-modern .hero-actions {
   display: flex;
@@ -331,11 +331,11 @@ body.home-modern .point {
   font-weight: 900;
   box-shadow: 0 8px 20px rgba(31, 59, 105, .12);
 }
-body.home-modern .prussia    { left: 8%;  top: 29%; }
-body.home-modern .volhynia   { left: 37%; top: 33%; }
-body.home-modern .kazakhstan { left: 58%; top: 58%; }
-body.home-modern .schachty   { left: 72%; top: 69%; }
-body.home-modern .berlin     { right: 7%; top: 18%; }
+body.home-modern .prussia    { left: 14%; top: 24%; }
+body.home-modern .volhynia   { left: 40%; top: 40%; }
+body.home-modern .kazakhstan { right: 8%;  top: 28%; }
+body.home-modern .schachty   { left: 52%; top: 70%; }
+body.home-modern .berlin     { left: 4%;  top: 18%; }
 
 body.home-modern .hero-stats {
   display: grid;
@@ -616,9 +616,9 @@ body.home-modern .support-strip {
     scrollbar-width: none;
   }
   .preview-header .header-tools::-webkit-scrollbar { display: none; }
-  body.home-modern .hero-copy { padding: 28px; }
-  body.home-modern h1 { font-size: 32px; line-height: 1.08; }
-  body.home-modern .lead { font-size: 18px; }
+  body.home-modern .hero-copy { padding: 22px; }
+  body.home-modern h1 { font-size: 22px; line-height: 1.2; max-width: 100%; }
+  body.home-modern .lead { font-size: 15px; }
   body.home-modern .hero-actions a { width: 100%; text-align: center; }
   body.home-modern .hero-panel { padding: 14px; }
   body.home-modern .story-card { grid-template-columns: 1fr; }
