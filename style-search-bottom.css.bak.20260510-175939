@@ -5181,7 +5181,23 @@ svg .node-date{
  * ============================================================ */
 
 /* Убираем правила v16 для .preview-header (они переносили поиск внутри шапки) */
-/* v17 mobile-grid override removed by v18 */
+@media (max-width: 1280px){
+  .preview-header{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    flex-wrap: nowrap !important;
+    row-gap: 0 !important;
+  }
+  .preview-header .header-tools{
+    flex-wrap: nowrap !important;
+  }
+  .preview-header .header-tools .header-search{
+    flex: 0 1 auto !important;
+    order: 0 !important;
+    width: auto !important;
+    margin-top: 0 !important;
+  }
+}
 
 /* === Контейнер вынесенного поиска под шапкой === */
 .search-bar-outside{
