@@ -3,18 +3,18 @@
 <desc>Пять поколений семьи Крёкер с Волыни до Берлина</desc>
 
 <style>
-  .lbl-gen { font-size: 11px; font-weight: 500; fill: #1a56db; text-anchor: middle; }
-  .name { font-size: 13px; font-weight: 500; fill: #0f2d5c; text-anchor: middle; }
-  .name-me { font-size: 13px; font-weight: 600; fill: #fff; text-anchor: middle; }
-  .name-grand { font-size: 13px; font-weight: 600; fill: #fff; text-anchor: middle; }
-  .meta { font-size: 11px; fill: #4b6a9b; text-anchor: middle; }
-  .meta-light { font-size: 11px; fill: #dbeafe; text-anchor: middle; }
-  .meta-grand { font-size: 11px; fill: #dbeafe; text-anchor: middle; }
+  .lbl-gen { font-size: 12px; font-weight: 500; fill: #1a56db; text-anchor: middle; }
+  .name { font-size: 15px; font-weight: 500; fill: #0f2d5c; text-anchor: middle; }
+  .name-me { font-size: 15px; font-weight: 600; fill: #fff; text-anchor: middle; }
+  .name-grand { font-size: 15px; font-weight: 600; fill: #fff; text-anchor: middle; }
+  .meta { font-size: 13px; fill: #4b6a9b; text-anchor: middle; }
+  .meta-light { font-size: 13px; fill: #dbeafe; text-anchor: middle; }
+  .meta-grand { font-size: 13px; fill: #dbeafe; text-anchor: middle; }
   .plus { font-size: 16px; font-weight: 600; fill: #0f2d5c; text-anchor: middle; }
-  .small-note { font-size: 10px; fill: #6b7280; text-anchor: middle; font-style: italic; }
-  .arch-title { font-size: 11px; font-weight: 500; fill: #1a56db; text-anchor: middle; }
-  .arch-text { font-size: 12px; fill: #1f2937; }
-  .arch-line { font-size: 11px; fill: #374151; }
+  .small-note { font-size: 12px; fill: #6b7280; text-anchor: middle; font-style: italic; }
+  .arch-title { font-size: 13px; font-weight: 500; fill: #1a56db; text-anchor: middle; }
+  .arch-text { font-size: 14px; fill: #1f2937; }
+  .arch-line { font-size: 13px; fill: #374151; }
   .ancestor-box { fill: #dbeafe; stroke: #1a56db; stroke-width: 0.5; stroke-dasharray: 3,2; }
   .person-box { fill: #bfdbfe; stroke: #1a56db; stroke-width: 1; }
   .grand-box { fill: #1a56db; stroke: #0f2d5c; stroke-width: 2; }
