@@ -5183,34 +5183,3 @@ svg .node-date{
 body.search-moved .preview-header .header-search{
   display: none !important;
 }
-
-/* ============================================================
- * v20 — desktop header layout: tools под меню, прижаты вправо
- * Дата: 10 мая 2026, версия v=20260510-tools-below-nav
- * Только для широких экранов (>1100px), мобилку не трогаем.
- * ============================================================ */
-
-@media (min-width: 1101px){
-  .preview-header{
-    grid-template-columns: auto 1fr !important;
-    grid-template-rows: auto auto !important;
-    grid-template-areas:
-      "brand nav"
-      "brand tools" !important;
-    row-gap: 8px !important;
-    align-items: center !important;
-  }
-  .preview-header .brand{
-    grid-area: brand !important;
-    align-self: center !important;
-  }
-  .preview-header .main-nav{
-    grid-area: nav !important;
-    justify-content: flex-end !important;
-    flex-wrap: wrap !important;
-  }
-  .preview-header .header-tools{
-    grid-area: tools !important;
-    justify-content: flex-end !important;
-  }
-}
