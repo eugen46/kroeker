@@ -1,0 +1,7 @@
+# Backup files
+*.bak
+*.bak.*
+**/*.bak
+**/*.bak.*
+*.backup
+.DS_Store
