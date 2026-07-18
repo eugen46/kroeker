@@ -1023,6 +1023,13 @@ body[data-section="s0"] .sec-title { display: none; }
 .amount-btn:hover { border-color: var(--accent); transform: translateY(-1px); text-decoration: none; }
 .amount-btn .icon { width: 20px; height: 20px; }
 .amount-custom { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.amount-btn.kofi { background: #ff5e5b; border-color: #ff5e5b; color: #fff; }
+.amount-btn.yoomoney { background: #8b3ffd; border-color: #8b3ffd; color: #fff; }
+.contact-action.kofi .contact-action-icon { background: #ffe5e4; color: #d4423f; }
+.contact-action.yoomoney .contact-action-icon { background: #efe4ff; color: #6d28d9; }
+[data-theme="dark"] .contact-action.kofi .contact-action-icon { background: #3c2222; color: #ff8a87; }
+[data-theme="dark"] .contact-action.yoomoney .contact-action-icon { background: #2c2140; color: #b98cff; }
+.nav-social .kofi { background: #ff5e5b; color: #fff; }
 
 /* Иконки в контенте */
 .icon { width: 20px; height: 20px; vertical-align: middle; }
