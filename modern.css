@@ -7,25 +7,25 @@
 
 /* ---------- 1. Токены ---------- */
 :root {
-  --bg: #f6f4ef;
-  --bg-soft: #efece4;
+  --bg: #eff5fa;
+  --bg-soft: #e2edf5;
   --surface: #ffffff;
-  --surface-soft: #fbfaf7;
-  --ink: #21242c;
-  --ink-strong: #14161b;
-  --muted: #676b76;
-  --line: #e4e0d5;
-  --line-strong: #d3cebf;
-  --accent: #b05a1e;
-  --accent-ink: #8f4715;
-  --accent-soft: #f6e8db;
+  --surface-soft: #f6fafd;
+  --ink: #1f2731;
+  --ink-strong: #131a22;
+  --muted: #5f6c7a;
+  --line: #d8e4ee;
+  --line-strong: #c1d3e2;
+  --accent: #2f8fd4;
+  --accent-ink: #1b6ca8;
+  --accent-soft: #dcedfa;
   --accent-contrast: #ffffff;
   --good: #2e7d4f;
   --good-soft: #e2f2e8;
   --bad: #b03030;
   --bad-soft: #f9e4e4;
-  --shadow: 0 1px 2px rgba(33, 30, 21, .05), 0 12px 32px -18px rgba(33, 30, 21, .25);
-  --shadow-pop: 0 24px 60px -24px rgba(33, 30, 21, .35);
+  --shadow: 0 1px 2px rgba(23, 42, 58, .05), 0 12px 32px -18px rgba(23, 42, 58, .25);
+  --shadow-pop: 0 24px 60px -24px rgba(23, 42, 58, .35);
   --radius: 16px;
   --radius-lg: 22px;
   --header-h: 64px;
@@ -36,19 +36,19 @@
   --blue5: var(--accent-soft);
 }
 [data-theme="dark"] {
-  --bg: #15171c;
-  --bg-soft: #1a1d23;
-  --surface: #1e2128;
-  --surface-soft: #23262e;
-  --ink: #e8e6e0;
-  --ink-strong: #f6f5f1;
-  --muted: #9b9da3;
-  --line: #2c2f37;
-  --line-strong: #3a3e48;
-  --accent: #dc8f4d;
-  --accent-ink: #e8a568;
-  --accent-soft: #33261a;
-  --accent-contrast: #1a130c;
+  --bg: #121820;
+  --bg-soft: #161e28;
+  --surface: #1b2530;
+  --surface-soft: #202b37;
+  --ink: #e2e8ee;
+  --ink-strong: #f2f6fa;
+  --muted: #94a3b2;
+  --line: #2a3947;
+  --line-strong: #3a4d5f;
+  --accent: #4da3e0;
+  --accent-ink: #7abbe8;
+  --accent-soft: #1a2c3c;
+  --accent-contrast: #0d1722;
   --good: #66bb8a;
   --good-soft: #1d2f25;
   --bad: #e08585;
@@ -319,7 +319,6 @@ button { font-family: inherit; }
 /* ---------- 4. Мобильная навигация ---------- */
 @media (max-width: 1219px) {
   .menu-toggle { display: block; }
-  .header-tools .lang-switch { display: none; }
   .main-nav {
     position: fixed; top: 0; right: 0; bottom: 0;
     z-index: 150;
@@ -907,6 +906,25 @@ body[data-section="s0"] .sec-title { display: none; }
 .section-card-header, .tree-preview-header { margin-bottom: 20px; }
 .section-card-header h2, .tree-preview-header h2 { margin: 0; }
 
+/* Свёрнутое продолжение длинных секций на главной */
+.section-more { margin-top: 4px; }
+.section-more summary {
+  list-style: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer;
+  color: var(--accent-ink);
+  font-weight: 600; font-size: 14.5px;
+}
+.section-more summary::-webkit-details-marker { display: none; }
+.section-more summary::after {
+  content: "▾";
+  font-size: 12px;
+  transition: transform .2s;
+}
+.section-more[open] summary::after { transform: rotate(180deg); }
+.section-more summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+.section-more > p:first-of-type { margin-top: 14px; }
+
 /* Горизонтальный маршрут на главной */
 .timeline-row {
   display: grid;
@@ -1046,11 +1064,16 @@ body[data-section="s0"] .sec-title { display: none; }
 }
 @media (max-width: 640px) {
   .main { padding: 24px 16px 56px; }
-  .header-bar { padding: 0 14px; gap: 10px; }
+  .header-bar { padding: 0 12px; gap: 8px; }
+  .header-tools { gap: 7px; }
   .brand-sub { display: none; }
+  .lang-switch a { padding: 4px 7px; }
   .hero-stats { grid-template-columns: 1fr 1fr; }
   .hero-actions a { flex: 1 1 100%; justify-content: center; }
   .footer { padding-bottom: 88px; }
+}
+@media (max-width: 359px) {
+  .brand-name { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
