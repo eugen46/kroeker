@@ -191,7 +191,7 @@ function initRevealAnimations(){
         obs.unobserve(entry.target);
       }
     });
-  },{threshold:.14,rootMargin:"0px 0px -5% 0px"});
+  },{threshold:0,rootMargin:"0px 0px -5% 0px"});
   items.forEach(function(el){obs.observe(el);});
 }
 function currentSection(){return document.body.getAttribute("data-section") || "s0";}
