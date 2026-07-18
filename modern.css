@@ -1007,6 +1007,14 @@ body[data-section="s0"] .sec-title { display: none; }
 .contact-options a:hover { border-color: var(--accent); color: var(--accent-ink); text-decoration: none; }
 
 .support-strip-extended ul { margin: 0 0 18px; padding-left: 20px; color: var(--muted); }
+.support-goal {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  background: var(--accent-soft);
+  font-size: 15px;
+}
 .support-strip-extended li { margin-bottom: 5px; }
 .support-amounts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
 .amount-btn {
