@@ -1055,6 +1055,40 @@ body[data-section="s0"] .sec-title { display: none; }
   border-radius: var(--radius);
   background: var(--surface-soft);
 }
+.timeline-item .scene {
+  display: block;
+  width: calc(100% + 36px);
+  margin: -16px -18px 12px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+a.journey-stop { text-decoration: none; transition: transform .18s; }
+a.journey-stop:hover { transform: translateY(-3px); text-decoration: none; }
+a.journey-stop:hover .journey-icon { border-color: var(--accent-ink); box-shadow: 0 6px 18px -6px var(--accent); }
+
+/* «С чего начать» — три шага для нового посетителя */
+.start-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.start-step {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  color: var(--ink);
+  transition: border-color .15s, transform .15s;
+}
+.start-step:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+.start-num {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 700; font-size: 15px;
+}
+.start-step strong { font-family: var(--font-display); font-size: 17px; color: var(--ink-strong); }
+.start-step p { margin: 0; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 720px) { .start-steps { grid-template-columns: 1fr; } }
+
 .timeline-item span {
   display: block; margin-bottom: 8px;
   color: var(--accent-ink);
