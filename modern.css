@@ -107,7 +107,7 @@ button { font-family: inherit; }
 .main {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 36px 22px 72px;
+  padding: 44px 22px 84px;
 }
 
 /* ---------- 3. Шапка ---------- */
@@ -594,7 +594,9 @@ html[lang="en"] .upd-date[data-country="de"]::after { content: "🇩🇪 Germany
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow);
+  transition: transform .18s, border-color .18s;
 }
+.stat-card:hover { transform: translateY(-3px); border-color: var(--accent); }
 .sc-label {
   font-size: 11.5px; font-weight: 700;
   letter-spacing: .08em; text-transform: uppercase;
@@ -815,14 +817,15 @@ body[data-section="s0"] .sec-title { display: none; }
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(380px, .82fr);
-  gap: 24px;
+  gap: 28px;
   align-items: stretch;
-  margin-bottom: 34px;
+  margin-bottom: 40px;
 }
 .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(8px, 2vw, 24px) 0; }
 .hero h1 { margin: 0 0 16px; font-size: clamp(28px, 3.6vw, 44px); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .hero-actions a {
+  transition: transform .15s, background .15s, border-color .15s;
   display: inline-flex; align-items: center;
   min-height: 46px;
   padding: 0 20px;
@@ -831,7 +834,7 @@ body[data-section="s0"] .sec-title { display: none; }
   color: var(--accent-contrast);
   font-weight: 600; font-size: 15px;
 }
-.hero-actions a:hover { background: var(--accent-ink); color: #fff; text-decoration: none; }
+.hero-actions a:hover { background: var(--accent-ink); color: #fff; text-decoration: none; transform: translateY(-2px); }
 .hero-actions .secondary {
   background: var(--surface);
   color: var(--ink);
@@ -878,6 +881,19 @@ body[data-section="s0"] .sec-title { display: none; }
   color: var(--ink-strong);
   font-size: 12px; font-weight: 600;
 }
+a.point { cursor: pointer; transition: transform .15s, border-color .15s, box-shadow .15s; }
+a.point:hover { transform: translateY(-2px) scale(1.04); border-color: var(--accent); box-shadow: 0 8px 20px -8px var(--accent); text-decoration: none; }
+.map-card-link {
+  position: absolute; right: 12px; bottom: 10px; z-index: 3;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 12.5px; font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: transform .15s;
+}
+.map-card-link:hover { transform: translateY(-2px); text-decoration: none; color: var(--accent-contrast); }
 .prussia    { left: 12%; top: 22%; }
 .volhynia   { left: 38%; top: 42%; }
 .kazakhstan { right: 6%; top: 26%; }
@@ -940,6 +956,7 @@ body[data-section="s0"] .sec-title { display: none; }
   font-size: 24px;
   z-index: 1;
 }
+.journey-flag { font-size: 13px; margin-right: 2px; }
 .journey-year {
   margin-top: 4px;
   font-size: 12px; font-weight: 700;
@@ -953,7 +970,7 @@ body[data-section="s0"] .sec-title { display: none; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin: 0 0 34px;
+  margin: 0 0 40px;
 }
 .nav-card {
   display: flex; flex-direction: column; gap: 8px;
@@ -982,8 +999,8 @@ body[data-section="s0"] .sec-title { display: none; }
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
-  margin: 0 0 34px;
-  padding: clamp(22px, 3vw, 30px);
+  margin: 0 0 40px;
+  padding: clamp(24px, 3.4vw, 34px);
   border-radius: var(--radius-lg);
   background: linear-gradient(140deg, var(--accent-ink), var(--accent));
   box-shadow: var(--shadow);
@@ -1009,7 +1026,7 @@ body[data-section="s0"] .sec-title { display: none; }
 }
 
 .section-card, .tree-preview, .support-strip-extended {
-  margin: 0 0 26px;
+  margin: 0 0 40px;
   padding: clamp(22px, 3vw, 34px);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -1049,6 +1066,7 @@ body[data-section="s0"] .sec-title { display: none; }
   scroll-snap-type: x proximity;
 }
 .timeline-item {
+  transition: transform .18s, border-color .18s, box-shadow .18s;
   scroll-snap-align: start;
   padding: 16px 18px;
   border: 1px solid var(--line);
@@ -1096,6 +1114,7 @@ a.journey-stop:hover .journey-icon { border-color: var(--accent-ink); box-shadow
 }
 .timeline-item strong { display: block; font-family: var(--font-display); font-size: 17px; color: var(--ink-strong); margin-bottom: 6px; }
 .timeline-item p { color: var(--muted); font-size: 13.5px; margin: 0; }
+.timeline-item:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
 
 /* Превью древа на главной */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
@@ -1128,7 +1147,7 @@ a.journey-stop:hover .journey-icon { border-color: var(--accent-ink); box-shadow
 
 /* Контакт-полоса и поддержка на главной */
 .contact-strip {
-  margin: 0 0 26px;
+  margin: 0 0 40px;
   padding: clamp(22px, 3vw, 34px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
