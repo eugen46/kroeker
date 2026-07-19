@@ -1263,3 +1263,40 @@ initRevealAnimations();
     document.addEventListener('DOMContentLoaded', initCompactHeader);
   } else { initCompactHeader(); }
 })();
+
+/* ===== Анимированные счётчики статистики на главной ===== */
+(function(){
+  function animate(el){
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
+    var t0 = null, dur = 1300;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(p < 1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+  function init(){
+    var nums = document.querySelectorAll(".stat-num[data-count]");
+    if(!nums.length) return;
+    if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      nums.forEach(function(el){ el.textContent = el.getAttribute("data-count") + (el.getAttribute("data-suffix") || ""); });
+      return;
+    }
+    if(!("IntersectionObserver" in window)){
+      nums.forEach(animate);
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ animate(e.target); obs.unobserve(e.target); }
+      });
+    }, {threshold: 0});
+    nums.forEach(function(el){ obs.observe(el); });
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
