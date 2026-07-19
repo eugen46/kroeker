@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe6f8"/><stop offset="1" stop-color="#f6fafd"/></linearGradient></defs><rect width="320" height="180" fill="url(#sky)"/>
+<circle cx="52" cy="40" r="14" fill="#ffffff" opacity=".85"/>
+<rect x="0" y="132" width="320" height="48" fill="#e8edf3"/>
+<polygon points="196,132 246,132 286,180 156,180" fill="#c1d3e2"/>
+<polygon points="60,180 96,120 132,180" fill="#8fc1e8"/>
+<g stroke="#1b6ca8" stroke-width="6" stroke-linecap="round"><line x1="176" y1="132" x2="196" y2="52"/><line x1="236" y1="132" x2="216" y2="52"/></g>
+<line x1="181" y1="112" x2="231" y2="112" stroke="#1b6ca8" stroke-width="5"/><line x1="187" y1="88" x2="225" y2="88" stroke="#1b6ca8" stroke-width="5"/>
+<circle cx="206" cy="52" r="14" fill="none" stroke="#2f8fd4" stroke-width="6"/><circle cx="206" cy="52" r="3" fill="#2f8fd4"/>
+<rect x="252" y="106" width="40" height="26" fill="#2f8fd4"/><rect x="258" y="112" width="8" height="8" fill="#ffffff"/><rect x="274" y="112" width="8" height="8" fill="#ffffff"/>
+</svg>
