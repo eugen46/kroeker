@@ -1086,7 +1086,7 @@ function initMap(){
   if(mapEl) mapEl.style.display='block';
   var map = L.map('leaflet-map',{scrollWheelZoom:false}).setView([52,25],4);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'&copy; OpenStreetMap',maxZoom:18
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">ODbL</a>',maxZoom:18
   }).addTo(map);
   var pts = [
     {ll:[54.35,18.65], title:'Danzig / Gdańsk', desc:'Westpreußen · Vorfahren ~1820–1864', color:'#0f2d5c'},
