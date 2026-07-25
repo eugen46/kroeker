@@ -83,14 +83,14 @@ function cookieTexts(){
       text:"Google Analytics загружается только после вашего согласия. Если отклонить, tracking-скрипт не будет включён.",
       accept:"Принять",
       reject:"Отклонить",
-      privacy:"Datenschutz"
+      privacy:"Политика конфиденциальности"
     },
     en:{
       title:"Privacy & cookies",
       text:"Google Analytics loads only after your consent. If you reject, this tracking script stays disabled.",
       accept:"Accept",
       reject:"Reject",
-      privacy:"Privacy"
+      privacy:"Privacy Policy"
     }
   };
   return copy[lang] || copy.de;
@@ -98,8 +98,8 @@ function cookieTexts(){
 function footerTexts(){
   var copy={
     de:{privacy:"Datenschutz",cookies:"Cookie-Einstellungen"},
-    ru:{privacy:"Datenschutz",cookies:"Настройки cookies"},
-    en:{privacy:"Privacy",cookies:"Cookie settings"}
+    ru:{privacy:"Политика конфиденциальности",cookies:"Настройки cookies"},
+    en:{privacy:"Privacy Policy",cookies:"Cookie settings"}
   };
   return copy[lang] || copy.de;
 }
@@ -127,6 +127,7 @@ function updateCookieBannerText(){
 function closeCookieBanner(){
   var b=document.getElementById("cookie-consent");
   if(b) b.classList.add("cookie-hidden");
+  document.body.classList.remove("has-cookie-banner");
 }
 function setCookieConsent(value){
   var wasLoaded=!!window.__kroekerTrackingLoaded;
@@ -140,6 +141,7 @@ function openCookieSettings(){
   var b=document.getElementById("cookie-consent");
   if(b){
     b.classList.remove("cookie-hidden");
+    document.body.classList.add("has-cookie-banner");
     updateCookieBannerText();
     return;
   }
@@ -169,6 +171,7 @@ function initCookieConsent(){
   banner.setAttribute("aria-live","polite");
   banner.innerHTML='<div class="cookie-copy"><strong data-cookie-title>'+t.title+'</strong><p data-cookie-text>'+t.text+'</p><a data-cookie-privacy href="'+withLang("datenschutz.html")+'">'+t.privacy+'</a></div><div class="cookie-actions"><button type="button" class="cookie-btn cookie-reject" data-cookie-reject>'+t.reject+'</button><button type="button" class="cookie-btn cookie-accept" data-cookie-accept>'+t.accept+'</button></div>';
   document.body.appendChild(banner);
+  document.body.classList.add("has-cookie-banner");
   banner.querySelector("[data-cookie-accept]").addEventListener("click",function(){setCookieConsent("accepted");});
   banner.querySelector("[data-cookie-reject]").addEventListener("click",function(){setCookieConsent("rejected");});
 }
