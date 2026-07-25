@@ -439,6 +439,7 @@ body.has-cookie-banner { padding-bottom: 64px; }
 .lead { color: var(--muted); font-size: 19px; max-width: 720px; }
 .muted { color: var(--muted); }
 .footnote { color: var(--muted); font-size: 16px; }
+.impressum-contact { color: var(--muted); font-size: 14px; line-height: 1.7; }
 
 .card {
   margin: 0 0 22px;

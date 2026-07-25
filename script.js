@@ -718,7 +718,7 @@ function translateSeoBlock(){
 var CONTACT_FORM_TEXT = {
   de: {
     "contact-form-title": "Nachricht senden",
-    "contact-form-note": "Schreiben Sie kurz, zu welcher Familie, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Beim Absenden wird eine E-Mail an Eugen vorbereitet.",
+    "contact-form-note": "Schreiben Sie kurz, zu welchem Nachnamen, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Beim Absenden wird eine E-Mail an Eugen vorbereitet.",
     "contact-label-name": "Name",
     "contact-label-relation": "Familie / Ort / GEDmatch",
     "contact-label-message": "Nachricht",
@@ -728,7 +728,7 @@ var CONTACT_FORM_TEXT = {
   },
   ru: {
     "contact-form-title": "Отправить сообщение",
-    "contact-form-note": "Напишите коротко, к какой семье, месту или ДНК-совпадению относится сообщение. При отправке откроется письмо на email Евгена.",
+    "contact-form-note": "Напишите коротко, к какой фамилии, месту или ДНК-совпадению относится сообщение. При отправке откроется письмо на email Евгена.",
     "contact-label-name": "Имя",
     "contact-label-relation": "Семья / место / GEDmatch",
     "contact-label-message": "Сообщение",
@@ -738,7 +738,7 @@ var CONTACT_FORM_TEXT = {
   },
   en: {
     "contact-form-title": "Send a message",
-    "contact-form-note": "Write briefly which family, place or DNA match your message is about. When you send it, an email to Eugen is prepared.",
+    "contact-form-note": "Write briefly which surname, place or DNA match your message is about. When you send it, an email to Eugen is prepared.",
     "contact-label-name": "Name",
     "contact-label-relation": "Family / place / GEDmatch",
     "contact-label-message": "Message",
