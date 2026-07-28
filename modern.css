@@ -313,7 +313,7 @@ button { font-family: inherit; }
 .nav-social .telegram { background: #229ED9; color: #fff; }
 .nav-social .donate { background: var(--accent); color: var(--accent-contrast); }
 
-@media (min-width: 1360px) and (max-width: 1499px) {
+@media (min-width: 1360px) {
   .brand-sub { display: none; }
   .nav-links a { font-size: 15px; padding: 8px 6px; }
   .header-search { flex: 0 1 130px; min-width: 105px; }
