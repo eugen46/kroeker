@@ -2,7 +2,6 @@ var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
 var GA_ID = "G-Z6EYVJ4FVW";
 var CONSENT_KEY = "kroeker-cookie-consent";
-var GEDMATCH_KIT = ["MZ","563","0855"].join("");
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
 function getPathLang(){
   try{
@@ -123,11 +122,18 @@ function updateCookieBannerText(){
   if(footerPrivacy) footerPrivacy.textContent=ft.privacy;
   var footerCookies=document.getElementById("footer-cookie-settings");
   if(footerCookies) footerCookies.textContent=ft.cookies;
+  syncCookieBannerHeight();
+}
+function syncCookieBannerHeight(){
+  var b=document.getElementById("cookie-consent");
+  if(!b || b.classList.contains("cookie-hidden")) return;
+  document.documentElement.style.setProperty("--cookie-banner-h", b.offsetHeight + "px");
 }
 function closeCookieBanner(){
   var b=document.getElementById("cookie-consent");
   if(b) b.classList.add("cookie-hidden");
   document.body.classList.remove("has-cookie-banner");
+  document.documentElement.style.removeProperty("--cookie-banner-h");
 }
 function setCookieConsent(value){
   var wasLoaded=!!window.__kroekerTrackingLoaded;
@@ -143,17 +149,10 @@ function openCookieSettings(){
     b.classList.remove("cookie-hidden");
     document.body.classList.add("has-cookie-banner");
     updateCookieBannerText();
+    syncCookieBannerHeight();
     return;
   }
   initCookieConsent();
-}
-function revealGedmatch(btn){
-  var text = "GEDmatch Kit " + GEDMATCH_KIT;
-  if(btn){
-    var small = btn.querySelector("small");
-    if(small) small.textContent = text;
-    btn.setAttribute("aria-label", text);
-  }
 }
 function initCookieConsent(){
   var current=getConsent();
@@ -174,6 +173,8 @@ function initCookieConsent(){
   document.body.classList.add("has-cookie-banner");
   banner.querySelector("[data-cookie-accept]").addEventListener("click",function(){setCookieConsent("accepted");});
   banner.querySelector("[data-cookie-reject]").addEventListener("click",function(){setCookieConsent("rejected");});
+  syncCookieBannerHeight();
+  window.addEventListener("resize",syncCookieBannerHeight);
 }
 function initRevealAnimations(){
   if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -718,33 +719,51 @@ function translateSeoBlock(){
 var CONTACT_FORM_TEXT = {
   de: {
     "contact-form-title": "Nachricht senden",
-    "contact-form-note": "Schreiben Sie kurz, zu welchem Nachnamen, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Beim Absenden wird eine E-Mail an Eugen vorbereitet.",
+    "contact-form-note": "Schreiben Sie kurz, zu welchem Nachnamen, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Am schnellsten erreichen Sie Eugen über Telegram; das Formular bereitet als Alternative eine E-Mail vor.",
     "contact-label-name": "Name",
     "contact-label-relation": "Familie / Ort / GEDmatch",
     "contact-label-message": "Nachricht",
     "contact-submit": "Per E-Mail senden",
+    "contact-telegram": "Über Telegram schreiben",
     "contact-status-ready": "",
-    "contact-status-sent": "Das E-Mail-Fenster wurde geöffnet. Bitte die Nachricht dort absenden."
+    "contact-status-sent": "Das E-Mail-Fenster wurde geöffnet. Bitte die Nachricht dort absenden.",
+    "contact-fallback-note": "Kein E-Mail-Programm geöffnet? Schreiben Sie über Telegram oder kopieren Sie Adresse und Text und senden Sie die Nachricht aus Ihrem Postfach.",
+    "contact-copy-email": "E-Mail-Adresse kopieren",
+    "contact-copy-message": "Nachrichtentext kopieren",
+    "contact-copy-ok": "Kopiert.",
+    "contact-copy-fail": "Kopieren nicht möglich — bitte den Text von Hand markieren."
   },
   ru: {
     "contact-form-title": "Отправить сообщение",
-    "contact-form-note": "Напишите коротко, к какой фамилии, месту или ДНК-совпадению относится сообщение. При отправке откроется письмо на email Евгена.",
+    "contact-form-note": "Напишите коротко, к какой фамилии, месту или ДНК-совпадению относится сообщение. Быстрее всего связаться через Telegram; форма как альтернатива подготовит письмо.",
     "contact-label-name": "Имя",
     "contact-label-relation": "Семья / место / GEDmatch",
     "contact-label-message": "Сообщение",
     "contact-submit": "Отправить на email",
+    "contact-telegram": "Написать в Telegram",
     "contact-status-ready": "",
-    "contact-status-sent": "Окно письма открыто. Нажмите отправку в почтовой программе."
+    "contact-status-sent": "Окно письма открыто. Нажмите отправку в почтовой программе.",
+    "contact-fallback-note": "Почтовая программа не открылась? Напишите в Telegram или скопируйте адрес и текст, чтобы отправить письмо из своей почты.",
+    "contact-copy-email": "Скопировать адрес",
+    "contact-copy-message": "Скопировать текст сообщения",
+    "contact-copy-ok": "Скопировано.",
+    "contact-copy-fail": "Скопировать не удалось — выделите текст вручную."
   },
   en: {
     "contact-form-title": "Send a message",
-    "contact-form-note": "Write briefly which surname, place or DNA match your message is about. When you send it, an email to Eugen is prepared.",
+    "contact-form-note": "Write briefly which surname, place or DNA match your message is about. Telegram is the fastest way to reach Eugen; the form prepares an email as an alternative.",
     "contact-label-name": "Name",
     "contact-label-relation": "Family / place / GEDmatch",
     "contact-label-message": "Message",
     "contact-submit": "Send by email",
+    "contact-telegram": "Write on Telegram",
     "contact-status-ready": "",
-    "contact-status-sent": "The email window was opened. Please send the message from your mail app."
+    "contact-status-sent": "The email window was opened. Please send the message from your mail app.",
+    "contact-fallback-note": "No mail app opened? Write on Telegram, or copy the address and the text and send the message from your own mailbox.",
+    "contact-copy-email": "Copy email address",
+    "contact-copy-message": "Copy message text",
+    "contact-copy-ok": "Copied.",
+    "contact-copy-fail": "Copying failed — please select the text manually."
   }
 };
 
@@ -828,18 +847,61 @@ function translateContactForm(){
   });
 }
 
-function submitContactForm(e){
-  if(e) e.preventDefault();
-  var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
+/* Fallback channel only: Telegram is the primary contact route. */
+function contactEmailAddress(){
+  return ["evusachev30", "gmail.com"].join("@");
+}
+function contactMessageText(){
   var name = (g("contact-name") && g("contact-name").value || "").trim();
   var relation = (g("contact-relation") && g("contact-relation").value || "").trim();
   var message = (g("contact-message") && g("contact-message").value || "").trim();
-  var status = g("contact-status");
-  var text = "Kroeker family website contact\n\nName: " + (name || "-") + "\nFamily / place: " + (relation || "-") + "\nMessage:\n" + (message || "-");
+  return "Kroeker family website contact\n\nName: " + (name || "-") + "\nFamily / place: " + (relation || "-") + "\nMessage:\n" + (message || "-");
+}
+function showContactFallback(){
+  var box = g("contact-fallback");
+  if(!box) return;
+  box.hidden = false;
+  var address = g("contact-email-display");
+  if(address) address.textContent = contactEmailAddress();
+}
+function copyPlainText(text){
+  try{
+    var field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.top = "0";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    var ok = document.execCommand("copy");
+    document.body.removeChild(field);
+    return ok;
+  }catch(err){ return false; }
+}
+function reportContactCopy(ok){
+  var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
+  var status = g("contact-copy-status");
+  if(status) status.textContent = ok ? t["contact-copy-ok"] : t["contact-copy-fail"];
+}
+function copyContactText(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ reportContactCopy(true); }, function(){ reportContactCopy(copyPlainText(text)); });
+    return;
+  }
+  reportContactCopy(copyPlainText(text));
+}
+function copyContactEmail(){ copyContactText(contactEmailAddress()); }
+function copyContactMessage(){ copyContactText(contactMessageText()); }
+
+function submitContactForm(e){
+  if(e) e.preventDefault();
+  var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
   var subject = "Kroeker family website contact";
-  var contactAddress = ["evusachev30", "gmail.com"].join("@");
-  var mailto = "mailto:" + contactAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+  var mailto = "mailto:" + contactEmailAddress() + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(contactMessageText());
+  var status = g("contact-status");
   if(status) status.textContent = t["contact-status-sent"];
+  showContactFallback();
   window.location.href = mailto;
 }
 
@@ -1108,11 +1170,27 @@ function initMap(){
   });
 }
 
+/* Picks the Slavic plural form from "1|2-4|5+" lists, e.g. "год|года|лет". */
+function pluralForm(value, forms){
+  var list = String(forms || "").split("|");
+  if(list.length < 3) return list[0] || "";
+  var tail = Math.abs(value) % 100;
+  var last = tail % 10;
+  if(tail > 10 && tail < 20) return list[2];
+  if(last === 1) return list[0];
+  if(last >= 2 && last <= 4) return list[1];
+  return list[2];
+}
+function applyStatValue(el, value){
+  el.textContent = value + (el.getAttribute("data-suffix") || "");
+  var label = el.parentNode && el.parentNode.querySelector("[data-plural]");
+  if(label) label.textContent = pluralForm(value, label.getAttribute("data-plural"));
+}
+
 function countYears(){
   var el = document.getElementById('cnt-years');
   if(!el) return;
-  var yr = new Date().getFullYear();
-  el.textContent = (yr - 1864).toString();
+  applyStatValue(el, new Date().getFullYear() - 1864);
 }
 countYears();
 if(document.getElementById("leaflet-map")) setTimeout(initMap,300);
@@ -1271,13 +1349,12 @@ initRevealAnimations();
 (function(){
   function animate(el){
     var target = parseInt(el.getAttribute("data-count"), 10) || 0;
-    var suffix = el.getAttribute("data-suffix") || "";
     var t0 = null, dur = 1300;
     function step(ts){
       if(!t0) t0 = ts;
       var p = Math.min((ts - t0) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
+      applyStatValue(el, Math.round(target * eased));
       if(p < 1) window.requestAnimationFrame(step);
     }
     window.requestAnimationFrame(step);
@@ -1286,7 +1363,7 @@ initRevealAnimations();
     var nums = document.querySelectorAll(".stat-num[data-count]");
     if(!nums.length) return;
     if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-      nums.forEach(function(el){ el.textContent = el.getAttribute("data-count") + (el.getAttribute("data-suffix") || ""); });
+      nums.forEach(function(el){ applyStatValue(el, parseInt(el.getAttribute("data-count"), 10) || 0); });
       return;
     }
     if(!("IntersectionObserver" in window)){
