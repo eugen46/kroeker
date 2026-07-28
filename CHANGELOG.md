@@ -1,5 +1,54 @@
 # Changelog
 
+## 2026-07-28 — Cookie banner over the stats band, search placeholder localization
+
+### Cookie banner no longer covers the stats labels
+
+The `--cookie-banner-h` reserve added in the previous entry works, but it only guarantees
+that the *end of the document* is reachable — a fixed bottom bar still covers whatever
+happens to sit at the fold. At 1280 × 800 that was the blue `.stats-band`: the numbers
+(`15+`, `16`, `9`) stayed visible while the labels beneath them were behind the bar.
+
+- The desktop banner now uses the same one-paragraph compaction that was already applied
+  under 560 px: `.cookie-copy` lays its title, text and privacy link out as inline flow
+  instead of a wrapping flex row, and `.cookie-consent` no longer wraps. The full text is
+  unchanged.
+- Measured at 1280 px, the banner height went from **120 px to 58 px (RU)** and
+  **72 px to 49 px (DE/EN)**, which clears the stats labels in all three languages.
+- The `@media (max-width: 560px)` block keeps only what still differs at mobile widths
+  (wrapping, tighter type, full-width buttons); the rules it used to duplicate now live in
+  the base declaration. Mobile heights are unchanged — 131 px (RU), 112 px (DE/EN) at
+  375 × 667 — so the hero CTA guarantee from the previous entry still holds.
+
+Note: at 1024 × 768 and 768 × 1024 the stats band happens to straddle the viewport fold
+(part of it is below the bottom edge with or without the banner), so its last rows are
+still behind the bar until you scroll. That is inherent to a fixed consent bar rather than
+a layout defect: `body.has-cookie-banner` still reserves the exact banner height, so
+nothing is permanently unreachable.
+
+### Search placeholder localization
+
+- `R()` overwrote the pre-rendered placeholders with different, longer strings
+  (`"Suche auf der Website..."`, `"Search the website..."`) and fell back to German via
+  `sp[lang]||sp.de` whenever `lang` could not be resolved — which is how a German
+  `Suche` could end up on a non-German page. The table now holds the same short strings
+  the HTML ships (`Suche...` / `Поиск...` / `Search...`), the German fallback is gone, and
+  `aria-label` is kept in sync with the placeholder.
+- `getSavedLang()` now consults `<html lang>` after the path and `?lang=`, but before
+  `localStorage`. The pages are pre-rendered per language, so a stored choice from an
+  earlier visit must not make the JS-translated fragments contradict the static markup
+  around them.
+
+### Verified in a browser
+
+Headless Chromium, RU/DE/EN at 1440 × 900, 1280 × 800, 1280 × 720 and 375 × 667: no stat
+number or label intersects the banner on load, `--cookie-banner-h` matches the measured
+height exactly, the banner text is not clipped, the document end clears the bar, the band
+is fully clear once scrolled into view, placeholder and `aria-label` are correct per
+language, and no page errors are raised. Reject/accept/reopen and resize between 1280 px
+and 375 px were re-checked: the height republishes on resize and the custom property and
+body padding are cleared once a choice is made.
+
 ## 2026-07-28 — Privacy, contact reliability, Russian grammar, mobile layout
 
 Applied across all three language trees (`de/`, `ru/`, `en/`).

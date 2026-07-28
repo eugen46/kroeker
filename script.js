@@ -15,6 +15,10 @@ function getSavedLang(){
   var qLang = "";
   try{ qLang = new URLSearchParams(window.location.search).get("lang") || ""; }catch(e){}
   if(validLang(qLang)) return qLang;
+  // Pages are pre-rendered per language, so <html lang> beats a stale stored choice —
+  // otherwise the JS-translated bits would contradict the static markup around them.
+  var docLang = document.documentElement.getAttribute("lang") || "";
+  if(validLang(docLang)) return docLang;
   try{
     var saved = localStorage.getItem("kroeker-lang");
     if(validLang(saved)) return saved;
@@ -1018,8 +1022,9 @@ function R(){
   document.querySelectorAll(".r-prog").forEach(function(e){e.innerHTML=t["r-prog"]||"";});
   document.querySelectorAll(".r-deny").forEach(function(e){e.innerHTML=t["r-deny"]||"";});
   document.documentElement.lang = lang;
-  var sp = {"de":"Suche auf der Website...","ru":"\u041f\u043e\u0438\u0441\u043a...","en":"Search the website..."};
-  var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
+  var sp = {"de":"Suche...","ru":"\u041f\u043e\u0438\u0441\u043a...","en":"Search..."};
+  var si = document.getElementById("search-input");
+  if(si && sp[lang]){ si.placeholder = sp[lang]; si.setAttribute("aria-label", sp[lang]); }
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
   var menuLabel = document.getElementById("menu-label");

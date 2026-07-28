@@ -391,8 +391,8 @@ button { font-family: inherit; }
 .cookie-consent {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 180;
   margin: 0;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-  display: flex; flex-wrap: wrap; gap: 10px 16px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-wrap: nowrap; gap: 8px 16px;
   align-items: center; justify-content: center;
   border-top: 1px solid var(--line);
   background: var(--surface);
@@ -404,10 +404,14 @@ button { font-family: inherit; }
 body.has-cookie-banner { padding-bottom: calc(var(--cookie-banner-h, 128px) + 16px); }
 /* The banner already offers both choices, so the floating toggle would only overlap content. */
 body.has-cookie-banner .google-cookie-toggle { display: none; }
-.cookie-copy { flex: 1 1 320px; max-width: 680px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
-.cookie-copy strong { font-size: 14px; }
+/* Title, text and link run as one paragraph: full text in the fewest lines, so the
+   fixed banner covers as little of the page as possible. */
+.cookie-copy { flex: 1 1 320px; min-width: 0; line-height: 1.45; }
+.cookie-copy strong, .cookie-copy p, .cookie-copy a { display: inline; }
+.cookie-copy strong { font-size: 13.5px; }
 .cookie-copy p { margin: 0; color: var(--muted); font-size: 13px; }
-.cookie-copy a { font-size: 13px; white-space: nowrap; }
+.cookie-copy a { font-size: 13px; }
+.cookie-copy p::before, .cookie-copy a::before { content: " "; }
 .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .cookie-btn {
   padding: 7px 14px;
@@ -423,15 +427,13 @@ body.has-cookie-banner .google-cookie-toggle { display: none; }
   /* Kept short so the banner does not sit on top of the hero call-to-action. */
   .cookie-consent {
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 6px 10px;
     padding: 7px 12px calc(7px + env(safe-area-inset-bottom, 0px));
     max-height: 45vh; overflow-y: auto;
   }
-  /* Title, text and link run as one wrapping paragraph: full text, fewest lines. */
-  .cookie-copy { display: block; flex-basis: 100%; line-height: 1.4; }
-  .cookie-copy strong, .cookie-copy p, .cookie-copy a { display: inline; font-size: 12.5px; }
-  .cookie-copy a { white-space: normal; }
-  .cookie-copy p::before, .cookie-copy a::before { content: " "; }
+  .cookie-copy { flex-basis: 100%; line-height: 1.4; }
+  .cookie-copy strong, .cookie-copy p, .cookie-copy a { font-size: 12.5px; }
   .cookie-actions { flex-basis: 100%; }
   .cookie-btn { flex: 1; padding: 7px 10px; font-size: 13px; }
 }
