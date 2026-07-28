@@ -1,6 +1,8 @@
 var lang = "de";
 var pageBySection = {"s0":"index.html","s1":"tree.html","s2":"history.html","s3":"timeline.html","s4":"research.html","s5":"updates.html","s6":"resources.html","s7":"map.html","s8":"contact.html"};
 var GA_ID = "G-Z6EYVJ4FVW";
+/* Внешний endpoint для приёма формы контакта (например, Formspree/Cloudflare Worker). Пусто = автоматическая отправка не настроена, форма показывает альтернативы. */
+var CONTACT_FORM_ENDPOINT = "";
 var CONSENT_KEY = "kroeker-cookie-consent";
 var GEDMATCH_KIT = ["MZ","563","0855"].join("");
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
@@ -718,33 +720,51 @@ function translateSeoBlock(){
 var CONTACT_FORM_TEXT = {
   de: {
     "contact-form-title": "Nachricht senden",
-    "contact-form-note": "Schreiben Sie kurz, zu welchem Nachnamen, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört. Beim Absenden wird eine E-Mail an Eugen vorbereitet.",
+    "contact-form-note": "Schreiben Sie kurz, zu welchem Nachnamen, welchem Ort oder welchem DNA-Treffer Ihre Nachricht gehört.",
     "contact-label-name": "Name",
     "contact-label-relation": "Familie / Ort / GEDmatch",
     "contact-label-message": "Nachricht",
-    "contact-submit": "Per E-Mail senden",
+    "contact-submit": "Absenden",
+    "contact-telegram-btn": "Telegram öffnen",
     "contact-status-ready": "",
-    "contact-status-sent": "Das E-Mail-Fenster wurde geöffnet. Bitte die Nachricht dort absenden."
+    "contact-status-sending": "Wird gesendet…",
+    "contact-status-sent": "Danke, die Nachricht wurde gesendet.",
+    "contact-status-not-configured": "Die automatische Formularübermittlung ist noch nicht eingerichtet. Bitte schreiben Sie stattdessen direkt:",
+    "contact-status-error": "Die Nachricht konnte nicht automatisch gesendet werden. Bitte schreiben Sie stattdessen direkt:",
+    "contact-alt-telegram": "per Telegram",
+    "contact-alt-email": "per E-Mail"
   },
   ru: {
     "contact-form-title": "Отправить сообщение",
-    "contact-form-note": "Напишите коротко, к какой фамилии, месту или ДНК-совпадению относится сообщение. При отправке откроется письмо на email Евгена.",
+    "contact-form-note": "Напишите коротко, к какой фамилии, месту или ДНК-совпадению относится сообщение.",
     "contact-label-name": "Имя",
     "contact-label-relation": "Семья / место / GEDmatch",
     "contact-label-message": "Сообщение",
-    "contact-submit": "Отправить на email",
+    "contact-submit": "Отправить",
+    "contact-telegram-btn": "Открыть Telegram",
     "contact-status-ready": "",
-    "contact-status-sent": "Окно письма открыто. Нажмите отправку в почтовой программе."
+    "contact-status-sending": "Отправка…",
+    "contact-status-sent": "Спасибо, сообщение отправлено.",
+    "contact-status-not-configured": "Автоматическая отправка формы пока не настроена. Пожалуйста, напишите напрямую:",
+    "contact-status-error": "Не удалось отправить сообщение автоматически. Пожалуйста, напишите напрямую:",
+    "contact-alt-telegram": "через Telegram",
+    "contact-alt-email": "по email"
   },
   en: {
     "contact-form-title": "Send a message",
-    "contact-form-note": "Write briefly which surname, place or DNA match your message is about. When you send it, an email to Eugen is prepared.",
+    "contact-form-note": "Write briefly which surname, place or DNA match your message is about.",
     "contact-label-name": "Name",
     "contact-label-relation": "Family / place / GEDmatch",
     "contact-label-message": "Message",
-    "contact-submit": "Send by email",
+    "contact-submit": "Send",
+    "contact-telegram-btn": "Open Telegram",
     "contact-status-ready": "",
-    "contact-status-sent": "The email window was opened. Please send the message from your mail app."
+    "contact-status-sending": "Sending…",
+    "contact-status-sent": "Thank you, the message was sent.",
+    "contact-status-not-configured": "Automatic form sending isn't set up yet. Please write directly instead:",
+    "contact-status-error": "The message could not be sent automatically. Please write directly instead:",
+    "contact-alt-telegram": "via Telegram",
+    "contact-alt-email": "by email"
   }
 };
 
@@ -828,6 +848,10 @@ function translateContactForm(){
   });
 }
 
+function contactFormAlternativesHtml(t, mailto){
+  return '<a href="https://t.me/eugen30" target="_blank" rel="noopener">' + t["contact-alt-telegram"] + '</a> · <a href="' + mailto + '">' + t["contact-alt-email"] + '</a>';
+}
+
 function submitContactForm(e){
   if(e) e.preventDefault();
   var t = CONTACT_FORM_TEXT[lang] || CONTACT_FORM_TEXT.de;
@@ -839,8 +863,23 @@ function submitContactForm(e){
   var subject = "Kroeker family website contact";
   var contactAddress = ["evusachev30", "gmail.com"].join("@");
   var mailto = "mailto:" + contactAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
-  if(status) status.textContent = t["contact-status-sent"];
-  window.location.href = mailto;
+
+  if(!CONTACT_FORM_ENDPOINT){
+    if(status){ status.classList.remove("is-success"); status.innerHTML = t["contact-status-not-configured"] + " " + contactFormAlternativesHtml(t, mailto); }
+    return;
+  }
+
+  if(status){ status.classList.remove("is-success"); status.textContent = t["contact-status-sending"]; }
+  fetch(CONTACT_FORM_ENDPOINT, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name: name, relation: relation, message: message, lang: lang})
+  }).then(function(res){
+    if(!res.ok) throw new Error("contact form endpoint returned " + res.status);
+    if(status){ status.classList.add("is-success"); status.textContent = t["contact-status-sent"]; }
+  }).catch(function(){
+    if(status) status.innerHTML = t["contact-status-error"] + " " + contactFormAlternativesHtml(t, mailto);
+  });
 }
 
 function contactBotTexts(){
@@ -1267,38 +1306,23 @@ initRevealAnimations();
   } else { initCompactHeader(); }
 })();
 
-/* ===== Анимированные счётчики статистики на главной ===== */
+/* Счётчики статистики на главной отображают финальные значения сразу из HTML (data-count/data-suffix), без покадровой анимации — числа участвуют в склонении подписи (например «года истории») и промежуточные значения дают неверную грамматику. */
+
+/* ===== Затухание карточек этапов на телефоне: скрываем градиент-подсказку, когда лента докручена до конца ===== */
 (function(){
-  function animate(el){
-    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
-    var suffix = el.getAttribute("data-suffix") || "";
-    var t0 = null, dur = 1300;
-    function step(ts){
-      if(!t0) t0 = ts;
-      var p = Math.min((ts - t0) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if(p < 1) window.requestAnimationFrame(step);
+  function initWrap(wrap){
+    var row = wrap.querySelector(".timeline-row");
+    if(!row) return;
+    function update(){
+      var atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+      wrap.classList.toggle("at-end", atEnd);
     }
-    window.requestAnimationFrame(step);
+    row.addEventListener("scroll", update, {passive: true});
+    window.addEventListener("resize", update);
+    update();
   }
   function init(){
-    var nums = document.querySelectorAll(".stat-num[data-count]");
-    if(!nums.length) return;
-    if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-      nums.forEach(function(el){ el.textContent = el.getAttribute("data-count") + (el.getAttribute("data-suffix") || ""); });
-      return;
-    }
-    if(!("IntersectionObserver" in window)){
-      nums.forEach(animate);
-      return;
-    }
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ animate(e.target); obs.unobserve(e.target); }
-      });
-    }, {threshold: 0});
-    nums.forEach(function(el){ obs.observe(el); });
+    document.querySelectorAll(".timeline-row-wrap").forEach(initWrap);
   }
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

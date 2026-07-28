@@ -8,5 +8,3 @@ Sitemap: https://kroeker-family.com/sitemap.xml
 
 User-agent: YandexBot
 Allow: /
-
-Host: kroeker-family.com

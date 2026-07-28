@@ -401,7 +401,7 @@ button { font-family: inherit; }
 }
 .cookie-consent.cookie-hidden { display: none; }
 body.has-cookie-banner { padding-bottom: 64px; }
-@media (max-width: 560px) { body.has-cookie-banner { padding-bottom: 128px; } }
+@media (max-width: 560px) { body.has-cookie-banner { padding-bottom: 96px; } }
 .cookie-copy { flex: 1 1 320px; max-width: 680px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
 .cookie-copy strong { font-size: 14px; }
 .cookie-copy p { margin: 0; color: var(--muted); font-size: 13px; }
@@ -418,10 +418,11 @@ body.has-cookie-banner { padding-bottom: 64px; }
 }
 .cookie-btn.cookie-accept { background: var(--ink-strong); border-color: var(--ink-strong); color: var(--bg); }
 @media (max-width: 560px) {
-  .cookie-consent { justify-content: flex-start; }
-  .cookie-copy { flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .cookie-consent { justify-content: flex-start; padding: 8px 14px calc(8px + env(safe-area-inset-bottom, 0px)); gap: 6px 10px; }
+  .cookie-copy { flex-basis: 100%; flex-direction: row; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .cookie-copy p { display: none; }
   .cookie-actions { flex-basis: 100%; }
-  .cookie-btn { flex: 1; }
+  .cookie-btn { flex: 1; padding: 6px 12px; }
 }
 
 /* ---------- 6. Общие блоки контента ---------- */
@@ -800,9 +801,8 @@ html[lang="en"] .upd-date[data-country="de"]::after { content: "🇩🇪 Germany
 .contact-form input:focus, .contact-form textarea:focus, .bot-input-label textarea:focus {
   outline: none; border-color: var(--accent);
 }
+.contact-form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .contact-submit {
-  grid-column: 1 / -1;
-  justify-self: start;
   padding: 12px 22px;
   border: 0; border-radius: 12px;
   background: var(--accent);
@@ -811,7 +811,21 @@ html[lang="en"] .upd-date[data-country="de"]::after { content: "🇩🇪 Germany
   cursor: pointer;
 }
 .contact-submit:hover { background: var(--accent-ink); color: #fff; }
-.contact-status { color: var(--good); font-size: 16.5px; margin: 0; }
+.contact-telegram-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #229ED9;
+  background: #229ED9;
+  color: #fff;
+  font-size: 17px; font-weight: 600;
+  text-decoration: none;
+}
+.contact-telegram-btn:hover { background: #1c87ba; border-color: #1c87ba; color: #fff; text-decoration: none; }
+.contact-status { color: var(--ink); font-size: 16.5px; margin: 0; grid-column: 1 / -1; }
+.contact-status:empty { display: none; }
+.contact-status.is-success { color: var(--good); }
+.contact-status a { font-weight: 600; }
 .contact-name-box {
   padding: 14px 18px;
   border: 1px dashed var(--line-strong);
@@ -1130,21 +1144,32 @@ a.journey-stop:hover .journey-icon { border-color: var(--accent-ink); box-shadow
   .timeline-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
+  .timeline-row-wrap { position: relative; }
   .timeline-row {
     grid-template-columns: none;
     grid-auto-flow: column;
     grid-auto-columns: minmax(240px, 84%);
     overflow-x: auto;
     padding-bottom: 8px;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+    transition: mask-image .15s, -webkit-mask-image .15s;
   }
+  .timeline-row-wrap.at-end .timeline-row { -webkit-mask-image: none; mask-image: none; }
   .timeline-item { scroll-snap-align: start; }
   .timeline-scroll-hint {
     display: flex; align-items: center; gap: 6px; justify-content: center;
-    margin-top: 6px;
-    color: var(--muted); font-size: 13px; font-weight: 600;
+    margin-top: 10px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    color: var(--ink); font-size: 13px; font-weight: 700;
+    width: fit-content; margin-left: auto; margin-right: auto;
   }
   .timeline-scroll-hint svg { width: 15px; height: 15px; animation: timeline-hint-nudge 1.4s ease-in-out infinite; }
+  .timeline-row-wrap.at-end .timeline-scroll-hint { opacity: .5; }
 }
 @keyframes timeline-hint-nudge {
   0%, 100% { transform: translateX(0); opacity: .55; }
