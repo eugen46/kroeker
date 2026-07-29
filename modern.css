@@ -391,8 +391,8 @@ button { font-family: inherit; }
 .cookie-consent {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 180;
   margin: 0;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-  display: flex; flex-wrap: wrap; gap: 10px 16px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-wrap: nowrap; gap: 8px 16px;
   align-items: center; justify-content: center;
   border-top: 1px solid var(--line);
   background: var(--surface);
@@ -400,12 +400,18 @@ button { font-family: inherit; }
   font-size: 14px;
 }
 .cookie-consent.cookie-hidden { display: none; }
-body.has-cookie-banner { padding-bottom: 64px; }
-@media (max-width: 560px) { body.has-cookie-banner { padding-bottom: 128px; } }
-.cookie-copy { flex: 1 1 320px; max-width: 680px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
-.cookie-copy strong { font-size: 14px; }
+/* --cookie-banner-h is measured by script.js so page content is never hidden behind the banner. */
+body.has-cookie-banner { padding-bottom: calc(var(--cookie-banner-h, 128px) + 16px); }
+/* The banner already offers both choices, so the floating toggle would only overlap content. */
+body.has-cookie-banner .google-cookie-toggle { display: none; }
+/* Title, text and link run as one paragraph: full text in the fewest lines, so the
+   fixed banner covers as little of the page as possible. */
+.cookie-copy { flex: 1 1 320px; min-width: 0; line-height: 1.45; }
+.cookie-copy strong, .cookie-copy p, .cookie-copy a { display: inline; }
+.cookie-copy strong { font-size: 13.5px; }
 .cookie-copy p { margin: 0; color: var(--muted); font-size: 13px; }
-.cookie-copy a { font-size: 13px; white-space: nowrap; }
+.cookie-copy a { font-size: 13px; }
+.cookie-copy p::before, .cookie-copy a::before { content: " "; }
 .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .cookie-btn {
   padding: 7px 14px;
@@ -418,10 +424,18 @@ body.has-cookie-banner { padding-bottom: 64px; }
 }
 .cookie-btn.cookie-accept { background: var(--ink-strong); border-color: var(--ink-strong); color: var(--bg); }
 @media (max-width: 560px) {
-  .cookie-consent { justify-content: flex-start; }
-  .cookie-copy { flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 2px; }
+  /* Kept short so the banner does not sit on top of the hero call-to-action. */
+  .cookie-consent {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    padding: 7px 12px calc(7px + env(safe-area-inset-bottom, 0px));
+    max-height: 45vh; overflow-y: auto;
+  }
+  .cookie-copy { flex-basis: 100%; line-height: 1.4; }
+  .cookie-copy strong, .cookie-copy p, .cookie-copy a { font-size: 12.5px; }
   .cookie-actions { flex-basis: 100%; }
-  .cookie-btn { flex: 1; }
+  .cookie-btn { flex: 1; padding: 7px 10px; font-size: 13px; }
 }
 
 /* ---------- 6. Общие блоки контента ---------- */
@@ -535,15 +549,15 @@ body.has-cookie-banner { padding-bottom: 64px; }
   background: var(--bg-soft); color: var(--muted);
   border: 1px solid var(--line);
 }
-.upd-date[data-country="ua"]::after { content: "🇺🇦 Украина"; }
-.upd-date[data-country="kz"]::after { content: "🇰🇿 Казахстан"; }
-.upd-date[data-country="de"]::after { content: "🇩🇪 Deutschland"; }
+.upd-date[data-country="ua"]::after { content: "Украина"; }
+.upd-date[data-country="kz"]::after { content: "Казахстан"; }
+.upd-date[data-country="de"]::after { content: "Deutschland"; }
 .upd-date[data-country="ewz"]::after { content: "EWZ"; }
-html[lang="de"] .upd-date[data-country="ua"]::after { content: "🇺🇦 Ukraine"; }
-html[lang="de"] .upd-date[data-country="kz"]::after { content: "🇰🇿 Kasachstan"; }
-html[lang="en"] .upd-date[data-country="ua"]::after { content: "🇺🇦 Ukraine"; }
-html[lang="en"] .upd-date[data-country="kz"]::after { content: "🇰🇿 Kazakhstan"; }
-html[lang="en"] .upd-date[data-country="de"]::after { content: "🇩🇪 Germany"; }
+html[lang="de"] .upd-date[data-country="ua"]::after { content: "Ukraine"; }
+html[lang="de"] .upd-date[data-country="kz"]::after { content: "Kasachstan"; }
+html[lang="en"] .upd-date[data-country="ua"]::after { content: "Ukraine"; }
+html[lang="en"] .upd-date[data-country="kz"]::after { content: "Kazakhstan"; }
+html[lang="en"] .upd-date[data-country="de"]::after { content: "Germany"; }
 .upd-text { margin: 0; }
 
 /* Древо: поколения */
@@ -812,6 +826,40 @@ html[lang="en"] .upd-date[data-country="de"]::after { content: "🇩🇪 Germany
 }
 .contact-submit:hover { background: var(--accent-ink); color: #fff; }
 .contact-status { color: var(--good); font-size: 16.5px; margin: 0; }
+.contact-form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.contact-telegram-btn {
+  display: inline-flex; align-items: center;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #229ED9;
+  color: #fff;
+  font-size: 17px; font-weight: 600;
+}
+.contact-telegram-btn:hover { background: #1b87b9; color: #fff; text-decoration: none; }
+/* Shown when the mailto: handoff may have failed, so the address stays reachable. */
+.contact-fallback {
+  grid-column: 1 / -1;
+  display: grid; gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+}
+.contact-fallback[hidden] { display: none; }
+.contact-fallback p { margin: 0; font-size: 16px; }
+.contact-fallback-address { font-weight: 700; word-break: break-word; }
+.contact-fallback-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.contact-copy-btn {
+  padding: 9px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit; font-size: 15.5px; font-weight: 600;
+  cursor: pointer;
+}
+.contact-copy-btn:hover { border-color: var(--accent); }
+.contact-copy-status { color: var(--good); font-size: 15.5px; }
 .contact-name-box {
   padding: 14px 18px;
   border: 1px dashed var(--line-strong);
@@ -925,7 +973,7 @@ a.point:hover { transform: translateY(-2px) scale(1.04); border-color: var(--acc
 .hero-stats strong { font-family: var(--font-display); font-size: 26px; color: var(--ink-strong); line-height: 1.2; }
 
 /* Горизонтальный маршрут-таймлайн на главной */
-.journey { margin: 6px 0 26px; overflow-x: auto; padding-bottom: 6px; }
+.journey { margin: 6px 0 26px; overflow-x: auto; overscroll-behavior-x: contain; padding: 8px 4px 12px; scroll-padding-inline: 4px; }
 .journey-track {
   position: relative;
   display: grid;
@@ -969,7 +1017,13 @@ a.point:hover { transform: translateY(-2px) scale(1.04); border-color: var(--acc
   font-size: 26px;
   z-index: 1;
 }
-.journey-flag { font-size: 16px; margin-right: 2px; }
+/* Historical state per stage, spelled out: modern flags would date the period wrongly. */
+.journey-era {
+  display: block;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted);
+}
 .journey-year {
   margin-top: 4px;
   font-size: 14px; font-weight: 700;
@@ -1130,15 +1184,18 @@ a.journey-stop:hover .journey-icon { border-color: var(--accent-ink); box-shadow
   .timeline-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
+  /* overflow-x:auto also clips vertically, so the lift/shadow of the cards needs room. */
   .timeline-row {
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(240px, 84%);
+    grid-auto-columns: minmax(220px, 82%);
     overflow-x: auto;
-    padding-bottom: 8px;
+    overscroll-behavior-x: contain;
+    padding: 6px 4px 14px;
     scroll-snap-type: x proximity;
+    scroll-padding-inline: 4px;
   }
-  .timeline-item { scroll-snap-align: start; }
+  .timeline-item { scroll-snap-align: start; min-width: 0; }
   .timeline-scroll-hint {
     display: flex; align-items: center; gap: 6px; justify-content: center;
     margin-top: 6px;
