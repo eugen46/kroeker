@@ -4,7 +4,6 @@ var GA_ID = "G-Z6EYVJ4FVW";
 /* Внешний endpoint для приёма формы контакта (например, Formspree/Cloudflare Worker). Пусто = автоматическая отправка не настроена, форма показывает альтернативы. */
 var CONTACT_FORM_ENDPOINT = "";
 var CONSENT_KEY = "kroeker-cookie-consent";
-var GEDMATCH_KIT = ["MZ","563","0855"].join("");
 function validLang(l){ return l === "de" || l === "ru" || l === "en"; }
 function getPathLang(){
   try{
@@ -18,6 +17,10 @@ function getSavedLang(){
   var qLang = "";
   try{ qLang = new URLSearchParams(window.location.search).get("lang") || ""; }catch(e){}
   if(validLang(qLang)) return qLang;
+  // Pages are pre-rendered per language, so <html lang> beats a stale stored choice —
+  // otherwise the JS-translated bits would contradict the static markup around them.
+  var docLang = document.documentElement.getAttribute("lang") || "";
+  if(validLang(docLang)) return docLang;
   try{
     var saved = localStorage.getItem("kroeker-lang");
     if(validLang(saved)) return saved;
@@ -125,11 +128,18 @@ function updateCookieBannerText(){
   if(footerPrivacy) footerPrivacy.textContent=ft.privacy;
   var footerCookies=document.getElementById("footer-cookie-settings");
   if(footerCookies) footerCookies.textContent=ft.cookies;
+  syncCookieBannerHeight();
+}
+function syncCookieBannerHeight(){
+  var b=document.getElementById("cookie-consent");
+  if(!b || b.classList.contains("cookie-hidden")) return;
+  document.documentElement.style.setProperty("--cookie-banner-h", b.offsetHeight + "px");
 }
 function closeCookieBanner(){
   var b=document.getElementById("cookie-consent");
   if(b) b.classList.add("cookie-hidden");
   document.body.classList.remove("has-cookie-banner");
+  document.documentElement.style.removeProperty("--cookie-banner-h");
 }
 function setCookieConsent(value){
   var wasLoaded=!!window.__kroekerTrackingLoaded;
@@ -145,17 +155,10 @@ function openCookieSettings(){
     b.classList.remove("cookie-hidden");
     document.body.classList.add("has-cookie-banner");
     updateCookieBannerText();
+    syncCookieBannerHeight();
     return;
   }
   initCookieConsent();
-}
-function revealGedmatch(btn){
-  var text = "GEDmatch Kit " + GEDMATCH_KIT;
-  if(btn){
-    var small = btn.querySelector("small");
-    if(small) small.textContent = text;
-    btn.setAttribute("aria-label", text);
-  }
 }
 function initCookieConsent(){
   var current=getConsent();
@@ -176,6 +179,8 @@ function initCookieConsent(){
   document.body.classList.add("has-cookie-banner");
   banner.querySelector("[data-cookie-accept]").addEventListener("click",function(){setCookieConsent("accepted");});
   banner.querySelector("[data-cookie-reject]").addEventListener("click",function(){setCookieConsent("rejected");});
+  syncCookieBannerHeight();
+  window.addEventListener("resize",syncCookieBannerHeight);
 }
 function initRevealAnimations(){
   if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -995,8 +1000,9 @@ function R(){
   document.querySelectorAll(".r-prog").forEach(function(e){e.innerHTML=t["r-prog"]||"";});
   document.querySelectorAll(".r-deny").forEach(function(e){e.innerHTML=t["r-deny"]||"";});
   document.documentElement.lang = lang;
-  var sp = {"de":"Suche auf der Website...","ru":"\u041f\u043e\u0438\u0441\u043a...","en":"Search the website..."};
-  var si = document.getElementById("search-input"); if(si) si.placeholder = sp[lang]||sp.de;
+  var sp = {"de":"Suche...","ru":"\u041f\u043e\u0438\u0441\u043a...","en":"Search..."};
+  var si = document.getElementById("search-input");
+  if(si && sp[lang]){ si.placeholder = sp[lang]; si.setAttribute("aria-label", sp[lang]); }
   var paypalHeader = document.getElementById("paypal-header-label");
   if(paypalHeader) paypalHeader.innerHTML = t["pp-label"] || "PayPal Spende";
   var menuLabel = document.getElementById("menu-label");
@@ -1147,11 +1153,27 @@ function initMap(){
   });
 }
 
+/* Picks the Slavic plural form from "1|2-4|5+" lists, e.g. "год|года|лет". */
+function pluralForm(value, forms){
+  var list = String(forms || "").split("|");
+  if(list.length < 3) return list[0] || "";
+  var tail = Math.abs(value) % 100;
+  var last = tail % 10;
+  if(tail > 10 && tail < 20) return list[2];
+  if(last === 1) return list[0];
+  if(last >= 2 && last <= 4) return list[1];
+  return list[2];
+}
+function applyStatValue(el, value){
+  el.textContent = value + (el.getAttribute("data-suffix") || "");
+  var label = el.parentNode && el.parentNode.querySelector("[data-plural]");
+  if(label) label.textContent = pluralForm(value, label.getAttribute("data-plural"));
+}
+
 function countYears(){
   var el = document.getElementById('cnt-years');
   if(!el) return;
-  var yr = new Date().getFullYear();
-  el.textContent = (yr - 1864).toString();
+  applyStatValue(el, new Date().getFullYear() - 1864);
 }
 countYears();
 if(document.getElementById("leaflet-map")) setTimeout(initMap,300);
@@ -1306,7 +1328,7 @@ initRevealAnimations();
   } else { initCompactHeader(); }
 })();
 
-/* Счётчики статистики на главной отображают финальные значения сразу из HTML (data-count/data-suffix), без покадровой анимации — числа участвуют в склонении подписи (например «года истории») и промежуточные значения дают неверную грамматику. */
+/* Счётчики статистики: покадрово корректное склонение (год/года/лет) при анимации через applyStatValue()/pluralForm(). */
 
 /* ===== Затухание карточек этапов на телефоне: скрываем градиент-подсказку, когда лента докручена до конца ===== */
 (function(){
@@ -1323,6 +1345,42 @@ initRevealAnimations();
   }
   function init(){
     document.querySelectorAll(".timeline-row-wrap").forEach(initWrap);
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+
+/* ===== Анимированные счётчики статистики на главной ===== */
+(function(){
+  function animate(el){
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    var t0 = null, dur = 1300;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      applyStatValue(el, Math.round(target * eased));
+      if(p < 1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+  function init(){
+    var nums = document.querySelectorAll(".stat-num[data-count]");
+    if(!nums.length) return;
+    if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      nums.forEach(function(el){ applyStatValue(el, parseInt(el.getAttribute("data-count"), 10) || 0); });
+      return;
+    }
+    if(!("IntersectionObserver" in window)){
+      nums.forEach(animate);
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ animate(e.target); obs.unobserve(e.target); }
+      });
+    }, {threshold: 0});
+    nums.forEach(function(el){ obs.observe(el); });
   }
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
